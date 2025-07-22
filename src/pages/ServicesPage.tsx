@@ -6,14 +6,29 @@ import {
   Typography,
   Card,
   CardContent,
-  Button,
   Chip,
+  Button,
 } from "@mui/material";
 import { AccessTime, AttachMoney } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { easeOut, motion } from "framer-motion";
+import { useEffect } from "react";
 
 export default function ServicesPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location]);
+
   const services = {
     facials: [
       {
@@ -95,15 +110,17 @@ export default function ServicesPage() {
   };
 
   const ServiceSection = ({
+    id,
     title,
     tagline,
     services,
   }: {
+    id: string;
     title: string;
     tagline: string;
     services: any[];
   }) => (
-    <Box sx={{ mb: 8 }}>
+    <Box id={id} sx={{ mb: 8 }}>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -172,17 +189,6 @@ export default function ServicesPage() {
                 <Typography variant="body1" sx={{ color: "#7f8c8d", mb: 3 }}>
                   {service.description}
                 </Typography>
-                <Button
-                  component={Link}
-                  to="/booking"
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#a67c5b",
-                    "&:hover": { backgroundColor: "#8b6f4e" },
-                  }}
-                >
-                  Book Now
-                </Button>
               </CardContent>
             </Card>
           </motion.div>
@@ -210,21 +216,25 @@ export default function ServicesPage() {
         </motion.div>
 
         <ServiceSection
+          id="facials"
           title="Facials"
           tagline="Rejuvenating treatments for radiant, healthy skin"
           services={services.facials}
         />
         <ServiceSection
+          id="scalp"
           title="Scalp & Head Spa"
           tagline="Japanese-inspired treatments for ultimate relaxation"
           services={services.scalp}
         />
         <ServiceSection
+          id="body"
           title="Body Treatments"
           tagline="Advanced therapies for body sculpting and skin tightening"
           services={services.body}
         />
         <ServiceSection
+          id="massage"
           title="Massage"
           tagline="Therapeutic massage for deep relaxation"
           services={services.massage}
@@ -279,7 +289,7 @@ export default function ServicesPage() {
         </motion.div>
 
         {/* Free Consultation */}
-        <motion.div
+        {/* <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -315,7 +325,7 @@ export default function ServicesPage() {
               Book Your Free Consultation
             </Button>
           </Box>
-        </motion.div>
+        </motion.div> */}
       </Container>
     </Box>
   );

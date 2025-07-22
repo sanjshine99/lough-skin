@@ -20,28 +20,30 @@ import { motion } from "framer-motion";
 export default function HomePage() {
   const services = [
     {
+      id: "facials",
       title: "Facials",
       description: "Luxury skincare treatments for radiant, healthy skin",
       icon: <Spa sx={{ fontSize: 40, color: "#a67c5b" }} />,
     },
     {
+      id: "scalp",
       title: "Scalp & Head Spa",
       description: "Japanese-inspired treatments for ultimate relaxation",
       icon: <Psychology sx={{ fontSize: 40, color: "#a67c5b" }} />,
     },
     {
+      id: "body",
       title: "Body Treatments",
       description: "Sculpting and skin tightening therapies",
       icon: <Healing sx={{ fontSize: 40, color: "#a67c5b" }} />,
     },
     {
+      id: "massage",
       title: "Massage",
       description: "ASMR head massage for deep relaxation",
       icon: <LocalFlorist sx={{ fontSize: 40, color: "#a67c5b" }} />,
     },
   ];
-
-  const features = ["Premium Products", "Expert Staff", "Relaxing Environment"];
 
   const testimonials = [
     {
@@ -63,6 +65,8 @@ export default function HomePage() {
       rating: 5,
     },
   ];
+
+  const features = ["Premium Products", "Expert Staff", "Relaxing Environment"];
 
   return (
     <Box>
@@ -201,6 +205,7 @@ export default function HomePage() {
               flexWrap: "wrap",
               gap: 3,
               justifyContent: "center",
+              alignItems: "stretch",
             }}
           >
             {services.map((service, index) => (
@@ -210,16 +215,20 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
                 viewport={{ once: true }}
+                style={{ width: "100%", maxWidth: 280 }}
               >
                 <Card
                   sx={{
-                    maxWidth: 280,
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
                     textAlign: "center",
                     p: 3,
                     boxShadow: 3,
                   }}
                 >
-                  <CardContent>
+                  <CardContent sx={{ flexGrow: 1 }}>
                     <Box mb={2}>{service.icon}</Box>
                     <Typography
                       variant="h5"
@@ -235,23 +244,23 @@ export default function HomePage() {
                     >
                       {service.description}
                     </Typography>
-                    <Button
-                      component={Link}
-                      to="/services"
-                      variant="outlined"
-                      sx={{
-                        borderColor: "#a67c5b",
-                        color: "#a67c5b",
-                        "&:hover": {
-                          borderColor: "#8b6f4e",
-                          backgroundColor: "#a67c5b",
-                          color: "white",
-                        },
-                      }}
-                    >
-                      Learn More
-                    </Button>
                   </CardContent>
+                  <Button
+                    component={Link}
+                    to={`/services#${service.id}`}
+                    variant="outlined"
+                    sx={{
+                      borderColor: "#a67c5b",
+                      color: "#a67c5b",
+                      "&:hover": {
+                        borderColor: "#8b6f4e",
+                        backgroundColor: "#a67c5b",
+                        color: "white",
+                      },
+                    }}
+                  >
+                    Learn More
+                  </Button>
                 </Card>
               </motion.div>
             ))}
@@ -315,6 +324,7 @@ export default function HomePage() {
               flexWrap: "wrap",
               gap: 3,
               justifyContent: "center",
+              alignItems: "stretch",
             }}
           >
             {testimonials.map((testimonial, index) => (
@@ -324,9 +334,19 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
                 viewport={{ once: true }}
+                style={{ width: "100%", maxWidth: 350 }}
               >
-                <Card sx={{ maxWidth: 350, p: 3, boxShadow: 3 }}>
-                  <CardContent>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    p: 3,
+                    boxShadow: 3,
+                  }}
+                >
+                  <CardContent sx={{ flexGrow: 1 }}>
                     <Rating
                       value={testimonial.rating}
                       readOnly
@@ -353,7 +373,7 @@ export default function HomePage() {
       </Box>
 
       {/* Footer */}
-      <Box sx={{ backgroundColor: "#e1c9b3", color: "black", py: 6 }}>
+      {/* <Box sx={{ backgroundColor: "#e1c9b3", color: "black", py: 6 }}>
         <Container maxWidth="lg">
           <Box
             sx={{
@@ -445,7 +465,7 @@ export default function HomePage() {
             </Box>
           </Box>
         </Container>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

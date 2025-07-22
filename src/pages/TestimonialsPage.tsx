@@ -199,7 +199,7 @@ export default function TestimonialsPage() {
         </Box>
 
         {/* Call to Action Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -261,7 +261,7 @@ export default function TestimonialsPage() {
               </Box>
             </Box>
           </Box>
-        </motion.div>
+        </motion.div> */}
       </Container>
     </Box>
   );

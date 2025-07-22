@@ -10,6 +10,8 @@ import GalleryPage from "./pages/GalleryPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import BookingPage from "./pages/BookingPage";
 import ContactPage from "./pages/ContactPage";
+import Footer from "./pages/Footer";
+import Banner from "./pages/Banner";
 
 const theme = createTheme({
   palette: {
@@ -57,6 +59,8 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
+        <Banner />
+        <Footer />
       </Router>
     </ThemeProvider>
   );

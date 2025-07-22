@@ -10,7 +10,7 @@ import {
   IconButton,
   Fade,
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import { Close, PlayCircleFilled } from "@mui/icons-material";
 
 type MediaType = {
   src: string;
@@ -42,6 +42,13 @@ export default function GalleryPage() {
     setSelectedMedia(null);
   };
 
+  // Helper to assign random row spans for masonry effect
+  // or you can do based on media type, or random for variety
+  const getRowSpan = (index: number) => {
+    // For example, random between 2 and 4 rows
+    return 2 + (index % 3); // cycles 2,3,4
+  };
+
   return (
     <Box sx={{ py: 8 }}>
       <Container maxWidth="lg">
@@ -62,11 +69,17 @@ export default function GalleryPage() {
           Step inside our luxurious spa and see where wellness meets beauty
         </Typography>
 
+        {/* Masonry style grid */}
         <Box
           sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 2,
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+            },
+            gridAutoRows: 150,
+            gap: 3,
             justifyContent: "center",
           }}
         >
@@ -75,15 +88,12 @@ export default function GalleryPage() {
               <Box
                 onClick={() => handleClick(item)}
                 sx={{
-                  width: {
-                    xs: "100%",
-                    sm: "calc(50% - 8px)",
-                    md: "calc(33.333% - 11px)",
-                  },
                   cursor: "pointer",
                   borderRadius: 2,
                   overflow: "hidden",
                   boxShadow: 2,
+                  position: "relative",
+                  gridRowEnd: `span ${getRowSpan(index)}`,
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   "&:hover": {
                     transform: "scale(1.05)",
@@ -91,18 +101,19 @@ export default function GalleryPage() {
                   },
                 }}
               >
-                <Box sx={{ height: 250 }}>
-                  {item.type === "image" ? (
-                    <img
-                      src={item.src}
-                      alt={`Gallery media ${index + 1}`}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />
-                  ) : (
+                {item.type === "image" ? (
+                  <img
+                    src={item.src}
+                    alt={`Gallery media ${index + 1}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                ) : (
+                  <>
                     <video
                       src={item.src}
                       muted
@@ -111,10 +122,23 @@ export default function GalleryPage() {
                         width: "100%",
                         height: "100%",
                         objectFit: "cover",
+                        display: "block",
                       }}
                     />
-                  )}
-                </Box>
+                    {/* Video icon overlay */}
+                    <PlayCircleFilled
+                      sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
+                        color: "rgba(255, 255, 255, 0.85)",
+                        fontSize: 40,
+                        pointerEvents: "none",
+                        textShadow: "0 0 6px rgba(0,0,0,0.7)",
+                      }}
+                    />
+                  </>
+                )}
               </Box>
             </Fade>
           ))}

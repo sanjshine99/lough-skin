@@ -48,7 +48,7 @@ export default function Navigation() {
           mb: 2,
         }}
       >
-        <Typography variant="h6" sx={{ color: "#2c3e50", fontWeight: "bold" }}>
+        <Typography variant="h6" sx={{ color: "#fff", fontWeight: "bold" }}>
           Lough Skin
         </Typography>
         <IconButton onClick={handleDrawerToggle}>
@@ -74,7 +74,7 @@ export default function Navigation() {
               primary={item.label}
               sx={{
                 "& .MuiTypography-root": {
-                  color: "#2c3e50",
+                  color: "#fff",
                   fontWeight: 500,
                 },
               }}
@@ -106,7 +106,7 @@ export default function Navigation() {
     <>
       <AppBar
         position="sticky"
-        sx={{ backgroundColor: "#e1c9b3", boxShadow: 1 }}
+        sx={{ backgroundColor: "#5c3a25", boxShadow: 1, padding: "5px" }}
       >
         <Toolbar>
           <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
@@ -134,7 +134,7 @@ export default function Navigation() {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ color: "#2c3e50" }}
+              sx={{ color: "#fff" }}
             >
               <Menu />
             </IconButton>
@@ -146,7 +146,7 @@ export default function Navigation() {
                   component={Link}
                   to={item.href}
                   sx={{
-                    color: "#2c3e50",
+                    color: "#fff",
                     fontWeight: 500,
                     textDecoration: "none",
                     backgroundColor:
