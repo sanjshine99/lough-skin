@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useMemo } from "react";
 import {
   Box,
   Container,
@@ -12,113 +13,34 @@ import {
 import { AccessTime, AttachMoney } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { easeOut, motion } from "framer-motion";
-import { useEffect } from "react";
+import { useCart } from "../context/CartContext"; // adjust path as needed
 
-export default function ServicesPage() {
-  const location = useLocation();
+const fadeIn = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.15,
+      duration: 0.6,
+      ease: easeOut,
+    },
+  }),
+};
 
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }, [location]);
-
-  const services = {
-    facials: [
-      {
-        name: "Luxury Facial",
-        duration: "55 min",
-        price: "£65",
-        description:
-          "A comprehensive facial treatment using premium products for deep cleansing, exfoliation, and hydration.",
-      },
-      {
-        name: "Dermaplaning",
-        duration: "30 min",
-        price: "£25",
-        description:
-          "Gentle exfoliation technique to remove dead skin cells and peach fuzz (female only).",
-      },
-    ],
-    scalp: [
-      {
-        name: "Japanese-Inspired Luxury HeadSpa",
-        duration: "1 hr",
-        price: "£105",
-        description:
-          "Traditional Japanese scalp treatment for ultimate relaxation and hair health.",
-      },
-      {
-        name: "HeadSpa + Luxury Facial",
-        duration: "1 hr 40 min",
-        price: "£145",
-        description:
-          "Combined treatment for complete head-to-face rejuvenation.",
-      },
-    ],
-    body: [
-      {
-        name: "Body Sculpting",
-        duration: "Duration varies",
-        price: "From £80",
-        description:
-          "Advanced body contouring treatments for skin tightening and sculpting.",
-      },
-      {
-        name: "Wood Therapy",
-        duration: "60 min",
-        price: "£90",
-        description:
-          "Natural wood tools used for lymphatic drainage and body sculpting.",
-      },
-    ],
-    massage: [
-      {
-        name: "ASMR Head Massage",
-        duration: "45 min",
-        price: "£55",
-        description:
-          "Relaxing head massage designed to trigger ASMR responses for deep relaxation.",
-      },
-    ],
-  };
-
-  const addOns = [
-    { name: "Vitamin C / L-Ascorbic Acid Serum Boost", price: "+£12" },
-    { name: "Collagen Booster", price: "+£15" },
-    { name: "LED Light Therapy", price: "+£15" },
-    { name: "Aromatherapy Upgrade", price: "+£10" },
-  ];
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.15,
-        duration: 0.6,
-        ease: easeOut,
-      },
-    }),
-  };
-
-  const ServiceSection = ({
+const ServiceSection = React.memo(
+  ({
     id,
     title,
     tagline,
     services,
+    onAddToCart,
   }: {
     id: string;
     title: string;
     tagline: string;
     services: any[];
+    onAddToCart: (service: any) => void;
   }) => (
     <Box id={id} sx={{ mb: 8 }}>
       <motion.div
@@ -184,6 +106,22 @@ export default function ServicesPage() {
                       label={service.price}
                       sx={{ backgroundColor: "#a67c5b", color: "white" }}
                     />
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      sx={{
+                        mt: 1,
+                        borderColor: "#a67c5b",
+                        color: "#a67c5b",
+                        "&:hover": {
+                          backgroundColor: "#f5eee7",
+                          borderColor: "#a67c5b",
+                        },
+                      }}
+                      onClick={() => onAddToCart(service)}
+                    >
+                      Add to Cart
+                    </Button>
                   </Box>
                 </Box>
                 <Typography variant="body1" sx={{ color: "#7f8c8d", mb: 3 }}>
@@ -195,7 +133,102 @@ export default function ServicesPage() {
         ))}
       </Box>
     </Box>
-  );
+  )
+);
+
+export default function ServicesPage() {
+  const location = useLocation();
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location]);
+
+  const services = {
+    facials: [
+      {
+        id: "s1",
+        name: "Luxury Facial",
+        duration: "55 min",
+        price: "£65",
+        description:
+          "A comprehensive facial treatment using premium products for deep cleansing, exfoliation, and hydration.",
+      },
+      {
+        id: "s2",
+        name: "Dermaplaning",
+        duration: "30 min",
+        price: "£25",
+        description:
+          "Gentle exfoliation technique to remove dead skin cells and peach fuzz (female only).",
+      },
+    ],
+    scalp: [
+      {
+        id: "s3",
+        name: "Japanese-Inspired Luxury HeadSpa",
+        duration: "1 hr",
+        price: "£105",
+        description:
+          "Traditional Japanese scalp treatment for ultimate relaxation and hair health.",
+      },
+      {
+        id: "s4",
+        name: "HeadSpa + Luxury Facial",
+        duration: "1 hr 40 min",
+        price: "£145",
+        description:
+          "Combined treatment for complete head-to-face rejuvenation.",
+      },
+    ],
+    body: [
+      {
+        id: "s5",
+        name: "Body Sculpting",
+        duration: "Duration varies",
+        price: "From £80",
+        description:
+          "Advanced body contouring treatments for skin tightening and sculpting.",
+      },
+      {
+        id: "s6",
+        name: "Wood Therapy",
+        duration: "60 min",
+        price: "£90",
+        description:
+          "Natural wood tools used for lymphatic drainage and body sculpting.",
+      },
+    ],
+    massage: [
+      {
+        id: "s7",
+        name: "ASMR Head Massage",
+        duration: "45 min",
+        price: "£55",
+        description:
+          "Relaxing head massage designed to trigger ASMR responses for deep relaxation.",
+      },
+    ],
+  };
+
+  const addOns = [
+    {
+      id: "a1",
+      name: "Vitamin C / L-Ascorbic Acid Serum Boost",
+      price: "+£12",
+    },
+    { id: "a2", name: "Collagen Booster", price: "+£15" },
+    { id: "a3", name: "LED Light Therapy", price: "+£15" },
+    { id: "a4", name: "Aromatherapy Upgrade", price: "+£10" },
+  ];
 
   return (
     <Box sx={{ py: 8, background: "#fff8f3" }}>
@@ -220,24 +253,28 @@ export default function ServicesPage() {
           title="Facials"
           tagline="Rejuvenating treatments for radiant, healthy skin"
           services={services.facials}
+          onAddToCart={addToCart}
         />
         <ServiceSection
           id="scalp"
           title="Scalp & Head Spa"
           tagline="Japanese-inspired treatments for ultimate relaxation"
           services={services.scalp}
+          onAddToCart={addToCart}
         />
         <ServiceSection
           id="body"
           title="Body Treatments"
           tagline="Advanced therapies for body sculpting and skin tightening"
           services={services.body}
+          onAddToCart={addToCart}
         />
         <ServiceSection
           id="massage"
           title="Massage"
           tagline="Therapeutic massage for deep relaxation"
           services={services.massage}
+          onAddToCart={addToCart}
         />
 
         {/* Add-ons */}
@@ -287,45 +324,6 @@ export default function ServicesPage() {
             </Box>
           </Box>
         </motion.div>
-
-        {/* Free Consultation */}
-        {/* <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-        >
-          <Box
-            sx={{
-              mt: 8,
-              p: 4,
-              textAlign: "center",
-              background: "#2c3e50",
-              color: "white",
-              borderRadius: 3,
-              boxShadow: 3,
-            }}
-          >
-            <Typography variant="h4" gutterBottom>
-              Free Consultation
-            </Typography>
-            <Typography variant="h6" sx={{ mb: 3 }}>
-              15-minute skin consultation for new clients – Complimentary
-            </Typography>
-            <Button
-              component={Link}
-              to="/booking"
-              variant="contained"
-              size="large"
-              sx={{
-                backgroundColor: "#a67c5b",
-                "&:hover": { backgroundColor: "#8b6f4e" },
-              }}
-            >
-              Book Your Free Consultation
-            </Button>
-          </Box>
-        </motion.div> */}
       </Container>
     </Box>
   );

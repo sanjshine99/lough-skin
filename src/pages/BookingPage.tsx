@@ -1,170 +1,475 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
   Typography,
+  Stack,
   Card,
   CardContent,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Button,
+  Divider,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+  CircularProgress,
+  Snackbar,
   Alert,
+  MenuItem,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useCart } from "../context/CartContext";
+import axios from "axios";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-export default function BookingPage() {
+export default function CartAndCheckout() {
+  // const { cartItems } = useCart();
+  const [services, setServices] = useState<any[]>([]);
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [bookingStatus, setBookingStatus] = useState<
+    "success" | "error" | null
+  >(null);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedSlot, setSelectedSlot] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("card");
+
+  const { cartItems, removeItemFromCart, clearCart } = useCart();
+
+  const [customerInfo, setCustomerInfo] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    notes: "",
+  });
+
+  const groupServices = (items: any[]) => {
+    const grouped: { [key: string]: any } = {};
+    items.forEach((item) => {
+      const key = item.name;
+      const price =
+        typeof item.price === "string"
+          ? parseFloat(item.price.replace("\u00a3", ""))
+          : item.price;
+
+      if (grouped[key]) {
+        grouped[key].quantity += 1;
+        grouped[key].totalPrice += price;
+      } else {
+        grouped[key] = {
+          ...item,
+          unitPrice: price,
+          totalPrice: price,
+          quantity: 1,
+        };
+      }
+    });
+    return Object.values(grouped);
+  };
+
+  useEffect(() => {
+    setServices(groupServices(cartItems));
+  }, [cartItems]);
+
+  const handleRemove = (name: string) => {
+    removeItemFromCart(name);
+  };
+
+  useEffect(() => {
+    const fetchSlots = async () => {
+      if (!selectedDate) return;
+      try {
+        const dateStr = selectedDate.toISOString().split("T")[0];
+        const res = await axios.get(
+          `http://localhost:8000/api/availability?date=${dateStr}`
+        );
+        setAvailableSlots(res.data);
+      } catch (error) {
+        console.error("Failed to fetch slots:", error);
+        setAvailableSlots([]);
+      }
+    };
+
+    fetchSlots();
+  }, [selectedDate]);
+
+  // const handleRemove = (name: string) => {
+  //   const updated = [...services];
+  //   const index = updated.findIndex((s) => s.name === name);
+
+  //   if (index > -1) {
+  //     if (updated[index].quantity > 1) {
+  //       updated[index].quantity -= 1;
+  //       updated[index].totalPrice -= updated[index].unitPrice;
+  //     } else {
+  //       updated.splice(index, 1);
+  //     }
+  //   }
+
+  //   setServices(updated);
+  // };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomerInfo({ ...customerInfo, [e.target.name]: e.target.value });
+  };
+
+  const total = services.reduce((acc: number, s: any) => acc + s.totalPrice, 0);
+
+  const handleConfirmBooking = async () => {
+    const bookingData = {
+      userId: "64d2024be1e3d9d5a45678ab", // Replace with dynamic user ID if available
+      services: services.map((s) => ({
+        serviceId: s.id, // Assuming `s.id` is the correct service identifier
+        name: s.name,
+        price: s.unitPrice,
+        duration: s.duration,
+      })),
+      totalAmount: total,
+      appointmentDate: selectedDate?.toISOString().split("T")[0], // "YYYY-MM-DD"
+      appointmentTime: selectedSlot, // e.g., "14:30"
+      staffMember: "Alex Groomer", // Can be dynamic if needed
+      notes: customerInfo.notes,
+      customerInfo: {
+        name: customerInfo.name,
+        email: customerInfo.email,
+        phone: customerInfo.phone,
+      },
+    };
+
+    try {
+      setLoading(true);
+
+      let paymentIntentId = null;
+      if (paymentMethod === "card") {
+        const stripeRes = await axios.post(
+          "http://localhost:8000/api/create-payment-intent",
+          {
+            amount: total,
+          }
+        );
+        paymentIntentId = stripeRes.data.paymentIntentId;
+      }
+
+      const res = await axios.post(
+        "http://localhost:8000/api/create-payment-intent",
+        {
+          ...bookingData,
+          paymentIntentId,
+        }
+      );
+
+      if (res.status === 200 || res.status === 201) {
+        window.open(res.data.session_url, "_blank");
+        clearCart(); // 👈 this line is new
+        setBookingStatus("success");
+        setSnackOpen(true);
+        setStep(4);
+      } else {
+        throw new Error("Booking failed");
+      }
+    } catch (err) {
+      console.error(err);
+      setBookingStatus("error");
+      setSnackOpen(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <Box sx={{ py: 8 }}>
+    <Box sx={{ py: 6 }}>
       <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          component="h1"
-          textAlign="center"
-          gutterBottom
-          sx={{ color: "#2c3e50", mb: 2 }}
-        >
-          Book Your Appointment
-        </Typography>
-        <Typography
-          variant="h6"
-          textAlign="center"
-          sx={{ color: "#7f8c8d", mb: 6 }}
-        >
-          Schedule your luxury spa experience with our easy online booking
-          system
-        </Typography>
-
-        <Card sx={{ maxWidth: 800, mx: "auto", p: 3, boxShadow: 3 }}>
-          <CardContent>
-            <Alert severity="info" sx={{ mb: 3 }}>
-              Our booking system is powered by Fresha for your convenience and
-              security.
-            </Alert>
-
-            {/* Placeholder for Fresha iframe */}
-            <Box
-              sx={{
-                width: "100%",
-                height: "600px",
-                backgroundColor: "#f8f9fa",
-                border: "2px dashed #a67c5b",
-                borderRadius: 2,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                textAlign: "center",
-                p: 4,
-              }}
-            >
-              <Typography variant="h5" sx={{ color: "#2c3e50", mb: 2 }}>
-                Fresha Booking Widget
-              </Typography>
-              <Typography variant="body1" sx={{ color: "#7f8c8d", mb: 3 }}>
-                This is where your Fresha booking iframe would be embedded.
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#7f8c8d" }}>
-                Replace this placeholder with your actual Fresha booking widget
-                code:
-              </Typography>
-              <Box
-                component="code"
-                sx={{
-                  backgroundColor: "#2c3e50",
-                  color: "white",
-                  p: 2,
-                  borderRadius: 1,
-                  mt: 2,
-                  fontSize: "0.8rem",
-                }}
-              >
-                {
-                  '<iframe src="https://your-fresha-booking-url" width="100%" height="600px"></iframe>'
-                }
-              </Box>
-            </Box>
-          </CardContent>
-        </Card>
-
-        {/* Quick Service Links */}
-        <Box sx={{ mt: 6 }}>
-          <Typography
-            variant="h4"
-            component="h2"
-            textAlign="center"
-            gutterBottom
-            sx={{ color: "#2c3e50", mb: 4 }}
-          >
-            Popular Services
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 3,
-              justifyContent: "center",
-            }}
-          >
-            {[
-              { name: "Luxury Facial", duration: "55 min", price: "£65" },
-              { name: "Japanese HeadSpa", duration: "1 hr", price: "£105" },
-              {
-                name: "HeadSpa + Facial",
-                duration: "1 hr 40 min",
-                price: "£145",
-              },
-              { name: "Free Consultation", duration: "15 min", price: "Free" },
-            ].map((service, index) => (
-              <Card
-                key={index}
-                sx={{ minWidth: 250, textAlign: "center", p: 2 }}
-              >
+        <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+          <Box flex={2}>
+            {step === 1 && (
+              <Card sx={{ mb: 3 }}>
                 <CardContent>
-                  <Typography variant="h6" sx={{ color: "#2c3e50", mb: 1 }}>
-                    {service.name}
+                  <Typography variant="h6">Selected Services</Typography>
+                  <List>
+                    {services.map((service: any, idx: number) => (
+                      <ListItem
+                        key={idx}
+                        secondaryAction={
+                          <IconButton
+                            edge="end"
+                            onClick={() => handleRemove(service.name)}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        }
+                      >
+                        <ListItemText
+                          primary={`${service.name}${
+                            service.quantity > 1 ? ` x${service.quantity}` : ""
+                          }`}
+                          secondary={`€ ${service.totalPrice.toLocaleString()}`}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                  <Divider sx={{ my: 2 }} />
+                  <Typography variant="subtitle1">
+                    Total: € {total.toLocaleString()}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "#7f8c8d", mb: 1 }}>
-                    {service.duration}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    sx={{ color: "#a67c5b", fontWeight: "bold" }}
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    sx={{ mt: 2 }}
+                    onClick={() => setStep(2)}
+                    disabled={services.length === 0}
                   >
-                    {service.price}
+                    Proceed to Checkout
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+
+            {step === 2 && (
+              <Card sx={{ mb: 3 }}>
+                <CardContent>
+                  <Typography variant="h6">Your Details</Typography>
+                  <Stack spacing={2}>
+                    <TextField
+                      label="Name"
+                      name="name"
+                      value={customerInfo.name}
+                      onChange={handleInputChange}
+                      fullWidth
+                    />
+                    <TextField
+                      label="Email"
+                      name="email"
+                      value={customerInfo.email}
+                      onChange={handleInputChange}
+                      fullWidth
+                    />
+                    <TextField
+                      label="Phone"
+                      name="phone"
+                      value={customerInfo.phone}
+                      onChange={handleInputChange}
+                      fullWidth
+                    />
+                    <TextField
+                      label="Address"
+                      name="address"
+                      value={customerInfo.address}
+                      onChange={handleInputChange}
+                      fullWidth
+                    />
+                    <TextField
+                      label="Notes or Add-ons"
+                      name="notes"
+                      value={customerInfo.notes}
+                      onChange={handleInputChange}
+                      fullWidth
+                    />
+
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Select Date"
+                        value={selectedDate}
+                        onChange={(newDate) => {
+                          setSelectedDate(newDate);
+                          setSelectedSlot("");
+                        }}
+                        disablePast
+                      />
+                      {/* <TextField
+                        fullWidth
+                        label="Select Date"
+                        value={selectedDate}
+                        onChange={(e: any) => setSelectedDate(e.target.value)}
+                      /> */}
+                    </LocalizationProvider>
+
+                    {selectedDate && (
+                      <TextField
+                        select
+                        label="Select Time Slot"
+                        value={selectedSlot}
+                        onChange={(e) => setSelectedSlot(e.target.value)}
+                        fullWidth
+                      >
+                        {availableSlots.length > 0 ? (
+                          availableSlots.map((slot: any, index: any) => (
+                            <MenuItem key={index} value={slot}>
+                              {slot}
+                            </MenuItem>
+                          ))
+                        ) : (
+                          <MenuItem disabled>No time slots available</MenuItem>
+                        )}
+                      </TextField>
+                    )}
+
+                    <Button
+                      variant="contained"
+                      onClick={() => setStep(3)}
+                      disabled={
+                        !customerInfo.name ||
+                        !customerInfo.email ||
+                        !customerInfo.phone ||
+                        !selectedSlot ||
+                        !selectedDate
+                      }
+                    >
+                      Continue to Payment
+                    </Button>
+                  </Stack>
+                </CardContent>
+              </Card>
+            )}
+
+            {step === 3 && (
+              <Card sx={{ m: 3, p: 2 }}>
+                <CardContent>
+                  <Typography variant="h6">Payment Method</Typography>
+                  <FormControl component="fieldset">
+                    <RadioGroup
+                      row
+                      value={paymentMethod}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    >
+                      {/* Stripe */}
+                      <Card
+                        sx={{
+                          border:
+                            paymentMethod === "stripe"
+                              ? "2px solid #28c76f"
+                              : "1px solid #ddd",
+                          borderRadius: "8px",
+                          p: 2,
+                          mr: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          width: 180,
+                        }}
+                      >
+                        <FormControlLabel
+                          value="stripe"
+                          control={<Radio />}
+                          label={
+                            <img
+                              src="stripe.png" // Replace with your actual path
+                              alt="Stripe"
+                              style={{ height: "24px" }}
+                            />
+                          }
+                        />
+                      </Card>
+
+                      {/* Cash on Delivery */}
+                      <Card
+                        sx={{
+                          border:
+                            paymentMethod === "cod"
+                              ? "2px solid #28c76f"
+                              : "1px solid #ddd",
+                          borderRadius: "8px",
+                          p: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          width: 180,
+                        }}
+                      >
+                        <FormControlLabel
+                          value="cod"
+                          control={<Radio />}
+                          label={
+                            <Typography
+                              sx={{ fontWeight: "bold", color: "#424242" }}
+                            >
+                              CASH ON <br /> DELIVERY
+                            </Typography>
+                          }
+                        />
+                      </Card>
+                    </RadioGroup>
+                  </FormControl>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    sx={{ mt: 3 }}
+                    onClick={handleConfirmBooking}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <CircularProgress size={24} />
+                    ) : (
+                      "Confirm Booking"
+                    )}
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+
+            {step === 4 && bookingStatus === "success" && (
+              <Card sx={{ mb: 3 }}>
+                <CardContent>
+                  <Typography variant="h5" color="success.main" gutterBottom>
+                    Booking Confirmed!
+                  </Typography>
+                  <Typography>
+                    Thank you, {customerInfo.name}. Your booking is successfully
+                    recorded.
                   </Typography>
                 </CardContent>
               </Card>
-            ))}
+            )}
           </Box>
-        </Box>
 
-        {/* Contact Info */}
-        <Box
-          sx={{
-            mt: 6,
-            textAlign: "center",
-            p: 4,
-            backgroundColor: "#e1c9b3",
-            borderRadius: 2,
-          }}
-        >
-          <Typography
-            variant="h5"
-            component="h3"
-            gutterBottom
-            sx={{ color: "#2c3e50" }}
-          >
-            Need Help Booking?
-          </Typography>
-          <Typography variant="body1" sx={{ color: "#7f8c8d", mb: 2 }}>
-            Call us directly or send us a message
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{ color: "#a67c5b", fontWeight: "bold" }}
-          >
-            01509 123456
-          </Typography>
-          <Typography variant="body1" sx={{ color: "#7f8c8d" }}>
-            info@loughskin.co.uk
-          </Typography>
-        </Box>
+          {/* Summary Panel */}
+          <Box flex={1}>
+            <Card sx={{ position: "sticky", top: 80 }}>
+              <CardContent>
+                <Typography variant="h6">Cart Summary</Typography>
+                <Divider sx={{ my: 1 }} />
+                {services.map((s: any, i: number) => (
+                  <Typography key={i} variant="body2">
+                    {s.name}
+                    {s.quantity > 1 ? ` x${s.quantity}` : ""}: €{" "}
+                    {s.totalPrice.toLocaleString()}
+                  </Typography>
+                ))}
+                <Divider sx={{ my: 1 }} />
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Total: € {total.toLocaleString()}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
+        </Stack>
       </Container>
+
+      <Snackbar
+        open={snackOpen}
+        autoHideDuration={4000}
+        onClose={() => setSnackOpen(false)}
+      >
+        <Alert
+          severity={bookingStatus === "success" ? "success" : "error"}
+          onClose={() => setSnackOpen(false)}
+        >
+          {bookingStatus === "success"
+            ? "Booking confirmed!"
+            : "Booking failed. Try again."}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

@@ -12,6 +12,9 @@ import BookingPage from "./pages/BookingPage";
 import ContactPage from "./pages/ContactPage";
 import Footer from "./pages/Footer";
 import Banner from "./pages/Banner";
+import { CartProvider } from "./context/CartContext";
+import OurTeamPage from "./pages/OurTeam";
+import BookingSuccessPage from "./pages/BookingSucess";
 
 const theme = createTheme({
   palette: {
@@ -45,23 +48,27 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Navigation />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/testimonials" element={<TestimonialsPage />} />
-            <Route path="/booking" element={<BookingPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </main>
-        <Banner />
-        <Footer />
-      </Router>
+      <CartProvider>
+        <CssBaseline />
+        <Router>
+          <Navigation />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/testimonials" element={<TestimonialsPage />} />
+              <Route path="/booking" element={<BookingPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/ourteam" element={<OurTeamPage />} />
+              <Route path="/booking-success" element={<BookingSuccessPage />} />
+            </Routes>
+          </main>
+          <Banner />
+          <Footer />
+        </Router>
+      </CartProvider>
     </ThemeProvider>
   );
 }
