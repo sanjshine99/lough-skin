@@ -93,8 +93,6 @@ export default function CartAndCheckout() {
       if (!selectedDate) return;
       try {
         const dateStr = selectedDate.toISOString().split("T")[0];
-        const url = `${process.env.REACT_APP_API_BASE_URL}/api/availability?date=${dateStr}`;
-        console.log("Fetching slots from:", url);
         const res = await axios.get(
           `${process.env.REACT_APP_API_BASE_URL}/api/availability?date=${dateStr}`
         );
@@ -157,7 +155,7 @@ export default function CartAndCheckout() {
       let paymentIntentId = null;
       if (paymentMethod === "card") {
         const stripeRes = await axios.post(
-          "${process.env.REACT_APP_API_BASE_URL}/api/create-payment-intent",
+          `${process.env.REACT_APP_API_BASE_URL}/api/create-payment-intent`,
           {
             amount: total,
           }
@@ -166,7 +164,7 @@ export default function CartAndCheckout() {
       }
 
       const res = await axios.post(
-        "${process.env.REACT_APP_API_BASE_URL}/api/create-payment-intent",
+        `${process.env.REACT_APP_API_BASE_URL}/api/create-payment-intent`,
         {
           ...bookingData,
           paymentIntentId,
