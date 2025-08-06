@@ -94,7 +94,7 @@ export default function CartAndCheckout() {
       try {
         const dateStr = selectedDate.toISOString().split("T")[0];
         const res = await axios.get(
-          `http://localhost:8000/api/availability?date=${dateStr}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/availability?date=${dateStr}`
         );
         setAvailableSlots(res.data);
       } catch (error) {
@@ -155,7 +155,7 @@ export default function CartAndCheckout() {
       let paymentIntentId = null;
       if (paymentMethod === "card") {
         const stripeRes = await axios.post(
-          "http://localhost:8000/api/create-payment-intent",
+          "${process.env.NEXT_PUBLIC_API_BASE_URL}/api/create-payment-intent",
           {
             amount: total,
           }
@@ -164,7 +164,7 @@ export default function CartAndCheckout() {
       }
 
       const res = await axios.post(
-        "http://localhost:8000/api/create-payment-intent",
+        "${process.env.NEXT_PUBLIC_API_BASE_URL}/api/create-payment-intent",
         {
           ...bookingData,
           paymentIntentId,

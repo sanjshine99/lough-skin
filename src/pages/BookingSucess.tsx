@@ -21,7 +21,7 @@ const BookingSuccessPage = () => {
     const fetchBookingDetails = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/booking-success?session_id=${sessionId}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/booking-success?session_id=${sessionId}`
         );
         setBookingDetails(res.data);
       } catch (err) {
