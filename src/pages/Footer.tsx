@@ -28,7 +28,7 @@ const Footer = () => {
               sx={{ mb: 1, display: "flex", alignItems: "center" }}
             >
               <LocationOn fontSize="small" sx={{ mr: 1 }} />
-              123 High Street, Loughborough
+              11 Great Central Road, Loughborough, England
             </Typography>
             <Typography
               variant="body2"

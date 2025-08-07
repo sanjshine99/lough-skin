@@ -105,11 +105,11 @@ export default function ContactPage() {
                       Address
                     </Typography>
                     <Typography variant="body1" sx={{ color: "#7f8c8d" }}>
-                      123 High Street
+                      11 Great Central Road
                       <br />
-                      Loughborough
+                      Loughborough,
                       <br />
-                      Leicestershire LE11 2AB
+                      England
                     </Typography>
                   </Box>
                 </Box>

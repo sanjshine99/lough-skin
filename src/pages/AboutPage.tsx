@@ -122,7 +122,7 @@ export default function AboutPage() {
         </motion.div>
 
         {/* Meet Our Team */}
-        <motion.div
+        {/* <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -231,7 +231,7 @@ export default function AboutPage() {
               })}
             </Box>
           </Box>
-        </motion.div>
+        </motion.div> */}
 
         {/* Our Values */}
         <motion.div
@@ -260,7 +260,11 @@ export default function AboutPage() {
                 <motion.div key={index} custom={index + 1} variants={fadeInUp}>
                   <Card
                     sx={{
-                      maxWidth: 300,
+                      width: 300, // fixed width
+                      height: 350, // fixed height
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
                       textAlign: "center",
                       p: 3,
                       borderRadius: 3,
@@ -272,7 +276,7 @@ export default function AboutPage() {
                       },
                     }}
                   >
-                    <CardContent>
+                    <CardContent sx={{ flexGrow: 1 }}>
                       <Box mb={2}>{value.icon}</Box>
                       <Typography variant="h5" sx={{ color: "#2c3e50", mb: 1 }}>
                         {value.title}
