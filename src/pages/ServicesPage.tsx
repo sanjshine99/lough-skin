@@ -11,9 +11,10 @@ import {
   Button,
 } from "@mui/material";
 import { AccessTime, AttachMoney } from "@mui/icons-material";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { easeOut, motion } from "framer-motion";
-import { useCart } from "../context/CartContext"; // adjust path as needed
+import { useCart } from "../context/CartContext";
+import axios from "axios";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -38,7 +39,7 @@ const ServiceSection = React.memo(
   }: {
     id: string;
     title: string;
-    tagline: string;
+    tagline?: string;
     services: any[];
     onAddToCart: (service: any) => void;
   }) => (
@@ -52,15 +53,17 @@ const ServiceSection = React.memo(
         <Typography variant="h4" sx={{ color: "#2c3e50", mb: 1 }}>
           {title}
         </Typography>
-        <Typography variant="h6" sx={{ color: "#7f8c8d", mb: 4 }}>
-          {tagline}
-        </Typography>
+        {tagline && (
+          <Typography variant="h6" sx={{ color: "#7f8c8d", mb: 4 }}>
+            {tagline}
+          </Typography>
+        )}
       </motion.div>
 
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
         {services.map((service, index) => (
           <motion.div
-            key={index}
+            key={service._id || index}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -97,13 +100,13 @@ const ServiceSection = React.memo(
                   <Box sx={{ display: "flex", gap: 1 }}>
                     <Chip
                       icon={<AccessTime />}
-                      label={service.duration}
+                      label={`${service.duration} min`}
                       variant="outlined"
                       sx={{ borderColor: "#a67c5b", color: "#a67c5b" }}
                     />
                     <Chip
                       icon={<AttachMoney />}
-                      label={service.price}
+                      label={`£${service.price}`}
                       sx={{ backgroundColor: "#a67c5b", color: "white" }}
                     />
                     <Button
@@ -139,6 +142,28 @@ const ServiceSection = React.memo(
 export default function ServicesPage() {
   const location = useLocation();
   const { addToCart } = useCart();
+  const [loadingServices, setLoadingServices] = React.useState(true);
+  const [error, setError] = React.useState("");
+  const [services, setServices] = React.useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      setLoadingServices(true);
+      setError("");
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/api/services`
+        );
+        setServices(res.data);
+      } catch (e) {
+        setError("Failed to load services.");
+      } finally {
+        setLoadingServices(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   useEffect(() => {
     if (location.hash) {
@@ -152,83 +177,17 @@ export default function ServicesPage() {
     }
   }, [location]);
 
-  const services = {
-    facials: [
-      {
-        id: "s1",
-        name: "Luxury Facial",
-        duration: "55 min",
-        price: "£65",
-        description:
-          "A comprehensive facial treatment using premium products for deep cleansing, exfoliation, and hydration.",
-      },
-      {
-        id: "s2",
-        name: "Dermaplaning",
-        duration: "30 min",
-        price: "£25",
-        description:
-          "Gentle exfoliation technique to remove dead skin cells and peach fuzz (female only).",
-      },
-    ],
-    scalp: [
-      {
-        id: "s3",
-        name: "Japanese-Inspired Luxury HeadSpa",
-        duration: "1 hr",
-        price: "£105",
-        description:
-          "Traditional Japanese scalp treatment for ultimate relaxation and hair health.",
-      },
-      {
-        id: "s4",
-        name: "HeadSpa + Luxury Facial",
-        duration: "1 hr 40 min",
-        price: "£145",
-        description:
-          "Combined treatment for complete head-to-face rejuvenation.",
-      },
-    ],
-    body: [
-      {
-        id: "s5",
-        name: "Body Sculpting",
-        duration: "Duration varies",
-        price: "From £80",
-        description:
-          "Advanced body contouring treatments for skin tightening and sculpting.",
-      },
-      {
-        id: "s6",
-        name: "Wood Therapy",
-        duration: "60 min",
-        price: "£90",
-        description:
-          "Natural wood tools used for lymphatic drainage and body sculpting.",
-      },
-    ],
-    massage: [
-      {
-        id: "s7",
-        name: "ASMR Head Massage",
-        duration: "45 min",
-        price: "£55",
-        description:
-          "Relaxing head massage designed to trigger ASMR responses for deep relaxation.",
-      },
-    ],
-  };
-
-  const addOns = [
-    {
-      id: "a1",
-      name: "Vitamin C / L-Ascorbic Acid Serum Boost",
-      price: "+£12",
-    },
-    { id: "a2", name: "Collagen Booster", price: "+£15" },
-    { id: "a3", name: "LED Light Therapy", price: "+£15" },
-    { id: "a4", name: "Aromatherapy Upgrade", price: "+£10" },
-  ];
+  // Group services by category
+  const groupedServices = useMemo(() => {
+    return services.reduce((acc: Record<string, any[]>, service) => {
+      const category = service.category || "Other";
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(service);
+      return acc;
+    }, {});
+  }, [services]);
 
   return (
     <Box sx={{ py: 8, background: "#fff8f3" }}>
@@ -248,82 +207,19 @@ export default function ServicesPage() {
           </Typography>
         </motion.div>
 
-        <ServiceSection
-          id="facials"
-          title="Facials"
-          tagline="Rejuvenating treatments for radiant, healthy skin"
-          services={services.facials}
-          onAddToCart={addToCart}
-        />
-        <ServiceSection
-          id="scalp"
-          title="Scalp & Head Spa"
-          tagline="Japanese-inspired treatments for ultimate relaxation"
-          services={services.scalp}
-          onAddToCart={addToCart}
-        />
-        <ServiceSection
-          id="body"
-          title="Body Treatments"
-          tagline="Advanced therapies for body sculpting and skin tightening"
-          services={services.body}
-          onAddToCart={addToCart}
-        />
-        <ServiceSection
-          id="massage"
-          title="Massage"
-          tagline="Therapeutic massage for deep relaxation"
-          services={services.massage}
-          onAddToCart={addToCart}
-        />
+        {loadingServices && <Typography>Loading...</Typography>}
+        {error && <Typography color="error">{error}</Typography>}
 
-        {/* Add-ons */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-        >
-          <Box
-            sx={{
-              mt: 8,
-              p: 4,
-              backgroundColor: "#f0e6db",
-              borderRadius: 3,
-              boxShadow: 2,
-            }}
-          >
-            <Typography variant="h4" sx={{ color: "#2c3e50", mb: 4 }}>
-              Treatment Add-Ons
-            </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-              {addOns.map((addon, index) => (
-                <Card
-                  key={index}
-                  sx={{
-                    minWidth: 250,
-                    p: 2,
-                    background: "#fff",
-                    borderRadius: 2,
-                    boxShadow: 2,
-                  }}
-                >
-                  <CardContent sx={{ p: 0 }}>
-                    <Typography variant="h6" sx={{ color: "#2c3e50" }}>
-                      {addon.name}
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      sx={{ color: "#a67c5b", fontWeight: "bold" }}
-                    >
-                      {addon.price}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))}
-            </Box>
-          </Box>
-        </motion.div>
+        {!loadingServices &&
+          Object.keys(groupedServices).map((category, idx) => (
+            <ServiceSection
+              key={category}
+              id={category.toLowerCase().replace(/\s+/g, "-")}
+              title={category}
+              services={groupedServices[category]}
+              onAddToCart={addToCart}
+            />
+          ))}
       </Container>
     </Box>
   );
