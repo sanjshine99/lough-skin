@@ -138,7 +138,7 @@ export default function CartAndCheckout() {
     const bookingData = {
       userId: "64d2024be1e3d9d5a45678ab", // Replace with dynamic user ID if available
       services: services.map((s) => ({
-        serviceId: s.id, // Assuming `s.id` is the correct service identifier
+        serviceId: s._id, // Assuming `s.id` is the correct service identifier
         name: s.name,
         price: s.unitPrice,
         duration: s.duration,
