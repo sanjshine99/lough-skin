@@ -92,7 +92,8 @@ export default function CartAndCheckout() {
     const fetchSlots = async () => {
       if (!selectedDate) return;
       try {
-        const dateStr = selectedDate.toISOString().split("T")[0];
+        const dateStr = selectedDate.toLocaleDateString("en-CA");
+
         const url = `${process.env.REACT_APP_API_BASE_URL}/api/availability?date=${dateStr}`;
         console.log(
           "Fetching slots from:",
