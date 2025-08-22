@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useMemo } from "react";
 import {
   Box,
@@ -9,8 +7,9 @@ import {
   CardContent,
   Chip,
   Button,
+  IconButton,
 } from "@mui/material";
-import { AccessTime, AttachMoney } from "@mui/icons-material";
+import { AccessTime, ShoppingCart } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 import { easeOut, motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
@@ -97,24 +96,33 @@ const ServiceSection = React.memo(
                   >
                     {service.name}
                   </Typography>
-                  <Box sx={{ display: "flex", gap: 1 }}>
+                  <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                     <Chip
-                      icon={<AccessTime />}
+                      icon={<AccessTime sx={{ fontSize: 18 }} />}
                       label={`${service.duration} min`}
                       variant="outlined"
-                      sx={{ borderColor: "#a67c5b", color: "#a67c5b" }}
+                      sx={{
+                        height: 32,
+                        borderColor: "#a67c5b",
+                        color: "#a67c5b",
+                        fontSize: 14,
+                      }}
                     />
                     <Chip
-                      icon={<AttachMoney />}
                       label={`£${service.price}`}
-                      sx={{ backgroundColor: "#a67c5b", color: "white" }}
-                    />
-                    <Button
-                      variant="outlined"
-                      size="small"
                       sx={{
-                        mt: 1,
-                        borderColor: "#a67c5b",
+                        height: 32,
+                        backgroundColor: "#a67c5b",
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: 14,
+                      }}
+                    />
+                    <IconButton
+                      sx={{
+                        height: 32,
+                        width: 32,
+                        border: "1px solid #a67c5b",
                         color: "#a67c5b",
                         "&:hover": {
                           backgroundColor: "#f5eee7",
@@ -123,8 +131,8 @@ const ServiceSection = React.memo(
                       }}
                       onClick={() => onAddToCart(service)}
                     >
-                      Add to Cart
-                    </Button>
+                      <ShoppingCart sx={{ fontSize: 18 }} />
+                    </IconButton>
                   </Box>
                 </Box>
                 <Typography variant="body1" sx={{ color: "#7f8c8d", mb: 3 }}>

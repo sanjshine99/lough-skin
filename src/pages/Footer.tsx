@@ -36,10 +36,10 @@ const Footer = () => {
             >
               <PhoneIcon fontSize="small" sx={{ mr: 1 }} />
               <a
-                href="tel:01509123456"
+                href="tel:+44 7788 988337"
                 style={{ color: "inherit", textDecoration: "none" }}
               >
-                01509 123456
+                +44 7788 988337
               </a>
             </Typography>
             <Typography

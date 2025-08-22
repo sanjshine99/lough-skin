@@ -46,11 +46,11 @@ const Banner = () => {
             }}
           >
             <Typography variant="h4" gutterBottom>
-              Free Consultation
+              Book your consultation just for £10
             </Typography>
-            <Typography variant="h6" sx={{ mb: 3 }}>
-              15-minute skin consultation for new clients – Complimentary
-            </Typography>
+            {/* <Typography variant="h6" sx={{ mb: 3 }}>
+              Book your consultation just for £10
+            </Typography> */}
             <Button
               component={Link}
               to="/booking"
@@ -61,7 +61,7 @@ const Banner = () => {
                 "&:hover": { backgroundColor: "#8b6f4e" },
               }}
             >
-              Book Your Free Consultation
+              Book Your Consultation
             </Button>
           </Box>
         </motion.div>

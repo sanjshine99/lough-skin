@@ -7,43 +7,15 @@ import {
   CardContent,
   Rating,
 } from "@mui/material";
-import {
-  Spa,
-  Star,
-  LocalFlorist,
-  Psychology,
-  Healing,
-} from "@mui/icons-material";
+import { Star } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function HomePage() {
-  const services = [
-    {
-      id: "facials",
-      title: "Facials",
-      description: "Luxury skincare treatments for radiant, healthy skin",
-      icon: <Spa sx={{ fontSize: 40, color: "#a67c5b" }} />,
-    },
-    {
-      id: "scalp",
-      title: "Scalp & Head Spa",
-      description: "Japanese-inspired treatments for ultimate relaxation",
-      icon: <Psychology sx={{ fontSize: 40, color: "#a67c5b" }} />,
-    },
-    {
-      id: "body",
-      title: "Body Treatments",
-      description: "Sculpting and skin tightening therapies",
-      icon: <Healing sx={{ fontSize: 40, color: "#a67c5b" }} />,
-    },
-    {
-      id: "massage",
-      title: "Massage",
-      description: "ASMR head massage for deep relaxation",
-      icon: <LocalFlorist sx={{ fontSize: 40, color: "#a67c5b" }} />,
-    },
-  ];
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const testimonials = [
     {
@@ -66,7 +38,19 @@ export default function HomePage() {
     },
   ];
 
-  const features = ["Premium Products", "Expert Staff", "Relaxing Environment"];
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_BASE_URL}/api/categories`)
+      .then((res) => {
+        setCategories(res.data); // assuming res.data is an array of categories
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching categories:", err);
+        setLoading(false);
+      });
+  }, []);
+  const features = ["Natural Products", "Expert Staff", "Relaxing Environment"];
 
   return (
     <Box>
@@ -132,7 +116,7 @@ export default function HomePage() {
             </Typography>
             <Button
               component={Link}
-              to="/booking"
+              to="/services"
               variant="contained"
               size="large"
               sx={{
@@ -146,7 +130,7 @@ export default function HomePage() {
                 },
               }}
             >
-              Book Now
+              Services
             </Button>
           </Container>
         </motion.div>
@@ -179,7 +163,7 @@ export default function HomePage() {
               }}
             >
               Experience our holistic approach to skincare and wellness in a
-              serene, luxurious environment. We combine premium products with
+              serene, luxurious environment. We combine natural products with
               expert techniques to deliver results-driven treatments that
               nurture both your skin and spirit.
             </Typography>
@@ -199,72 +183,78 @@ export default function HomePage() {
           >
             Our Services
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 3,
-              justifyContent: "center",
-              alignItems: "stretch",
-            }}
-          >
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                viewport={{ once: true }}
-                style={{ width: "100%", maxWidth: 280 }}
-              >
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    textAlign: "center",
-                    p: 3,
-                    boxShadow: 3,
+
+          {loading ? (
+            <Typography textAlign="center">Loading services...</Typography>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 3,
+                justifyContent: "center",
+              }}
+            >
+              {categories.map((category: any, index: any) => (
+                <motion.div
+                  key={category._id || index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  style={{
+                    flex: "1 1 calc(25% - 24px)", // 4 per row, minus gap
+                    maxWidth: 280, // optional, to limit card width
                   }}
                 >
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Box mb={2}>{service.icon}</Box>
-                    <Typography
-                      variant="h5"
-                      component="h3"
-                      gutterBottom
-                      sx={{ color: "#2c3e50" }}
-                    >
-                      {service.title}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{ color: "#7f8c8d", mb: 3 }}
-                    >
-                      {service.description}
-                    </Typography>
-                  </CardContent>
-                  <Button
-                    component={Link}
-                    to={`/services#${service.id}`}
-                    variant="outlined"
+                  <Card
                     sx={{
-                      borderColor: "#a67c5b",
-                      color: "#a67c5b",
-                      "&:hover": {
-                        borderColor: "#8b6f4e",
-                        backgroundColor: "#a67c5b",
-                        color: "white",
-                      },
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      textAlign: "center",
+                      p: 3,
+                      boxShadow: 3,
                     }}
                   >
-                    Learn More
-                  </Button>
-                </Card>
-              </motion.div>
-            ))}
-          </Box>
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography
+                        variant="h5"
+                        component="h3"
+                        gutterBottom
+                        sx={{ color: "#2c3e50" }}
+                      >
+                        {category.name}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{ color: "#7f8c8d", mb: 3 }}
+                      >
+                        {category.description}
+                      </Typography>
+                    </CardContent>
+                    <Button
+                      component={Link}
+                      to={`/services#${category.id}`}
+                      variant="outlined"
+                      sx={{
+                        borderColor: "#a67c5b",
+                        color: "#a67c5b",
+                        "&:hover": {
+                          borderColor: "#8b6f4e",
+                          backgroundColor: "#a67c5b",
+                          color: "white",
+                        },
+                      }}
+                    >
+                      Learn More
+                    </Button>
+                  </Card>
+                </motion.div>
+              ))}
+            </Box>
+          )}
         </Container>
       </Box>
 
@@ -371,101 +361,6 @@ export default function HomePage() {
           </Box>
         </Container>
       </Box>
-
-      {/* Footer */}
-      {/* <Box sx={{ backgroundColor: "#e1c9b3", color: "black", py: 6 }}>
-        <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              gap: 4,
-            }}
-          >
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Contact Info
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                123 High Street, Loughborough
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                Phone: 01509 123456
-              </Typography>
-              <Typography variant="body2">
-                Email: info@loughskin.co.uk
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Business Hours
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                Monday: Closed
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                Tuesday: 10:30 - 18:30
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                Wednesday: 10:30 - 18:30
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                Thursday: 10:30 - 18:30
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                Friday: 10:30 - 18:30
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                Saturday: 11:00 - 18:00
-              </Typography>
-              <Typography variant="body2">Sunday: 11:00 - 18:00</Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Additional Information
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                • Verified business by Fresha
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                • Instant Confirmation
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                • Pay by app
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                • Wheelchair accessible
-              </Typography>
-              <Typography variant="body2">• Parking available</Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Follow Us
-              </Typography>
-              <Box sx={{ display: "flex", gap: 2 }}>
-                <Button
-                  href="https://instagram.com"
-                  target="_blank"
-                  sx={{ color: "black", minWidth: "auto" }}
-                >
-                  Instagram
-                </Button>
-                <Button
-                  href="https://facebook.com"
-                  target="_blank"
-                  sx={{ color: "black", minWidth: "auto" }}
-                >
-                  Facebook
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-        </Container>
-      </Box> */}
     </Box>
   );
 }

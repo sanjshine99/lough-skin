@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Box,
   Container,
@@ -20,8 +18,14 @@ const team = [
     desc: `With nearly 10 years in the makeup and beauty industry and a retail-based role with Dior, I've had the privilege of working closely with clients every day, helping them feel confident through makeup and skincare. Through these experiences, I discovered my true passion: creating moments of calm.
 
 I focus on delivering deeply relaxing, result-driven treatments with a personal touch and keen attention to detail. Whether addressing specific skin concerns or providing a soothing HeadSpa experience, my goal is to offer a peaceful space where self-care thrives and every visit feels like a journey toward beauty and well-being.`,
-    tags: ["Makeup Artist", "HeadSpa Specialist", "10+ Years Experience"],
-    image: "image1.jpeg", // Replace with actual image path
+    tags: [
+      "Facialist",
+      "HeadSpa Specialist",
+      "10+ Years Experience",
+      "VTCT Qualified",
+      "CPD Credited",
+    ],
+    image: "image2.jpeg", // Replace with actual image path
   },
   {
     name: "Shriya",
@@ -29,8 +33,13 @@ I focus on delivering deeply relaxing, result-driven treatments with a personal 
     desc: `Hi, I’m Shriya! With a bubbly personality and a love for good conversation, I’m passionate about body contouring, wood therapy, lymphatic drainage, and overall wellbeing. I create calm, relaxing experiences tailored to each client.
 
 With careful attention to skin concerns and soothing HeadSpa treatments, my goal is to provide a peaceful space where self-care thrives and every visit becomes a journey of beauty and renewal.`,
-    tags: ["VTCT Qualified", "Lymphatic Expert", "HeadSpa Therapy"],
-    image: "image2.jpeg", // Replace with actual image path
+    tags: [
+      "Lymphatic Expert",
+      "HeadSpa Therapy",
+      "VTCT Qualified",
+      "CPD Credited",
+    ],
+    image: "image1.jpeg", // Replace with actual image path
   },
 ];
 
@@ -55,7 +64,7 @@ export default function OurTeamPage() {
         background: "linear-gradient(180deg, #fffaf4 0%, #f8f8f8 100%)",
       }}
     >
-      <Container maxWidth="lg">
+      <Container>
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -81,11 +90,24 @@ export default function OurTeamPage() {
             justifyContent: "center",
           }}
         >
+          {/* {team.map((member, i) => (
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 3, // space between cards
+                justifyContent: "center",
+              }}
+            > */}
           {team.map((member, i) => (
-            <motion.div key={i} custom={i + 1} variants={fadeInUp}>
+            <motion.div
+              key={i}
+              custom={i + 1}
+              variants={fadeInUp}
+              style={{ flex: "1 1 45%" }}
+            >
               <Card
                 sx={{
-                  width: 360,
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
@@ -93,9 +115,7 @@ export default function OurTeamPage() {
                   boxShadow: 3,
                   backgroundColor: "white",
                   transition: "transform 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-5px)",
-                  },
+                  "&:hover": { transform: "translateY(-5px)" },
                 }}
               >
                 <Box
@@ -151,10 +171,7 @@ export default function OurTeamPage() {
                         icon={<Spa />}
                         label={tag}
                         size="small"
-                        sx={{
-                          backgroundColor: "#a67c5b",
-                          color: "white",
-                        }}
+                        sx={{ backgroundColor: "#a67c5b", color: "white" }}
                       />
                     ))}
                   </Box>
@@ -162,6 +179,8 @@ export default function OurTeamPage() {
               </Card>
             </motion.div>
           ))}
+          {/* </Box> */}
+          {/* ))} */}
         </Box>
       </Container>
     </Box>

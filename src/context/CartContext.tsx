@@ -1,6 +1,5 @@
-"use client";
-
 import { createContext, useContext, useEffect, useState } from "react";
+import { Toaster, toast } from "sonner";
 
 type CartItem = {
   id: string;
@@ -44,6 +43,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addToCart = (item: CartItem) => {
     setCartItems((prev) => [...prev, item]);
+    toast.success(`${item.name} added to cart ✅`);
   };
 
   const removeItemFromCart = (name: string) => {
@@ -53,6 +53,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       const updated = [...prev];
       updated.splice(index, 1);
+      toast.info(`${name} removed from cart ❌`);
       return updated;
     });
   };
@@ -60,6 +61,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const clearCart = () => {
     setCartItems([]);
     sessionStorage.removeItem("cart");
+    toast.warning("Cart cleared 🛒");
   };
 
   return (
@@ -67,6 +69,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       value={{ cartItems, addToCart, removeItemFromCart, clearCart }}
     >
       {children}
+      {/* Toasts at the top */}
+      <Toaster richColors position="top-right" />
     </CartContext.Provider>
   );
 }

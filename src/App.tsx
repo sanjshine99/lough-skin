@@ -15,6 +15,7 @@ import Banner from "./pages/Banner";
 import { CartProvider } from "./context/CartContext";
 import OurTeamPage from "./pages/OurTeam";
 import BookingSuccessPage from "./pages/BookingSucess";
+import BookingFailPage from "./pages/BookingFail";
 
 const theme = createTheme({
   palette: {
@@ -63,6 +64,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/ourteam" element={<OurTeamPage />} />
               <Route path="/booking-success" element={<BookingSuccessPage />} />
+              <Route path="/booking-fail" element={<BookingFailPage />} />
             </Routes>
           </main>
           <Banner />

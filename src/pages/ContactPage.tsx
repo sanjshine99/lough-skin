@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Box,
   Container,
@@ -42,7 +40,7 @@ export default function ContactPage() {
     {
       question: "What products do you use?",
       answer:
-        "We use only premium, professional-grade skincare products from leading brands. All our products are carefully selected for their quality, effectiveness, and suitability for different skin types.",
+        "We use only natural, professional-grade skincare products from leading brands. All our products are carefully selected for their quality, effectiveness, and suitability for different skin types.",
     },
     {
       question: "Is parking available?",
@@ -121,7 +119,7 @@ export default function ContactPage() {
                       Phone
                     </Typography>
                     <Typography variant="body1" sx={{ color: "#7f8c8d" }}>
-                      01509 123456
+                      +44 7788 988337
                     </Typography>
                   </Box>
                 </Box>

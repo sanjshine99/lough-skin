@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -24,6 +22,7 @@ import {
   Snackbar,
   Alert,
   MenuItem,
+  InputAdornment,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart } from "../context/CartContext";
@@ -31,6 +30,7 @@ import axios from "axios";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh"; // mandatory icon
 
 export default function CartAndCheckout() {
   // const { cartItems } = useCart();
@@ -250,6 +250,7 @@ export default function CartAndCheckout() {
                   <Typography variant="h6">Your Details</Typography>
                   <Stack spacing={2}>
                     <TextField
+                      required
                       label="Name"
                       name="name"
                       value={customerInfo.name}
@@ -257,6 +258,7 @@ export default function CartAndCheckout() {
                       fullWidth
                     />
                     <TextField
+                      required
                       label="Email"
                       name="email"
                       value={customerInfo.email}
@@ -264,6 +266,7 @@ export default function CartAndCheckout() {
                       fullWidth
                     />
                     <TextField
+                      required
                       label="Phone"
                       name="phone"
                       value={customerInfo.phone}
@@ -287,7 +290,7 @@ export default function CartAndCheckout() {
 
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DatePicker
-                        label="Select Date"
+                        label="Select Date *"
                         value={selectedDate}
                         onChange={(newDate) => {
                           setSelectedDate(newDate);
@@ -305,6 +308,7 @@ export default function CartAndCheckout() {
 
                     {selectedDate && (
                       <TextField
+                        required
                         select
                         label="Select Time Slot"
                         value={selectedSlot}

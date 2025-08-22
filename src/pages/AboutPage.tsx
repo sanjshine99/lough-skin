@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Box,
   Container,
@@ -16,7 +14,7 @@ export default function AboutPage() {
   const values = [
     {
       title: "Luxury",
-      description: "Premium products and treatments in an elegant environment",
+      description: "Natural products and treatments in an elegant environment",
       icon: <Star sx={{ fontSize: 40, color: "#a67c5b" }} />,
     },
     {

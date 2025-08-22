@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import {
   AppBar,
@@ -107,7 +105,7 @@ export default function Navigation() {
     <>
       <AppBar
         position="sticky"
-        sx={{ backgroundColor: "#5c3a25", boxShadow: 1, padding: "5px" }}
+        sx={{ backgroundColor: "#e1c9b3", boxShadow: 1, padding: "5px" }}
       >
         <Toolbar>
           <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
@@ -147,7 +145,7 @@ export default function Navigation() {
                   component={Link}
                   to={item.href}
                   sx={{
-                    color: "#fff",
+                    color: "black",
                     fontWeight: 500,
                     textDecoration: "none",
                     backgroundColor:
