@@ -148,6 +148,12 @@ export default function GalleryPage() {
           onClose={handleClose}
           maxWidth="lg"
           fullWidth
+          BackdropProps={{
+            sx: {
+              backgroundColor: "rgba(0,0,0,0.6)", // darken background
+              backdropFilter: "blur(50px)", // blur effect
+            },
+          }}
           sx={{
             "& .MuiDialog-paper": {
               backgroundColor: "transparent",

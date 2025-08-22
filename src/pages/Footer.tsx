@@ -48,10 +48,10 @@ const Footer = () => {
             >
               <Email fontSize="small" sx={{ mr: 1 }} />
               <a
-                href="mailto:info@loughskin.co.uk"
+                href="mailto:loughskin@outlook.com"
                 style={{ color: "inherit", textDecoration: "none" }}
               >
-                info@loughskin.co.uk
+                loughskin@outlook.com
               </a>
             </Typography>
           </Box>

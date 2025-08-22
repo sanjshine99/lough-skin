@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Box,
   Container,
@@ -6,8 +6,8 @@ import {
   Card,
   CardContent,
   Chip,
-  Button,
   IconButton,
+  Button,
 } from "@mui/material";
 import { AccessTime, ShoppingCart } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
@@ -15,16 +15,14 @@ import { easeOut, motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
 import axios from "axios";
 
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
   visible: (i = 1) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.15,
-      duration: 0.6,
-      ease: easeOut,
-    },
+    transition: { delay: i * 0.15, duration: 0.6, ease: easeOut },
   }),
 };
 
@@ -76,9 +74,7 @@ const ServiceSection = React.memo(
                 borderRadius: 3,
                 background: "linear-gradient(to right, #fff, #fdf7f1)",
                 transition: "transform 0.3s ease",
-                "&:hover": {
-                  transform: "translateY(-4px)",
-                },
+                "&:hover": { transform: "translateY(-4px)" },
               }}
             >
               <CardContent sx={{ p: 0 }}>
@@ -150,9 +146,9 @@ const ServiceSection = React.memo(
 export default function ServicesPage() {
   const location = useLocation();
   const { addToCart } = useCart();
-  const [loadingServices, setLoadingServices] = React.useState(true);
-  const [error, setError] = React.useState("");
-  const [services, setServices] = React.useState<any[]>([]);
+  const [loadingServices, setLoadingServices] = useState(true);
+  const [error, setError] = useState("");
+  const [services, setServices] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -169,37 +165,50 @@ export default function ServicesPage() {
         setLoadingServices(false);
       }
     };
-
     fetchServices();
   }, []);
+
+  const containerRef: any = useRef(null);
+
+  const scroll = (direction: any) => {
+    if (containerRef.current) {
+      const scrollAmount = 150; // adjust scroll step
+      containerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");
       const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [location]);
 
-  // Group services by category
   const groupedServices = useMemo(() => {
     return services.reduce((acc: Record<string, any[]>, service) => {
       const category = service.category || "Other";
-      if (!acc[category]) {
-        acc[category] = [];
-      }
+      if (!acc[category]) acc[category] = [];
       acc[category].push(service);
       return acc;
     }, {});
   }, [services]);
 
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <Box sx={{ py: 8, background: "#fff8f3" }}>
       <Container maxWidth="lg">
+        {/* Horizontal Scrollable Category Bar */}
+
         <motion.div
           initial="hidden"
           animate="visible"
@@ -215,11 +224,57 @@ export default function ServicesPage() {
           </Typography>
         </motion.div>
 
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1, pb: 5 }}>
+          {/* Left Arrow */}
+          <IconButton onClick={() => scroll("left")} sx={{ color: "#a67c5b" }}>
+            <ArrowBackIos />
+          </IconButton>
+
+          {/* Scrollable Buttons Container */}
+          <Box
+            ref={containerRef}
+            sx={{
+              display: "flex",
+              overflow: "hidden", // hide native scrollbar
+              gap: 2,
+              flexGrow: 1,
+            }}
+          >
+            {Object.keys(groupedServices).map((category) => {
+              const id = category.toLowerCase().replace(/\s+/g, "-");
+              return (
+                <Button
+                  key={id}
+                  variant="outlined"
+                  onClick={() => handleScrollTo(id)}
+                  sx={{
+                    flexShrink: 0,
+                    borderColor: "#a67c5b",
+                    color: "#a67c5b",
+                    fontWeight: "bold",
+                    "&:hover": {
+                      backgroundColor: "#f5eee7",
+                      borderColor: "#a67c5b",
+                    },
+                  }}
+                >
+                  {category}
+                </Button>
+              );
+            })}
+          </Box>
+
+          {/* Right Arrow */}
+          <IconButton onClick={() => scroll("right")} sx={{ color: "#a67c5b" }}>
+            <ArrowForwardIos />
+          </IconButton>
+        </Box>
+
         {loadingServices && <Typography>Loading...</Typography>}
         {error && <Typography color="error">{error}</Typography>}
 
         {!loadingServices &&
-          Object.keys(groupedServices).map((category, idx) => (
+          Object.keys(groupedServices).map((category) => (
             <ServiceSection
               key={category}
               id={category.toLowerCase().replace(/\s+/g, "-")}

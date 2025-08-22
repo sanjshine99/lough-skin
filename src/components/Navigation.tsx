@@ -89,7 +89,7 @@ export default function Navigation() {
             sx={{
               backgroundColor: "#a67c5b",
               textDecoration: "none",
-              "&:hover": { backgroundColor: "#b8941f" },
+              // "&:hover": { backgroundColor: "#b8941f" },
               mt: 2,
             }}
             onClick={handleDrawerToggle}
@@ -168,7 +168,7 @@ export default function Navigation() {
                   backgroundColor: "#a67c5b",
                   ml: 2,
                   textDecoration: "none",
-                  "&:hover": { backgroundColor: "#b8941f" },
+                  // "&:hover": { backgroundColor: "#b8941f" },
                 }}
               >
                 Book Now

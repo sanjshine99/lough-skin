@@ -131,7 +131,7 @@ export default function ContactPage() {
                       Email
                     </Typography>
                     <Typography variant="body1" sx={{ color: "#7f8c8d" }}>
-                      info@loughskin.co.uk
+                      loughskin@outlook.com
                     </Typography>
                   </Box>
                 </Box>
