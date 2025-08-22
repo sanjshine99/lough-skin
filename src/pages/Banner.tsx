@@ -39,8 +39,8 @@ const Banner = () => {
               mt: 8,
               p: 4,
               textAlign: "center",
-              background: "#2c3e50",
-              color: "white",
+              background: "#e1c9b3",
+              color: "black",
               borderRadius: 3,
               boxShadow: 3,
             }}
