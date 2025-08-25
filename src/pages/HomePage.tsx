@@ -144,29 +144,49 @@ export default function HomePage() {
         viewport={{ once: true }}
       >
         <Container maxWidth="lg" sx={{ py: 8 }}>
-          <Box textAlign="center" mb={6}>
-            <Typography
-              variant="h4"
-              component="h2"
-              gutterBottom
-              sx={{ color: "#2c3e50", mb: 3 }}
-            >
-              Welcome to Lough Skin
-            </Typography>
-            <Typography
-              variant="h6"
+          <Box
+            display="flex"
+            flexDirection={{ xs: "column", md: "row" }}
+            alignItems="center"
+            gap={4}
+          >
+            {/* Left: Image */}
+            <Box
+              component="img"
+              src="/gallery/13.jpeg" // change this path
+              alt="Welcome to Lough Skin"
               sx={{
-                color: "#7f8c8d",
-                maxWidth: "800px",
-                mx: "auto",
-                lineHeight: 1.8,
+                width: { xs: "100%", md: "50%" },
+                borderRadius: 3,
+                boxShadow: 3,
               }}
-            >
-              Experience our holistic approach to skincare and wellness in a
-              serene, luxurious environment. We combine natural products with
-              expert techniques to deliver results-driven treatments that
-              nurture both your skin and spirit.
-            </Typography>
+            />
+
+            {/* Right: Text */}
+            <Box textAlign={{ xs: "center", md: "left" }}>
+              <Typography
+                variant="h4"
+                component="h2"
+                gutterBottom
+                sx={{ color: "#2c3e50", mb: 3 }}
+              >
+                Welcome to Lough Skin
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#7f8c8d",
+                  maxWidth: "600px",
+                  lineHeight: 1.8,
+                  mx: { xs: "auto", md: "0" },
+                }}
+              >
+                Experience our holistic approach to skincare and wellness in a
+                serene, luxurious environment. We combine natural products with
+                expert techniques to deliver results-driven treatments that
+                nurture both your skin and spirit.
+              </Typography>
+            </Box>
           </Box>
         </Container>
       </motion.div>
