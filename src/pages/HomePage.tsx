@@ -83,7 +83,7 @@ export default function HomePage() {
             zIndex: -1,
           }}
         >
-          <source src="/video.mp4" type="video/mp4" />
+          <source src="/gallery/video.mp4" type="video/mp4" />
         </video>
 
         {/* Overlay */}
