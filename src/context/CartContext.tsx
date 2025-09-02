@@ -43,7 +43,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addToCart = (item: CartItem) => {
     setCartItems((prev) => [...prev, item]);
-    toast.success(`${item.name} added to cart ✅`);
+    // toast.success(`${item.name} added to cart ✅`);
   };
 
   const removeItemFromCart = (name: string) => {

@@ -162,7 +162,7 @@ const BookingSuccessPage = () => {
               </Box>
               <Box display="flex" justifyContent="space-between" mb={1}>
                 <Typography>Reference number</Typography>
-                <Typography>{bookingDetails?.bookingId}</Typography>
+                <Typography>{bookingDetails?.paymentIntent}</Typography>
               </Box>
               <Box display="flex" justifyContent="space-between" mb={1}>
                 <Typography>Total Amount</Typography>

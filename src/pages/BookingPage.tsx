@@ -17,20 +17,13 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
   CircularProgress,
   Snackbar,
   Alert,
-  MenuItem,
-  InputAdornment,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart } from "../context/CartContext";
 import axios from "axios";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import PriorityHighIcon from "@mui/icons-material/PriorityHigh"; // mandatory icon
 
 export default function CartAndCheckout() {
   // const { cartItems } = useCart();
@@ -41,9 +34,6 @@ export default function CartAndCheckout() {
     "success" | "error" | null
   >(null);
   const [snackOpen, setSnackOpen] = useState(false);
-  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedSlot, setSelectedSlot] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
 
   const { cartItems, removeItemFromCart, clearCart } = useCart();
@@ -88,47 +78,6 @@ export default function CartAndCheckout() {
     removeItemFromCart(name);
   };
 
-  useEffect(() => {
-    const fetchSlots = async () => {
-      if (!selectedDate) return;
-      try {
-        const dateStr = selectedDate.toLocaleDateString("en-CA");
-
-        const url = `${process.env.REACT_APP_API_BASE_URL}/api/availability?date=${dateStr}`;
-        console.log(
-          "Fetching slots from:",
-          url,
-          process.env.REACT_APP_API_BASE_URL
-        );
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/availability?date=${dateStr}`
-        );
-        setAvailableSlots(res.data);
-      } catch (error) {
-        console.error("Failed to fetch slots:", error);
-        setAvailableSlots([]);
-      }
-    };
-
-    fetchSlots();
-  }, [selectedDate]);
-
-  // const handleRemove = (name: string) => {
-  //   const updated = [...services];
-  //   const index = updated.findIndex((s) => s.name === name);
-
-  //   if (index > -1) {
-  //     if (updated[index].quantity > 1) {
-  //       updated[index].quantity -= 1;
-  //       updated[index].totalPrice -= updated[index].unitPrice;
-  //     } else {
-  //       updated.splice(index, 1);
-  //     }
-  //   }
-
-  //   setServices(updated);
-  // };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCustomerInfo({ ...customerInfo, [e.target.name]: e.target.value });
   };
@@ -145,9 +94,6 @@ export default function CartAndCheckout() {
         duration: s.duration,
       })),
       totalAmount: total,
-      appointmentDate: selectedDate?.toISOString().split("T")[0], // "YYYY-MM-DD"
-      appointmentTime: selectedSlot, // e.g., "14:30"
-      staffMember: "Alex Groomer", // Can be dynamic if needed
       notes: customerInfo.notes,
       customerInfo: {
         name: customerInfo.name,
@@ -160,15 +106,6 @@ export default function CartAndCheckout() {
       setLoading(true);
 
       let paymentIntentId = null;
-      if (paymentMethod === "card") {
-        const stripeRes = await axios.post(
-          `${process.env.REACT_APP_API_BASE_URL}/api/create-payment-intent`,
-          {
-            amount: total,
-          }
-        );
-        paymentIntentId = stripeRes.data.paymentIntentId;
-      }
 
       const res = await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/api/create-payment-intent`,
@@ -288,7 +225,7 @@ export default function CartAndCheckout() {
                       fullWidth
                     />
 
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DatePicker
                         label="Select Date *"
                         value={selectedDate}
@@ -297,16 +234,16 @@ export default function CartAndCheckout() {
                           setSelectedSlot("");
                         }}
                         disablePast
-                      />
-                      {/* <TextField
+                      /> */}
+                    {/* <TextField
                         fullWidth
                         label="Select Date"
                         value={selectedDate}
                         onChange={(e: any) => setSelectedDate(e.target.value)}
                       /> */}
-                    </LocalizationProvider>
+                    {/* </LocalizationProvider> */}
 
-                    {selectedDate && (
+                    {/* {selectedDate && (
                       <TextField
                         required
                         select
@@ -325,7 +262,7 @@ export default function CartAndCheckout() {
                           <MenuItem disabled>No time slots available</MenuItem>
                         )}
                       </TextField>
-                    )}
+                    )} */}
 
                     <Button
                       variant="contained"
@@ -333,9 +270,9 @@ export default function CartAndCheckout() {
                       disabled={
                         !customerInfo.name ||
                         !customerInfo.email ||
-                        !customerInfo.phone ||
-                        !selectedSlot ||
-                        !selectedDate
+                        !customerInfo.phone
+                        // !selectedSlot ||
+                        // !selectedDate
                       }
                     >
                       Continue to Payment
