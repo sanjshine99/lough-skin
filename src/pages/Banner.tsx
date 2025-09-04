@@ -53,7 +53,7 @@ const Banner = () => {
             </Typography> */}
             <Button
               component={Link}
-              to="/booking"
+              to="/services"
               variant="contained"
               size="large"
               sx={{

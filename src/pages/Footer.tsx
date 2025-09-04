@@ -106,14 +106,14 @@ const Footer = () => {
             </Typography>
             <Box sx={{ display: "flex", gap: 2 }}>
               <IconButton
-                href="https://instagram.com"
+                href="https://instagram.com/loughskin"
                 target="_blank"
                 sx={{ color: "black" }}
               >
                 <Instagram />
               </IconButton>
               <IconButton
-                href="https://facebook.com"
+                href="https://facebook.com/loughskin"
                 target="_blank"
                 sx={{ color: "black" }}
               >
