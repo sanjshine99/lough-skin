@@ -122,6 +122,178 @@ const CONSULTATION_SERVICES = [
   },
 ];
 
+const FACIAL_SERVICES = [
+  {
+    _id: "5",
+    name: "Party Glow Facial",
+    duration: 35,
+    price: 55,
+    description:
+      "Double cleanse, lymphatic drainage using gua sha, dermaplaning exfoliation, toner, facial massage with moisturiser & SPF, optional herbal tea.",
+  },
+  {
+    _id: "6",
+    name: "Luxury Facial",
+    duration: 50,
+    price: 65,
+    description:
+      "Double cleanse, lymphatic drainage, steam with exfoliation, hot towel, nourishing mask with shoulder & neck massage, LED light therapy, head massage, hydrating facial massage, SPF, optional herbal tea.",
+  },
+  {
+    _id: "7",
+    name: "HydraFacial",
+    duration: 75,
+    price: 95,
+    description:
+      "Double cleanse, lymphatic drainage, steam with exfoliation, hot towel, manual extraction, hydra dermabrasion, nourishing mask with shoulder & neck massage, LED light therapy, head massage, hydrating facial massage, SPF, optional herbal tea.",
+  },
+  {
+    _id: "8",
+    name: "BioRe Peel with Microneedling",
+    duration: 75,
+    price: 105,
+    description:
+      "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, BioRepeel + Microneedling, cold globe treatment, mask with shoulder & neck massage, LED light therapy, head massage, facial massage with SPF, optional herbal tea.",
+  },
+  {
+    _id: "9",
+    name: "LoughGlow",
+    duration: 60,
+    price: 85,
+    description:
+      "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, mask with shoulder & neck massage, microneedling with glow serum, LED light therapy, head massage, hydrating facial massage with SPF, optional herbal tea.",
+  },
+  {
+    _id: "10",
+    name: "Age Rewind",
+    duration: 75,
+    price: 85,
+    description:
+      "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, nourishing mask with shoulder, neck & head massage, microneedling with age-rewind serum, LED light therapy, head massage, hydrating facial massage with SPF, optional herbal tea.",
+  },
+];
+
+const BODY_SCULPT_SERVICES = [
+  {
+    _id: "11",
+    name: "Sculpt Bundle (Side of Thighs)",
+    duration: 50,
+    price: 75,
+    description:
+      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+  },
+  {
+    _id: "12",
+    name: "Sculpt Bundle (Inner Thighs)",
+    duration: 45,
+    price: 70,
+    description:
+      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+  },
+  {
+    _id: "13",
+    name: "Sculpt Bundle (Front of Thighs)",
+    duration: 50,
+    price: 75,
+    description:
+      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+  },
+  {
+    _id: "14",
+    name: "Sculpt Bundle (Back of Thighs)",
+    duration: 50,
+    price: 75,
+    description:
+      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+  },
+  {
+    _id: "15",
+    name: "Sculpt Bundle (Abdomen)",
+    duration: 70,
+    price: 110,
+    description:
+      "Ultrasonic cavitation + radio frequency + wood therapy to help reduce localised fat, improve circulation, and tighten the abdomen.",
+  },
+  {
+    _id: "16",
+    name: "Sculpt Bundle Thighs (Front, Back, Inner Thighs) Both Thighs",
+    duration: 120,
+    price: 200,
+    description:
+      "Full thigh sculpting with ultrasonic cavitation + radio frequency + wood therapy for smoother, well-proportioned contours.",
+  },
+];
+
+const SKIN_TIGHTENING_SERVICES = [
+  {
+    _id: "17",
+    name: "Back Rolls",
+    duration: 40,
+    price: 70,
+    description:
+      "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
+  },
+  {
+    _id: "18",
+    name: "Chin and Jaw",
+    duration: 35,
+    price: 65,
+    description:
+      "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
+  },
+  {
+    _id: "19",
+    name: "Abdomen",
+    duration: 40,
+    price: 70,
+    description:
+      "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
+  },
+  {
+    _id: "20",
+    name: "Glutes",
+    duration: 40,
+    price: 70,
+    description:
+      "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
+  },
+];
+
+const WOOD_THERAPY_SERVICES = [
+  {
+    _id: "21",
+    name: "Wood Therapy (Back of Thighs)",
+    duration: 40,
+    price: 55,
+    description:
+      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+  },
+  {
+    _id: "22",
+    name: "Wood Therapy (Buttocks)",
+    duration: 35,
+    price: 55,
+    description:
+      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+  },
+  {
+    _id: "23",
+    name: "Wood Therapy (Inner Thighs)",
+    duration: 35,
+    price: 60,
+    description:
+      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+  },
+  {
+    _id: "24",
+    name: "Wood Therapy (Abdomen)",
+    duration: 35,
+    price: 60,
+    description:
+      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+  },
+];
+
 const ServiceSection = ({ title, services, onAddToCart }: any) => (
   <Box sx={{ mb: 8 }}>
     <motion.div
@@ -267,6 +439,30 @@ export default function ServicesPage() {
         <ServiceSection
           title="Consultation"
           services={CONSULTATION_SERVICES}
+          onAddToCart={addToCart}
+        />
+
+        <ServiceSection
+          title="Body Sculpt"
+          services={BODY_SCULPT_SERVICES}
+          onAddToCart={addToCart}
+        />
+
+        <ServiceSection
+          title="Facials"
+          services={FACIAL_SERVICES}
+          onAddToCart={addToCart}
+        />
+
+        <ServiceSection
+          title="Skin Tightening"
+          services={SKIN_TIGHTENING_SERVICES}
+          onAddToCart={addToCart}
+        />
+
+        <ServiceSection
+          title="Wood Therapy"
+          services={WOOD_THERAPY_SERVICES}
           onAddToCart={addToCart}
         />
       </Container>
