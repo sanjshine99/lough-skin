@@ -47,7 +47,7 @@ export default function Navigation() {
           mb: 2,
         }}
       >
-        <Typography variant="h6" sx={{ color: "#fff", fontWeight: "bold" }}>
+        <Typography variant="h6" sx={{ color: "black", fontWeight: "bold" }}>
           Lough Skin
         </Typography>
         <IconButton onClick={handleDrawerToggle}>
@@ -73,7 +73,7 @@ export default function Navigation() {
               primary={item.label}
               sx={{
                 "& .MuiTypography-root": {
-                  color: "#fff",
+                  color: "black",
                   fontWeight: 500,
                 },
               }}
@@ -185,6 +185,12 @@ export default function Navigation() {
         onClose={handleDrawerToggle}
         ModalProps={{
           keepMounted: true,
+        }}
+        PaperProps={{
+          sx: {
+            backgroundColor: "#e1c9b3", // same as AppBar
+            color: "black", // default text color inside drawer
+          },
         }}
       >
         {drawer}

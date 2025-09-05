@@ -294,6 +294,65 @@ const WOOD_THERAPY_SERVICES = [
   },
 ];
 
+const MASSAGE_SERVICES = [
+  {
+    _id: "m1",
+    name: "Lymph Therapy Abdomen",
+    duration: 30,
+    price: 40,
+    description:
+      "Lymphatic drainage massage can ease swelling that occurs with a blocked lymphatic system. It moves waste toward your lymph nodes to rid your body of toxins.",
+  },
+  {
+    _id: "m2",
+    name: "Bamboo Full Body Deep Tissue Massage",
+    duration: 65, // 1 hr 5 mins
+    price: 75,
+    description:
+      "Stimulate your circulation with the unique properties of Bamboo massage. Guaranteed to relax tight muscles and aid in stress relief. Certain problem areas can be targeted in this treatment to ensure that muscles are lengthened and tension is removed. Perfect for those wanting a deep penetration to aid stimulation and lymphatic drainage.",
+  },
+  {
+    _id: "m3",
+    name: "Full Body Relaxation Therapy",
+    duration: 60,
+    price: 60,
+    description:
+      "Relaxing full body massage is a classic massage technique using gentle to moderate pressure and long, gliding strokes, kneading, and circular movements across the entire body. This therapy aims to ease muscular tension, improve circulation, and promote deep relaxation.",
+  },
+  {
+    _id: "m4",
+    name: "Back Relaxation Therapy",
+    duration: 30,
+    price: 35,
+    description:
+      "It helps relax muscles, reduce stress, improve circulation, and relieve pain or tension.",
+  },
+  {
+    _id: "m5",
+    name: "Lymph Therapy Full Body",
+    duration: 50,
+    price: 65,
+    description:
+      "Full Body Lymphatic Drainage Massage. A gentle, rhythmic treatment designed to stimulate the lymphatic system, reduce fluid retention, boost circulation, and support the body’s natural detox process. Ideal for bloating, getting rid of toxins or general wellness.",
+  },
+  {
+    _id: "m6",
+    name: "Hot River Rock Therapy",
+    duration: 60,
+    price: 65,
+    description:
+      "Hot river rock therapy uses smooth, heated basalt stones to relax muscles and provide warmth. The hot stones are placed on key points of the body to relieve tension and may also use them to gently massage the muscles. The heat and pressure help reduce stiffness, improve circulation, and promote relaxation.",
+  },
+  {
+    _id: "m7",
+    name: "Hot River Rock Back Therapy",
+    duration: 30,
+    price: 35,
+    description:
+      "Hot river rock therapy uses smooth, heated basalt stones to relax muscles and provide warmth. The hot stones are placed on key points of the body to relieve tension and may also use them to gently massage the muscles. The heat and pressure help reduce stiffness, improve circulation, and promote relaxation.",
+  },
+];
+
 const ServiceSection = ({ title, services, onAddToCart }: any) => (
   <Box sx={{ mb: 8 }}>
     <motion.div
@@ -414,17 +473,24 @@ export default function ServicesPage() {
           </Typography>
         </motion.div>
 
-        {/* Therapy Section */}
+        {/* Consultation Section */}
         <ServiceSection
-          title="Therapy"
+          title="Consultation"
+          services={CONSULTATION_SERVICES}
+          onAddToCart={addToCart}
+        />
+
+        {/* Headspa Section */}
+        <ServiceSection
+          title="Headspa"
           services={THERAPY_SERVICES}
           onAddToCart={addToCart}
         />
 
-        {/* Add-ons Section */}
+        {/* Facials Section */}
         <ServiceSection
-          title="Add-ons"
-          services={ADDON_SERVICES}
+          title="Facials"
+          services={FACIAL_SERVICES}
           onAddToCart={addToCart}
         />
 
@@ -435,34 +501,38 @@ export default function ServicesPage() {
           onAddToCart={addToCart}
         />
 
-        {/* Consultation Section */}
-        <ServiceSection
-          title="Consultation"
-          services={CONSULTATION_SERVICES}
-          onAddToCart={addToCart}
-        />
-
+        {/* Body Sculpt Section */}
         <ServiceSection
           title="Body Sculpt"
           services={BODY_SCULPT_SERVICES}
           onAddToCart={addToCart}
         />
 
-        <ServiceSection
-          title="Facials"
-          services={FACIAL_SERVICES}
-          onAddToCart={addToCart}
-        />
-
+        {/* Skin Tightening Section */}
         <ServiceSection
           title="Skin Tightening"
           services={SKIN_TIGHTENING_SERVICES}
           onAddToCart={addToCart}
         />
 
+        {/* Wood Therapy Section */}
         <ServiceSection
           title="Wood Therapy"
           services={WOOD_THERAPY_SERVICES}
+          onAddToCart={addToCart}
+        />
+
+        {/* Massages Section */}
+        <ServiceSection
+          title="Massages"
+          services={MASSAGE_SERVICES}
+          onAddToCart={addToCart}
+        />
+
+        {/* Add-ons Section */}
+        <ServiceSection
+          title="Add-ons"
+          services={ADDON_SERVICES}
           onAddToCart={addToCart}
         />
       </Container>

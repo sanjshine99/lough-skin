@@ -16,6 +16,7 @@ import axios from "axios";
 export default function HomePage() {
   // const [categories, setCategories] = useState([]);
   // const [loading, setLoading] = useState(true);
+  const [expandedService, setExpandedService] = useState<number | null>(null);
 
   const testimonials = [
     {
@@ -263,64 +264,90 @@ export default function HomePage() {
               justifyContent: "center",
             }}
           >
-            {categories.map((category: any, index: any) => (
-              <motion.div
-                key={category._id || index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                viewport={{ once: true }}
-                style={{
-                  flex: "1 1 calc(25% - 24px)", // 4 per row, minus gap
-                  maxWidth: 280, // optional, to limit card width
-                }}
-              >
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    textAlign: "center",
-                    p: 3,
-                    boxShadow: 3,
+            {categories.map((category: any, index: number) => {
+              const isExpanded = expandedService === index;
+              const shortText = category.description?.slice(0, 100); // first 100 chars
+              const needsTruncate = category.description?.length > 100;
+
+              return (
+                <motion.div
+                  key={category._id || index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  style={{
+                    flex: "1 1 calc(25% - 24px)", // 4 per row
+                    maxWidth: 280,
                   }}
                 >
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography
-                      variant="h5"
-                      component="h3"
-                      gutterBottom
-                      sx={{ color: "#2c3e50" }}
-                    >
-                      {category.name}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{ color: "#7f8c8d", mb: 3 }}
-                    >
-                      {category.description}
-                    </Typography>
-                  </CardContent>
-                  <Button
-                    component={Link}
-                    to={`/services#${category.id}`}
-                    variant="outlined"
+                  <Card
                     sx={{
-                      borderColor: "#a67c5b",
-                      color: "#a67c5b",
-                      "&:hover": {
-                        borderColor: "#8b6f4e",
-                        backgroundColor: "#a67c5b",
-                        color: "white",
-                      },
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      textAlign: "center",
+                      p: 3,
+                      boxShadow: 3,
                     }}
                   >
-                    Learn More
-                  </Button>
-                </Card>
-              </motion.div>
-            ))}
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography
+                        variant="h5"
+                        component="h3"
+                        gutterBottom
+                        sx={{ color: "#2c3e50" }}
+                      >
+                        {category.name}
+                      </Typography>
+
+                      {/* Truncated Description */}
+                      <Typography
+                        variant="body1"
+                        sx={{ color: "#7f8c8d", mb: 2 }}
+                      >
+                        {isExpanded ? category.description : shortText}
+                        {needsTruncate && !isExpanded && "..."}
+                      </Typography>
+
+                      {needsTruncate && (
+                        <Button
+                          size="small"
+                          onClick={() =>
+                            setExpandedService(isExpanded ? null : index)
+                          }
+                          sx={{
+                            color: "#a67c5b",
+                            textTransform: "none",
+                            "&:hover": { backgroundColor: "transparent" },
+                          }}
+                        >
+                          {isExpanded ? "Read Less" : "Read More"}
+                        </Button>
+                      )}
+                    </CardContent>
+
+                    <Button
+                      component={Link}
+                      to={`/services#${category.id}`}
+                      variant="outlined"
+                      sx={{
+                        borderColor: "#a67c5b",
+                        color: "#a67c5b",
+                        "&:hover": {
+                          borderColor: "#8b6f4e",
+                          backgroundColor: "#a67c5b",
+                          color: "white",
+                        },
+                      }}
+                    >
+                      Learn More
+                    </Button>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </Box>
         </Container>
       </Box>
