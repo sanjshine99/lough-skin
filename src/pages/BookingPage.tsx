@@ -159,14 +159,14 @@ export default function CartAndCheckout() {
                           primary={`${service.name}${
                             service.quantity > 1 ? ` x${service.quantity}` : ""
                           }`}
-                          secondary={`€ ${service.totalPrice.toLocaleString()}`}
+                          secondary={`£ ${service.totalPrice.toLocaleString()}`}
                         />
                       </ListItem>
                     ))}
                   </List>
                   <Divider sx={{ my: 2 }} />
                   <Typography variant="subtitle1">
-                    Total: € {total.toLocaleString()}
+                    Total: £ {total.toLocaleString()}
                   </Typography>
                   <Button
                     variant="contained"
@@ -390,13 +390,13 @@ export default function CartAndCheckout() {
                 {services.map((s: any, i: number) => (
                   <Typography key={i} variant="body2">
                     {s.name}
-                    {s.quantity > 1 ? ` x${s.quantity}` : ""}: €{" "}
+                    {s.quantity > 1 ? ` x${s.quantity}` : ""}: £{" "}
                     {s.totalPrice.toLocaleString()}
                   </Typography>
                 ))}
                 <Divider sx={{ my: 1 }} />
                 <Typography variant="subtitle1" fontWeight="bold">
-                  Total: € {total.toLocaleString()}
+                  Total: £ {total.toLocaleString()}
                 </Typography>
               </CardContent>
             </Card>
