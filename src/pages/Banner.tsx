@@ -46,7 +46,7 @@ const Banner = () => {
             }}
           >
             <Typography variant="h4" gutterBottom>
-              Book your consultation just for £10
+              Book your FREE consultation today
             </Typography>
             {/* <Typography variant="h6" sx={{ mb: 3 }}>
               Book your consultation just for £10
@@ -61,7 +61,7 @@ const Banner = () => {
                 "&:hover": { backgroundColor: "#8b6f4e" },
               }}
             >
-              Book your FREE consultation today
+              Book your consultation
             </Button>
           </Box>
         </motion.div>

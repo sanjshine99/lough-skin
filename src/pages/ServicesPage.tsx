@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+// ServicesPage.tsx
+import React, { useMemo, useRef, useState } from "react";
 import {
   Box,
   Container,
@@ -7,11 +8,14 @@ import {
   CardContent,
   Chip,
   IconButton,
+  Stack,
+  Divider,
 } from "@mui/material";
 import { AccessTime, ShoppingCart } from "@mui/icons-material";
 import { easeOut, motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
 
+// ---------- Animations ----------
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
   visible: (i = 1) => ({
@@ -21,7 +25,7 @@ const fadeIn = {
   }),
 };
 
-// Hardcoded services
+// ---------- Data ----------
 const THERAPY_SERVICES = [
   {
     _id: "1",
@@ -124,7 +128,7 @@ const CONSULTATION_SERVICES = [
 
 const FACIAL_SERVICES = [
   {
-    _id: "5",
+    _id: "f5",
     name: "Party Glow Facial",
     duration: 35,
     price: 55,
@@ -132,7 +136,7 @@ const FACIAL_SERVICES = [
       "Double cleanse, lymphatic drainage using gua sha, dermaplaning exfoliation, toner, facial massage with moisturiser & SPF, optional herbal tea.",
   },
   {
-    _id: "6",
+    _id: "f6",
     name: "Luxury Facial",
     duration: 50,
     price: 65,
@@ -140,7 +144,7 @@ const FACIAL_SERVICES = [
       "Double cleanse, lymphatic drainage, steam with exfoliation, hot towel, nourishing mask with shoulder & neck massage, LED light therapy, head massage, hydrating facial massage, SPF, optional herbal tea.",
   },
   {
-    _id: "7",
+    _id: "f7",
     name: "HydraFacial",
     duration: 75,
     price: 95,
@@ -148,7 +152,7 @@ const FACIAL_SERVICES = [
       "Double cleanse, lymphatic drainage, steam with exfoliation, hot towel, manual extraction, hydra dermabrasion, nourishing mask with shoulder & neck massage, LED light therapy, head massage, hydrating facial massage, SPF, optional herbal tea.",
   },
   {
-    _id: "8",
+    _id: "f8",
     name: "BioRe Peel with Microneedling",
     duration: 75,
     price: 105,
@@ -156,7 +160,7 @@ const FACIAL_SERVICES = [
       "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, BioRepeel + Microneedling, cold globe treatment, mask with shoulder & neck massage, LED light therapy, head massage, facial massage with SPF, optional herbal tea.",
   },
   {
-    _id: "9",
+    _id: "f9",
     name: "LoughGlow",
     duration: 60,
     price: 85,
@@ -164,7 +168,7 @@ const FACIAL_SERVICES = [
       "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, mask with shoulder & neck massage, microneedling with glow serum, LED light therapy, head massage, hydrating facial massage with SPF, optional herbal tea.",
   },
   {
-    _id: "10",
+    _id: "f10",
     name: "Age Rewind",
     duration: 75,
     price: 85,
@@ -172,7 +176,7 @@ const FACIAL_SERVICES = [
       "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, nourishing mask with shoulder, neck & head massage, microneedling with age-rewind serum, LED light therapy, head massage, hydrating facial massage with SPF, optional herbal tea.",
   },
   {
-    _id: "10",
+    _id: "f11",
     name: "Bacial",
     duration: 50,
     price: 65,
@@ -192,7 +196,7 @@ Finally relax after your treatment with a optional complimentary herbal tea.`,
 
 const BODY_SCULPT_SERVICES = [
   {
-    _id: "11",
+    _id: "12",
     name: "Sculpt Bundle Thighs (Front, Back, Inner Thighs) Both Thighs",
     duration: 120,
     price: 200,
@@ -200,7 +204,7 @@ const BODY_SCULPT_SERVICES = [
       "Full thigh sculpting with ultrasonic cavitation + radio frequency + wood therapy for smoother, well-proportioned contours.",
   },
   {
-    _id: "12",
+    _id: "13",
     name: "Sculpt Bundle (Abdomen)",
     duration: 70,
     price: 110,
@@ -208,7 +212,7 @@ const BODY_SCULPT_SERVICES = [
       "Ultrasonic cavitation + radio frequency + wood therapy to help reduce localised fat, improve circulation, and tighten the abdomen.",
   },
   {
-    _id: "13",
+    _id: "14",
     name: "Sculpt Bundle (Side of Thighs)",
     duration: 50,
     price: 75,
@@ -216,7 +220,7 @@ const BODY_SCULPT_SERVICES = [
       "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
   },
   {
-    _id: "14",
+    _id: "15",
     name: "Sculpt Bundle (Inner Thighs)",
     duration: 45,
     price: 70,
@@ -224,7 +228,7 @@ const BODY_SCULPT_SERVICES = [
       "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
   },
   {
-    _id: "15",
+    _id: "16",
     name: "Sculpt Bundle (Front of Thighs)",
     duration: 50,
     price: 75,
@@ -232,7 +236,7 @@ const BODY_SCULPT_SERVICES = [
       "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
   },
   {
-    _id: "16",
+    _id: "17",
     name: "Sculpt Bundle (Back of Thighs)",
     duration: 50,
     price: 75,
@@ -243,7 +247,7 @@ const BODY_SCULPT_SERVICES = [
 
 const SKIN_TIGHTENING_SERVICES = [
   {
-    _id: "17",
+    _id: "18",
     name: "Chin and Jaw",
     duration: 35,
     price: 65,
@@ -251,7 +255,7 @@ const SKIN_TIGHTENING_SERVICES = [
       "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
   },
   {
-    _id: "18",
+    _id: "19",
     name: "Abdomen",
     duration: 40,
     price: 70,
@@ -259,7 +263,7 @@ const SKIN_TIGHTENING_SERVICES = [
       "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
   },
   {
-    _id: "19",
+    _id: "20",
     name: "Back Rolls",
     duration: 40,
     price: 70,
@@ -267,7 +271,7 @@ const SKIN_TIGHTENING_SERVICES = [
       "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
   },
   {
-    _id: "20",
+    _id: "21",
     name: "Glutes",
     duration: 40,
     price: 70,
@@ -278,7 +282,7 @@ const SKIN_TIGHTENING_SERVICES = [
 
 const WOOD_THERAPY_SERVICES = [
   {
-    _id: "21",
+    _id: "22",
     name: "Wood Therapy (Abdomen)",
     duration: 35,
     price: 60,
@@ -286,7 +290,7 @@ const WOOD_THERAPY_SERVICES = [
       "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
   },
   {
-    _id: "22",
+    _id: "23",
     name: "Wood Therapy (Buttocks)",
     duration: 35,
     price: 55,
@@ -294,7 +298,7 @@ const WOOD_THERAPY_SERVICES = [
       "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
   },
   {
-    _id: "23",
+    _id: "24",
     name: "Wood Therapy (Back of Thighs)",
     duration: 40,
     price: 55,
@@ -302,7 +306,7 @@ const WOOD_THERAPY_SERVICES = [
       "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
   },
   {
-    _id: "24",
+    _id: "25",
     name: "Wood Therapy (Inner Thighs)",
     duration: 35,
     price: 60,
@@ -315,7 +319,7 @@ const MASSAGE_SERVICES = [
   {
     _id: "m1",
     name: "Bamboo Full Body Deep Tissue Massage",
-    duration: 65, // 1 hr 5 mins
+    duration: 65,
     price: 75,
     description:
       "Stimulate your circulation with the unique properties of Bamboo massage. Guaranteed to relax tight muscles and aid in stress relief. Certain problem areas can be targeted in this treatment to ensure that muscles are lengthened and tension is removed. Perfect for those wanting a deep penetration to aid stimulation and lymphatic drainage.",
@@ -323,7 +327,7 @@ const MASSAGE_SERVICES = [
   {
     _id: "m2",
     name: "Bamboo back deep tissue massage",
-    duration: 30, // 1 hr 5 mins
+    duration: 30,
     price: 45,
     description:
       "Experience a revitalising back massage designed to target deep muscle tension with the unique use of bamboo. This treatment blends firm pressure and soothing movements, helping you unwind and ease away daily stress. Ideal for those seeking a truly restorative massage experience.",
@@ -398,7 +402,7 @@ Optional: complimentary herbal tea and dry hair`,
     name: "HydraFacial",
     duration: 65,
     price: 95,
-    description: `This deeply cleansing treatment begins with a gentle double cleanse, followed by lymphatic drainage using gua sha to reduce puffiness and improve circulation. Enjoy a 10-minute steam with exfoliation and a hot towel treatment to prepare the skin for manual extraction. Next, a hydra dermabrasion gently resurfaces the skin for a radiant glow. A nourishing mask is applied while you relax with a soothing shoulder and neck massage. Experience LED light therapy combined with a calming head massage, then finish with a hydrating facial massage using moisturizer and SPF. Complete your experience with an optional complimentary herbal tea for added relaxation.`,
+    description: "This deeply cleansing treatment begins with a gentle double cleanse, followed by lymphatic drainage using gua sha to reduce puffiness and improve circulation. Enjoy a 10-minute steam with exfoliation and a hot towel treatment to prepare the skin for manual extraction. Next, a hydra dermabrasion gently resurfaces the skin for a radiant glow. A nourishing mask is applied while you relax with a soothing shoulder and neck massage. Experience LED light therapy combined with a calming head massage, then finish with a hydrating facial massage using moisturizer and SPF. Complete your experience with an optional complimentary herbal tea for added relaxation.",
   },
   {
     _id: "m11",
@@ -431,7 +435,7 @@ A gentle, rhythmic treatment designed to stimulate the lymphatic system, reduce 
 
 const Japanese_Inspired_Luxury_HeadSpa_Services = [
   {
-    _id: "m14",
+    _id: "h1",
     name: "Japanese Inspired Luxury HeadSpa",
     duration: 60,
     price: 105,
@@ -445,7 +449,7 @@ leave in conditioner & lightly towel dry
 Optional: complimentary herbal tea and dry hair`,
   },
   {
-    _id: "m14",
+    _id: "h2",
     name: "Japanese inspired Luxury HeadSpa + Mini Facial",
     duration: 80,
     price: 125,
@@ -456,7 +460,7 @@ Transition into the Head Spa, beginning with gentle brushing to boost circulatio
 The experience concludes with a moisturiser facial massage and SPF application to protect and hydrate your skin. Optional complimentary herbal tea and dry hair service are available to complete your indulgent treatment.`,
   },
   {
-    _id: "m15",
+    _id: "h3",
     name: "Japanese inspired Luxury Headspa + Luxury Facial",
     duration: 100,
     price: 145,
@@ -470,82 +474,30 @@ The experience concludes with a moisturiser facial massage and SPF application t
 
 const ASMR_Head_Massage_Services = [
   {
-    _id: "m16",
+    _id: "a1",
     name: "ASMR Head massage",
     duration: 40,
     price: 65,
-    description: `A soothing treatment beginning with gentle brushing to boost circulation, followed by the application of nourishing scalp oil. Enjoy a relaxing head massage using a variety of tools to release tension and stimulate the scalp, finishing with a leave-in mask to deeply condition and revitalise the scalp and hair.`,
+    description: "A soothing treatment beginning with gentle brushing to boost circulation, followed by the application of nourishing scalp oil. Enjoy a relaxing head massage using a variety of tools to release tension and stimulate the scalp, finishing with a leave-in mask to deeply condition and revitalise the scalp and hair.",
   },
 ];
 
-// const Add_ons_Services = [
-//   {
-//     _id: "m17",
-//     name: "Dermaplaning",
-//     duration: 15,
-//     price: 25,
-//     description:
-//       `Please note: Dermaplaning is an add on service, you would need to book a facial and add Dermaplaning as an add on.
-// Dermaplaning is a cosmetic treatment in which dead skin cells and peach fuzz are scraped off with a scalpel by a plastic surgeon, dermatologist, or cosmetologist. While dermaplaning removes fine facial hairs, the procedure differs from shaving in terms of the tools used, the amount of skin removed, and the person performing the procedure.`,
-//   },
-//   {
-//     _id: "m18",
-//     name: "Microneedling Hands",
-//     duration: 25,
-//     price: 35,
-//     description:
-//       `Microneedling for the hands is an effective treatment for improving the appearance of aging hands by stimulating collagen and elastin production, which can help reduce wrinkles, improve skin texture, and address sunspots.`,
-//   },
-//   {
-//     _id: "m19",
-//     name: "Microneedling Neck",
-//     duration: 20,
-//     price: 30,
-//     description:
-//       `Microneedling the neck helps to stimulate collagen and elastin production, which can improve skin texture, firmness, and reduce the appearance of wrinkles and fine lines.`,
-//   },
-//   {
-//     _id: "m20",
-//     name: "Anti age serum",
-//     duration: 5,
-//     price: 12,
-//     description:
-//       `Anti age serum reduces the appearance of various effects of aging such as fine lines, wrinkles, hyperpigmentation, and sun spots. Non-invasive and safe.`,
-//   },
-//   {
-//     _id: "m21",
-//     name: "Vitamin C serum",
-//     duration: 5,
-//     price: 10,
-//     description:
-//       `reduces wrinkles.
-// protects collagen and increases production.
-// aids wound healing.
-// helps protect against sun damage.
-// reduces hyperpigmentation.
-// evens skin tone.
-// brightens complexion.
-// acts like armour against pollution and other free radicals.`,
-//   },
-// ];
+// ---------- Small helpers ----------
+const priceLabel = (price: number | string) =>
+  typeof price === "string" ? price.charAt(0).toUpperCase() + price.slice(1) : `£${price}`;
 
 const ServiceSection = ({ title, services, onAddToCart }: any) => (
   <Box sx={{ mb: 8 }}>
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeIn}
-    >
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
       <Typography variant="h4" sx={{ color: "#2c3e50", mb: 4 }}>
         {title}
       </Typography>
     </motion.div>
 
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-      {services.map((service: any, index: any) => (
+      {services.map((service: any, index: number) => (
         <motion.div
-          key={service._id}
+          key={`${title}-${service._id}-${index}`}  // Corrected key interpolation
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -571,10 +523,7 @@ const ServiceSection = ({ title, services, onAddToCart }: any) => (
                   mb: 2,
                 }}
               >
-                <Typography
-                  variant="h5"
-                  sx={{ color: "#2c3e50", fontWeight: "bold" }}
-                >
+                <Typography variant="h5" sx={{ color: "#2c3e50", fontWeight: "bold" }}>
                   {service.name}
                 </Typography>
                 <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
@@ -590,7 +539,7 @@ const ServiceSection = ({ title, services, onAddToCart }: any) => (
                     }}
                   />
                   <Chip
-                    label={`£${service.price}`}
+                    label={priceLabel(service.price)}
                     sx={{
                       height: 32,
                       backgroundColor: "#a67c5b",
@@ -605,12 +554,10 @@ const ServiceSection = ({ title, services, onAddToCart }: any) => (
                       width: 32,
                       border: "1px solid #a67c5b",
                       color: "#a67c5b",
-                      "&:hover": {
-                        backgroundColor: "#f5eee7",
-                        borderColor: "#a67c5b",
-                      },
+                      "&:hover": { backgroundColor: "#f5eee7", borderColor: "#a67c5b" },
                     }}
                     onClick={() => onAddToCart(service)}
+                    aria-label={`Add ${service.name} to cart`}
                   >
                     <ShoppingCart sx={{ fontSize: 18 }} />
                   </IconButton>
@@ -627,110 +574,123 @@ const ServiceSection = ({ title, services, onAddToCart }: any) => (
   </Box>
 );
 
+// ---------- Categories Config ----------
+type CategoryKey =
+  | "Featured"
+  | "Consultation"
+  | "Headspa"
+  | "ASMR Head massage"
+  | "Facials"
+  | "Facial Sculpt"
+  | "Body Sculpt"
+  | "Skin Tightening"
+  | "Wood Therapy"
+  | "Massages"
+  | "Add-ons";
+
+const CATEGORY_MAP: Record<CategoryKey, any[]> = {
+  Featured: FEATURED_SERVICES,
+  Consultation: CONSULTATION_SERVICES,
+  Headspa: THERAPY_SERVICES,
+  "ASMR Head massage": ASMR_Head_Massage_Services,
+  Facials: FACIAL_SERVICES,
+  "Facial Sculpt": FACIAL_SCULPT_SERVICES,
+  "Body Sculpt": BODY_SCULPT_SERVICES,
+  "Skin Tightening": SKIN_TIGHTENING_SERVICES,
+  "Wood Therapy": WOOD_THERAPY_SERVICES,
+  Massages: MASSAGE_SERVICES,
+  "Add-ons": ADDON_SERVICES,
+};
+
+const CATEGORY_ORDER: CategoryKey[] = [
+  "Featured",
+  "Consultation",
+  "Headspa",
+  "ASMR Head massage",
+  "Facials",
+  "Facial Sculpt",
+  "Body Sculpt",
+  "Skin Tightening",
+  "Wood Therapy",
+  "Massages",
+  "Add-ons",
+];
+
+// ---------- Page ----------
 export default function ServicesPage() {
   const { addToCart } = useCart();
-  const containerRef: any = useRef(null);
+  const [activeCategory, setActiveCategory] = useState<"Featured" | CategoryKey>("Featured");  // Default to "Featured"
+
+  const filteredGroups = useMemo(() => {
+    return [{ title: activeCategory, data: CATEGORY_MAP[activeCategory] }];
+  }, [activeCategory]);
+
+  const catBarRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <Box sx={{ py: 8, background: "#fff8f3" }}>
       <Container maxWidth="lg">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          viewport={{ once: true }}
-        >
-          <Typography
-            variant="h2"
-            textAlign="center"
-            sx={{ color: "#2c3e50", mb: 6, fontWeight: 600 }}
-          >
+        <motion.div initial="hidden" animate="visible" variants={fadeIn} viewport={{ once: true }}>
+          <Typography variant="h2" textAlign="center" sx={{ color: "#2c3e50", mb: 3, fontWeight: 600 }}>
             Our Services
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            textAlign="center"
+            sx={{ color: "#7f8c8d", mb: 4, maxWidth: 720, mx: "auto" }}
+          >
+            Browse by category or view everything. Add any service to your cart and we’ll handle the rest.
           </Typography>
         </motion.div>
 
-        {/* Consultation Section */}
-        <ServiceSection
-          title="Featured"
-          services={FEATURED_SERVICES}
-          onAddToCart={addToCart}
-        />
+        {/* Category Bar */}
+        <Box
+          ref={catBarRef}
+          sx={{
+            position: "sticky",
+            top: 0,
+            zIndex: 5,
+            py: 2,
+            background: "rgba(255,248,243,0.9)",
+            backdropFilter: "saturate(120%) blur(6px)",
+          }}
+        >
+          <Stack
+            direction="row"
+            spacing={1}
+            useFlexGap
+            flexWrap="wrap"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mb: 1 }}
+          >
+            {/* Removed the "All" option chip */}
+            {CATEGORY_ORDER.map((cat) => (
+              <Chip
+                key={cat}
+                label={cat}
+                clickable
+                onClick={() => setActiveCategory(cat)}
+                color={activeCategory === cat ? "primary" : undefined}
+                variant={activeCategory === cat ? "filled" : "outlined"}
+                sx={{
+                  borderColor: "#a67c5b",
+                  color: activeCategory === cat ? "white" : "#a67c5b",
+                  backgroundColor: activeCategory === cat ? "#a67c5b" : "transparent",
+                  "&:hover": { backgroundColor: activeCategory === cat ? "#916748" : "#f5eee7" },
+                }}
+              />
+            ))}
+          </Stack>
+          <Divider sx={{ opacity: 0.5 }} />
+        </Box>
 
-        {/* Consultation Section */}
-        <ServiceSection
-          title="Consultation"
-          services={CONSULTATION_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Japanese inspired Luxury HeadSpa */}
-        <ServiceSection
-          title="Japanese inspired Luxury HeadSpa"
-          services={Japanese_Inspired_Luxury_HeadSpa_Services}
-          onAddToCart={addToCart}
-        />
-
-        {/*ASMR Head massage */}
-        <ServiceSection
-          title="ASMR Head massage"
-          services={ASMR_Head_Massage_Services}
-          onAddToCart={addToCart}
-        />
-        {/* Headspa Section */}
-        <ServiceSection
-          title="Headspa"
-          services={THERAPY_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Facials Section */}
-        <ServiceSection
-          title="Facials"
-          services={FACIAL_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Facial Sculpt Section */}
-        <ServiceSection
-          title="Facial Sculpt"
-          services={FACIAL_SCULPT_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Body Sculpt Section */}
-        <ServiceSection
-          title="Body Sculpt"
-          services={BODY_SCULPT_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Skin Tightening Section */}
-        <ServiceSection
-          title="Skin Tightening"
-          services={SKIN_TIGHTENING_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Wood Therapy Section */}
-        <ServiceSection
-          title="Wood Therapy"
-          services={WOOD_THERAPY_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Massages Section */}
-        <ServiceSection
-          title="Massages"
-          services={MASSAGE_SERVICES}
-          onAddToCart={addToCart}
-        />
-
-        {/* Add-ons Section */}
-        <ServiceSection
-          title="Add-ons"
-          services={ADDON_SERVICES}
-          onAddToCart={addToCart}
-        />
+        {/* Sections (filtered) */}
+        <Box sx={{ mt: 4 }}>
+          {filteredGroups.map(({ title, data }) => (
+            <ServiceSection key={title} title={title} services={data} onAddToCart={addToCart} />
+          ))}
+        </Box>
       </Container>
     </Box>
   );

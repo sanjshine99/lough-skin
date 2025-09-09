@@ -41,22 +41,16 @@ export default function HomePage() {
 
   const [categories, setCategories] = useState([
     {
-      id: "facial-sculpt",
-      name: "Facial sculpt",
-      description:
-        "Rejuvenate your facial contours and enhance natural symmetry with our expert facial sculpting treatments.",
-    },
-    {
       id: "consultation",
       name: "Consultation",
       description:
         "Personalized skin and wellness consultations to tailor the perfect treatment plan for your needs.",
     },
     {
-      id: "japanese-headspa",
-      name: "Japanese inspired Luxury HeadSpa",
+      id: "headspa",
+      name: "Headspa",
       description:
-        "Unwind with our luxurious Japanese-inspired Head Spa experience, where your scalp receives gentle care using exquisite oils, various massage tools, scalp exfoliation, herbal soup & steam treatment, a refreshing wash followed by a conditioning mask.",
+      "Full Body Lymphatic Drainage Massage A gentle, rhythmic treatment designed to stimulate the lymphatic system, reduce fluid retention, boost circulation, and support the body’s natural detox process. Ideal for bloating, getting rid of toxins or general wellness",
     },
     {
       id: "asmr-head-massage",
@@ -69,6 +63,18 @@ export default function HomePage() {
       name: "Facials",
       description:
         "Discover the wonders of our facial treatments, crafted to meet a variety of skincare needs. Featuring a soothing facial massage, advanced LED light therapy for radiant skin, and a calming head massage to ease tension. Elevate your self care routine!",
+    },
+    {
+      id: "facial-sculpt",
+      name: "Facial sculpt",
+      description:
+      "Rejuvenate your facial contours and enhance natural symmetry with our expert facial sculpting treatments.",
+    },
+    {
+      id: "massages",
+      name: "Massages",
+      description:
+        "Relax and rejuvenate with a variety of massage techniques designed to relieve tension, improve circulation, and promote overall wellness.",
     },
     {
       id: "body-sculpt",
@@ -89,10 +95,10 @@ export default function HomePage() {
         "Wood Therapy (Maderotherapy) is a massage technique that uses specially designed wooden tools to break down fat and cellulite, stimulate blood circulation, smooth the skin’s texture, and reduce stress—offering both body-sculpting and relaxation benefits.",
     },
     {
-      id: "massages",
-      name: "Massages",
+      id: "japanese-headspa",
+      name: "Japanese inspired Luxury HeadSpa",
       description:
-        "Relax and rejuvenate with a variety of massage techniques designed to relieve tension, improve circulation, and promote overall wellness.",
+        "Unwind with our luxurious Japanese-inspired Head Spa experience, where your scalp receives gentle care using exquisite oils, various massage tools, scalp exfoliation, herbal soup & steam treatment, a refreshing wash followed by a conditioning mask.",
     },
     {
       id: "add-ons",
