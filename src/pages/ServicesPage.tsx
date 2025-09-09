@@ -55,44 +55,52 @@ const THERAPY_SERVICES = [
 
 const ADDON_SERVICES = [
   {
-    _id: "4",
+    _id: "m17",
     name: "Dermaplaning",
     duration: 15,
     price: 25,
     description:
-      "Please note: Dermaplaning is an add on service, you would need to book a facial and add Dermaplaning as an add on. Dermaplaning is a cosmetic treatment in which dead skin cells and peach fuzz are scraped off with a scalpel by a plastic surgeon, dermatologist, or cosmetologist. While dermaplaning removes fine facial hairs, the procedure differs from shaving in terms of the tools used, the amount of skin removed, and the person performing the procedure.",
+      `Please note: Dermaplaning is an add on service, you would need to book a facial and add Dermaplaning as an add on. 
+Dermaplaning is a cosmetic treatment in which dead skin cells and peach fuzz are scraped off with a scalpel by a plastic surgeon, dermatologist, or cosmetologist. While dermaplaning removes fine facial hairs, the procedure differs from shaving in terms of the tools used, the amount of skin removed, and the person performing the procedure.`,
   },
   {
-    _id: "5",
+    _id: "m18",
     name: "Microneedling Hands",
     duration: 25,
     price: 35,
     description:
-      "Microneedling for the hands is an effective treatment for improving the appearance of aging hands by stimulating collagen and elastin production, which can help reduce wrinkles, improve skin texture, and address sunspots",
+      `Microneedling for the hands is an effective treatment for improving the appearance of aging hands by stimulating collagen and elastin production, which can help reduce wrinkles, improve skin texture, and address sunspots.`,
   },
   {
-    _id: "6",
+    _id: "m19",
     name: "Microneedling Neck",
     duration: 20,
     price: 30,
     description:
-      "Microneedling the neck helps to stimulate collagen and elastin production, which can improve skin texture, firmness, and reduce the appearance of wrinkles and fine lines.",
+      `Microneedling the neck helps to stimulate collagen and elastin production, which can improve skin texture, firmness, and reduce the appearance of wrinkles and fine lines.`,
   },
   {
-    _id: "7",
+    _id: "m20",
     name: "Anti age serum",
     duration: 5,
     price: 12,
     description:
-      "Anti age serum reduces the appearance of various effects of aging such as fine lines, wrinkles, hyperpigmentation, and sun spots. Non-invasive and safe.",
+      `Anti age serum reduces the appearance of various effects of aging such as fine lines, wrinkles, hyperpigmentation, and sun spots. Non-invasive and safe.`,
   },
   {
-    _id: "8",
+    _id: "m21",
     name: "Vitamin C serum",
     duration: 5,
     price: 10,
     description:
-      "Reduces wrinkles. Protects collagen and increases production. Aids wound healing. Helps protect against sun damage. Reduces hyperpigmentation. Evens skin tone. Brightens complexion. Acts like armour against pollution and other free radicals.",
+      `reduces wrinkles.
+protects collagen and increases production.
+aids wound healing.
+helps protect against sun damage.
+reduces hyperpigmentation.
+evens skin tone.
+brightens complexion.
+acts like armour against pollution and other free radicals.`,
   },
 ];
 
@@ -133,7 +141,7 @@ const FACIAL_SERVICES = [
     duration: 35,
     price: 55,
     description:
-      "Double cleanse, lymphatic drainage using gua sha, dermaplaning exfoliation, toner, facial massage with moisturiser & SPF, optional herbal tea.",
+      "This revitalising facial starts with a gentle double cleanse to purify the skin, followed by lymphatic drainage using gua sha to reduce puffiness and improve circulation. Next, a precise dermaplaning exfoliation smooths and brightens the skin. A soothing toner balances the complexion, and the treatment finishes with a relaxing facial massage using moisturiser and SPF for hydration and protection. Finally, enjoy a moment of calm with an optional complimentary herbal tea.",
   },
   {
     _id: "f6",
@@ -141,7 +149,7 @@ const FACIAL_SERVICES = [
     duration: 50,
     price: 65,
     description:
-      "Double cleanse, lymphatic drainage, steam with exfoliation, hot towel, nourishing mask with shoulder & neck massage, LED light therapy, head massage, hydrating facial massage, SPF, optional herbal tea.",
+      "Begin with a gentle double cleanse followed by lymphatic drainage using gua sha to reduce puffiness and boost circulation. Enjoy a 10-minute steam combined with exfoliation and a soothing hot towel treatment to prepare the skin for extractions. A nourishing mask is applied while you relax with a calming shoulder and neck massage. Experience the benefits of LED light therapy paired with a gentle head massage, then finish with a hydrating moisturiser , facial massage, and SPF protection. Complete your experience with an optional complimentary herbal tea for added relaxation.",
   },
   {
     _id: "f7",
@@ -149,7 +157,7 @@ const FACIAL_SERVICES = [
     duration: 75,
     price: 95,
     description:
-      "Double cleanse, lymphatic drainage, steam with exfoliation, hot towel, manual extraction, hydra dermabrasion, nourishing mask with shoulder & neck massage, LED light therapy, head massage, hydrating facial massage, SPF, optional herbal tea.",
+      "This deeply cleansing treatment begins with a gentle double cleanse, followed by lymphatic drainage using gua sha to reduce puffiness and improve circulation. Enjoy a 10-minute steam with exfoliation and a hot towel treatment to prepare the skin for manual extraction. Next, a hydra dermabrasion gently resurfaces the skin for a radiant glow. A nourishing mask is applied while you relax with a soothing shoulder and neck massage. Experience LED light therapy combined with a calming head massage, then finish with a hydrating facial massage using moisturizer and SPF. Complete your experience with an optional complimentary herbal tea for added relaxation.",
   },
   {
     _id: "f8",
@@ -157,7 +165,7 @@ const FACIAL_SERVICES = [
     duration: 75,
     price: 105,
     description:
-      "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, BioRepeel + Microneedling, cold globe treatment, mask with shoulder & neck massage, LED light therapy, head massage, facial massage with SPF, optional herbal tea.",
+      "This results-driven facial begins with a double cleanse and gua sha lymphatic drainage to reduce puffiness and boost circulation. A 10-minute steam with exfoliation and a hot towel prepares the skin for extractions. This is followed by a BioRepeel and microNeedling to smooth and renew the skin, then a calming cold globe treatment. A soothing mask is applied with a shoulder and neck massage, followed by LED light therapy and a relaxing head massage. Finished with a facial massage using moisturizer and SPF, and an optional complimentary herbal tea to unwind.",
   },
   {
     _id: "f9",
@@ -165,7 +173,7 @@ const FACIAL_SERVICES = [
     duration: 60,
     price: 85,
     description:
-      "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, mask with shoulder & neck massage, microneedling with glow serum, LED light therapy, head massage, hydrating facial massage with SPF, optional herbal tea.",
+      "This radiance-boosting treatment begins with a gentle double cleanse, followed by gua sha lymphatic drainage to reduce puffiness and improve circulation. A 10-minute steam with exfoliation and a hot towel treatment softens the skin before extractions. A soothing mask is applied with a relaxing shoulder and neck massage. Microneedling with a glow-boosting serum helps smooth and revitalise the skin, followed by LED light therapy and a calming head massage. The treatment finishes with a hydrating facial massage using moisturiser and SPF, with an optional complimentary herbal tea to complete your experience.",
   },
   {
     _id: "f10",
@@ -173,7 +181,7 @@ const FACIAL_SERVICES = [
     duration: 75,
     price: 85,
     description:
-      "Double cleanse, gua sha lymphatic drainage, steam with exfoliation, hot towel, nourishing mask with shoulder, neck & head massage, microneedling with age-rewind serum, LED light therapy, head massage, hydrating facial massage with SPF, optional herbal tea.",
+      "This rejuvenating facial begins with a gentle double cleanse, followed by gua sha lymphatic drainage to reduce puffiness and boost circulation. A 10-minute steam with exfoliation and a hot towel treatment prepares the skin for extractions. A nourishing mask is applied while you relax with a soothing shoulder, neck, and head massage. Microneedling with an age-rewind serum helps smooth fine lines and improve skin texture, followed by LED light therapy and a calming head massage. The treatment finishes with a hydrating facial massage using moisturiser and SPF, and an optional complimentary herbal tea to leave you refreshed and glowing.",
   },
   {
     _id: "f11",
@@ -201,7 +209,8 @@ const BODY_SCULPT_SERVICES = [
     duration: 120,
     price: 200,
     description:
-      "Full thigh sculpting with ultrasonic cavitation + radio frequency + wood therapy for smoother, well-proportioned contours.",
+      `Ultrasonic cavitation + radio frequency + wood therapy 
+This creates an appearance of smoother skin and better-proportioned contours of the thighs and lower body. This procedure can achieve results that weight loss and fitness efforts alone may not be able to accomplish.`,
   },
   {
     _id: "13",
@@ -209,7 +218,8 @@ const BODY_SCULPT_SERVICES = [
     duration: 70,
     price: 110,
     description:
-      "Ultrasonic cavitation + radio frequency + wood therapy to help reduce localised fat, improve circulation, and tighten the abdomen.",
+      `Ultrasonic cavitation + radio frequency + wood therapy 
+can potentially benefit by helping to reduce localised fat deposits, improve blood circulation, alleviate pain from muscle tension or injuries, and may even aid in tissue healing, making it a potential treatment option for individuals looking to address concerns like stubborn belly fat`,
   },
   {
     _id: "14",
@@ -217,7 +227,8 @@ const BODY_SCULPT_SERVICES = [
     duration: 50,
     price: 75,
     description:
-      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+      `Ultrasonic cavitation + radio frequency + wood therapy 
+This creates an appearance of smoother skin and better-proportioned contours of the thighs and lower body. This procedure can achieve results that weight loss and fitness efforts alone may not be able to accomplish.`,
   },
   {
     _id: "15",
@@ -225,7 +236,8 @@ const BODY_SCULPT_SERVICES = [
     duration: 45,
     price: 70,
     description:
-      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+      `Ultrasonic cavitation + radio frequency + wood therapy 
+This creates an appearance of smoother skin and better-proportioned contours of the thighs and lower body. This procedure can achieve results that weight loss and fitness efforts alone may not be able to accomplish.`,
   },
   {
     _id: "16",
@@ -233,7 +245,9 @@ const BODY_SCULPT_SERVICES = [
     duration: 50,
     price: 75,
     description:
-      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+      `Ultrasonic cavitation + radio frequency + wood therapy 
+This creates an appearance of smoother skin and better-proportioned contours of the thighs and lower body. This procedure can achieve results that weight loss and fitness efforts alone may not be able to accomplish.
+`,
   },
   {
     _id: "17",
@@ -241,7 +255,8 @@ const BODY_SCULPT_SERVICES = [
     duration: 50,
     price: 75,
     description:
-      "Ultrasonic cavitation + radio frequency + wood therapy to smooth skin and improve thigh contours.",
+      `Ultrasonic cavitation + radio frequency + wood therapy 
+This creates an appearance of smoother skin and better-proportioned contours of the thighs and lower body. This procedure can achieve results that weight loss and fitness efforts alone may not be able to accomplish.`,
   },
 ];
 
@@ -252,7 +267,7 @@ const SKIN_TIGHTENING_SERVICES = [
     duration: 35,
     price: 65,
     description:
-      "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
+      `Radio frequency helps tighten the skin while improving its texture and overall appearance by stimulating collagen and elastin production—leaving the skin smoother, firmer, and more youthful-looking.`,
   },
   {
     _id: "19",
@@ -268,7 +283,14 @@ const SKIN_TIGHTENING_SERVICES = [
     duration: 40,
     price: 70,
     description:
-      "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
+      `Radio frequency helps tighten the skin while improving its texture and overall appearance by stimulating collagen and elastin production—leaving the skin smoother, firmer, and more youthful-looking.`,
+  },
+  {
+    _id: "20a",
+    name: "Back rolls",
+    duration: 40,
+    price: 70,
+    description:`Radio frequency helps tighten the skin while improving its texture and overall appearance by stimulating collagen and elastin production—leaving the skin smoother, firmer, and more youthful-looking.`,
   },
   {
     _id: "21",
@@ -276,7 +298,7 @@ const SKIN_TIGHTENING_SERVICES = [
     duration: 40,
     price: 70,
     description:
-      "Radio frequency treatment to tighten skin, improve texture, and stimulate collagen and elastin for smoother, firmer appearance.",
+      "Radio frequency helps tighten the skin while improving its texture and overall appearance by stimulating collagen and elastin production—leaving the skin smoother, firmer, and more youthful-looking.",
   },
 ];
 
@@ -287,7 +309,7 @@ const WOOD_THERAPY_SERVICES = [
     duration: 35,
     price: 60,
     description:
-      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+      "This sculpting massage uses specially crafted wooden tools to shape and tone the body, reduce the appearance of cellulite, and enhance skin texture—all while stimulating circulation. It naturally contours the body and refines muscle and bone structure without damaging skin tissue, helping you achieve a smoother, more sculpted silhouette.",
   },
   {
     _id: "23",
@@ -295,7 +317,7 @@ const WOOD_THERAPY_SERVICES = [
     duration: 35,
     price: 55,
     description:
-      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+      "This sculpting massage uses specially crafted wooden tools to shape and tone the body, reduce the appearance of cellulite, and enhance skin texture—all while stimulating circulation. It naturally contours the body and refines muscle and bone structure without damaging skin tissue, helping you achieve a smoother, more sculpted silhouette.",
   },
   {
     _id: "24",
@@ -303,7 +325,7 @@ const WOOD_THERAPY_SERVICES = [
     duration: 40,
     price: 55,
     description:
-      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+      "This sculpting massage uses specially crafted wooden tools to shape and tone the body, reduce the appearance of cellulite, and enhance skin texture—all while stimulating circulation. It naturally contours the body and refines muscle and bone structure without damaging skin tissue, helping you achieve a smoother, more sculpted silhouette.",
   },
   {
     _id: "25",
@@ -311,7 +333,7 @@ const WOOD_THERAPY_SERVICES = [
     duration: 35,
     price: 60,
     description:
-      "Sculpting massage using wooden tools to shape and tone the body, reduce cellulite, and stimulate circulation.",
+      "This sculpting massage uses specially crafted wooden tools to shape and tone the body, reduce the appearance of cellulite, and enhance skin texture—all while stimulating circulation. It naturally contours the body and refines muscle and bone structure without damaging skin tissue, helping you achieve a smoother, more sculpted silhouette.",
   },
 ];
 
@@ -322,7 +344,7 @@ const MASSAGE_SERVICES = [
     duration: 65,
     price: 75,
     description:
-      "Stimulate your circulation with the unique properties of Bamboo massage. Guaranteed to relax tight muscles and aid in stress relief. Certain problem areas can be targeted in this treatment to ensure that muscles are lengthened and tension is removed. Perfect for those wanting a deep penetration to aid stimulation and lymphatic drainage.",
+      "Experience a revitalising back massage designed to target deep muscle tension with the unique use of bamboo. This treatment blends firm pressure and soothing movements, helping you unwind and ease away daily stress. Ideal for those seeking a truly restorative massage experience.",
   },
   {
     _id: "m2",
@@ -347,6 +369,14 @@ const MASSAGE_SERVICES = [
     price: 35,
     description:
       "It helps relax muscles, reduce stress, improve circulation, and relieve pain or tension.",
+  },
+  {
+    _id: "m14",
+    name: "Lymph Therapy Full Body",
+    duration: 50,
+    price: 65,
+    description: `Full Body Lymphatic Drainage Massage
+A gentle, rhythmic treatment designed to stimulate the lymphatic system, reduce fluid retention, boost circulation, and support the body’s natural detox process. Ideal for bloating, getting rid of toxins or general wellness.`
   },
   {
     _id: "m5",
@@ -410,7 +440,7 @@ Dermaplaning is a cosmetic treatment in which dead skin cells and peach fuzz are
     name: "Japanese inspired Luxury Headspa + Luxury Facial",
     duration: 100,
     price: 145,
-    description: `Begin with a soothing double cleanse followed by gentle lymphatic drainage using gua sha to promote circulation and detoxify the skin. Enjoy a 10-minute steam paired with exfoliation and a hot towel treatment to open pores and refresh your complexion, preparing for extraction, a nourishing mask is applied, with a relaxing shoulder and neck massage eases tension.
+    description: `Begin with a gentle double cleanse followed by gentle lymphatic drainage using gua sha to promote circulation and detoxify the skin. Enjoy a 10-minute steam paired with exfoliation and a hot towel treatment to open pores and refresh your complexion, preparing for extraction, a nourishing mask is applied, with a relaxing shoulder and neck massage eases tension.
 
 Transition into the Head Spa, beginning with gentle brushing, next a deeply relaxing oil head massage with specialised tools to stimulate scalp health. This is followed by steam and exfoliation of the scalp, a thorough shampoo massage and waterfall wash, and a restorative hair mask with a final waterfall wash and rinse. Your hair is treated with leave-in conditioner and lightly towel-dried for a soft finish.
 
@@ -432,14 +462,9 @@ const Japanese_Inspired_Luxury_HeadSpa_Services = [
     name: "Japanese Inspired Luxury HeadSpa",
     duration: 60,
     price: 105,
-    description: `Beginning with gentle brushing to boost circulation 
-Scalp oil & head massage using different tools
-Salt scrub exfoliation of the scalp
-Herbal hair soak & steam
-Double lather wash
-Herbal hair mask & final wash
-leave in conditioner & lightly towel dry
-Optional: complimentary herbal tea and dry hair`,
+    description: `Indulge in a soothing ritual that starts with gentle brushing to boost scalp circulation. Enjoy nourishing scalp oil and a relaxing head massage with various tools, followed by a salt scrub exfoliation. Experience a calming herbal hair soak and steam, double lather wash, herbal hair mask, and a final rinse. Leave-in conditioner and a light towel dry finish your session, with complimentary herbal tea and the option for dry hair.
+
+`,
   },
   {
     _id: "h2",
@@ -488,21 +513,21 @@ const Vitamin_Injectables_Services = [
      loss, improved nail strength, enhanced hair elasticity, and reduced split ends. This treatment may also help regulate cholesterol, 
      stabilise blood sugar, and support metabolism for overall wellness.`,
   },
-    {
+  {
     _id: "v2",
     name: "Vitamin B12 muscular injection",
     duration: 10,
     price: 25,
     description: `Feel revitalised with a Vitamin B12 injection, designed to help prevent fatigue and support your body's natural energy. This essential vitamin plays a role in maintaining healthy skin, hair and nails, while supporting brain function, mood, and restful sleep.`,
   },
-    {
+  {
     _id: "v3",
     name: "Vitamin C muscular injection",
     duration: 10,
     price: 25,
     description: `Experience a revitalising boost that supports your skin and overall wellness. Vitamin C injections can help brighten skin, combat free radicals, and support immune function. This treatment may also improve energy, promote collagen production, and aid in wound healing, leaving you feeling refreshed and renewed.`,
   },
-    {
+  {
     _id: "v4",
     name: "Vitamin D muscular injection",
     duration: 10,
