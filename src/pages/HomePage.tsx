@@ -233,10 +233,15 @@ export default function HomePage() {
                   mx: { xs: "auto", md: "0" },
                 }}
               >
-                Experience our holistic approach to skincare and wellness in a
-                serene, luxurious environment. We combine natural products with
-                expert techniques to deliver results-driven treatments that
-                nurture both your skin and spirit.
+                Welcome to LoughSkin, a space created for calm, care, and
+                confidence.
+                <br />
+                Here, we blend traditional and modern techniques to deliver
+                treatments that not only enhance your skin but also restore
+                balance to your busy lifestyle.
+                <br />
+                Every visit is designed to be more than a treatment—it’s your
+                moment to pause, relax, and feel truly renewed.
               </Typography>
             </Box>
           </Box>

@@ -28,11 +28,19 @@ export default function AboutPage() {
     },
     {
       title: "Our Founder",
-      text: "Our founder's journey began with a deep appreciation for natural healing and the transformative power of touch. After extensive training in both traditional and contemporary techniques, including specialized Japanese HeadSpa methods, Lough Skin was created to offer a unique blend of luxury, expertise, and genuine care.",
+      text: `LoughSkin was founded by Bithe also known as B, whose journey began in the fast-paced retail sector, 
+             providing treatments to clients constantly on the move. It was here she discovered the value of helping 
+             women pause, relax, and feel restored in the middle of their busy routines.`,
+      text1:
+        "Through dedicated training in both classic and modern techniques, her passion for self-care evolved into the creation of LoughSkin. Today, the brand is built on delivering high-quality treatments that combine skill, comfort, and genuine care—designed to make clients feel not only revitalised but truly looked after.",
     },
     {
       title: "Our Philosophy",
-      text: "We believe in a holistic, natural, and results-driven philosophy that honors the individual needs of each client while promoting overall wellness and self-care as essential elements of a balanced life.",
+      text: `At LoughSkin, we believe self-care is not a luxury—it is a necessity.
+             Our philosophy is rooted in the idea that true beauty comes from balance: moments of calm in a busy life, care that restores both skin and spirit, and treatments that blend expertise with a personal touch.`,
+      text1: `We combine traditional practices with modern techniques to create experiences that go beyond the surface. 
+              Every treatment is designed to nourish, rejuvenate, and leave you feeling renewed—inside and out.
+              LoughSkin is more than a treatment; it is a sanctuary where luxury, expertise, and genuine care meet.`,
     },
   ];
 
@@ -138,7 +146,6 @@ export default function AboutPage() {
                     flexShrink: 0,
                   }}
                 >
-                  {/* Choose an icon per section, e.g., Spa, Star, etc. */}
                   {index === 0 && (
                     <Star sx={{ fontSize: 50, color: "white" }} />
                   )}
@@ -170,6 +177,16 @@ export default function AboutPage() {
                   >
                     {section.text}
                   </Typography>
+
+                  {/* Check if text1 exists and display it */}
+                  {section.text1 && (
+                    <Typography
+                      variant="body1"
+                      sx={{ color: "#7f8c8d", lineHeight: 1.8, marginTop: 2 }}
+                    >
+                      {section.text1}
+                    </Typography>
+                  )}
                 </Box>
               </Box>
             </motion.div>
