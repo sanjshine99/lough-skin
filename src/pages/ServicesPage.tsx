@@ -388,14 +388,7 @@ const FEATURED_SERVICES = [
     name: "Japanese Inspired Luxury HeadSpa",
     duration: 60,
     price: 105,
-    description: `Beginning with gentle brushing to boost circulation 
-Scalp oil & head massage using different tools
-Salt scrub exfoliation of the scalp
-Herbal hair soak & steam
-Double lather wash
-Herbal hair mask & final wash
-leave in conditioner & lightly towel dry
-Optional: complimentary herbal tea and dry hair`,
+    description: `Indulge in a soothing ritual that starts with gentle brushing to boost scalp circulation. Enjoy nourishing scalp oil and a relaxing head massage with various tools, followed by a salt scrub exfoliation. Experience a calming herbal hair soak and steam, double lather wash, herbal hair mask, and a final rinse. Leave-in conditioner and a light towel dry finish your session, with complimentary herbal tea and the option for dry hair.`,
   },
   {
     _id: "m10",
@@ -481,6 +474,42 @@ const ASMR_Head_Massage_Services = [
     description: "A soothing treatment beginning with gentle brushing to boost circulation, followed by the application of nourishing scalp oil. Enjoy a relaxing head massage using a variety of tools to release tension and stimulate the scalp, finishing with a leave-in mask to deeply condition and revitalise the scalp and hair.",
   },
 ];
+
+const Vitamin_Injectables_Services = [
+  {
+    _id: "v1",
+    name: "Biotin muscular injection",
+    duration: 10,
+    price: 25,
+    description: `A biotin injection reacts with enzymes and contributes to the production of amino acids that, in turn, help with basic protein
+     building. Healthy levels of biotin can boost the body's keratin infrastructure and revive hair follicles leading to a decrease in hair loss and shinier and thicker hair. 
+     Experience a boost in your hair and nail health with this targeted biotin injection. By supporting amino acid production, it helps build 
+     essential proteins and revitalises hair follicles, leading to stronger, shinier, and thicker hair. Enjoy benefits such as decreased hair 
+     loss, improved nail strength, enhanced hair elasticity, and reduced split ends. This treatment may also help regulate cholesterol, 
+     stabilise blood sugar, and support metabolism for overall wellness.`,
+  },
+    {
+    _id: "v2",
+    name: "Vitamin B12 muscular injection",
+    duration: 10,
+    price: 25,
+    description: `Feel revitalised with a Vitamin B12 injection, designed to help prevent fatigue and support your body's natural energy. This essential vitamin plays a role in maintaining healthy skin, hair and nails, while supporting brain function, mood, and restful sleep.`,
+  },
+    {
+    _id: "v3",
+    name: "Vitamin C muscular injection",
+    duration: 10,
+    price: 25,
+    description: `Experience a revitalising boost that supports your skin and overall wellness. Vitamin C injections can help brighten skin, combat free radicals, and support immune function. This treatment may also improve energy, promote collagen production, and aid in wound healing, leaving you feeling refreshed and renewed.`,
+  },
+    {
+    _id: "v4",
+    name: "Vitamin D muscular injection",
+    duration: 10,
+    price: 25,
+    description: `Boost your wellbeing with this treatment designed to support healthy bones and teeth while aiding your immune system, brain, and nervous system. Vitamin D injections may also help regulate insulin, support diabetes management, and benefit lung and cardiovascular health.`,
+  },
+]
 
 // ---------- Small helpers ----------
 const priceLabel = (price: number | string) =>
@@ -578,42 +607,45 @@ const ServiceSection = ({ title, services, onAddToCart }: any) => (
 type CategoryKey =
   | "Featured"
   | "Consultation"
-  | "Headspa"
+  | "Japanese inspired Luxury HeadSpa"
   | "ASMR Head massage"
   | "Facials"
   | "Facial Sculpt"
+  | "Massages"
   | "Body Sculpt"
   | "Skin Tightening"
   | "Wood Therapy"
-  | "Massages"
-  | "Add-ons";
+  | "Add-ons"
+  | "Vitamin Injectables";
 
 const CATEGORY_MAP: Record<CategoryKey, any[]> = {
   Featured: FEATURED_SERVICES,
   Consultation: CONSULTATION_SERVICES,
-  Headspa: THERAPY_SERVICES,
+  "Japanese inspired Luxury HeadSpa": Japanese_Inspired_Luxury_HeadSpa_Services,
   "ASMR Head massage": ASMR_Head_Massage_Services,
   Facials: FACIAL_SERVICES,
   "Facial Sculpt": FACIAL_SCULPT_SERVICES,
+  Massages: MASSAGE_SERVICES,
   "Body Sculpt": BODY_SCULPT_SERVICES,
   "Skin Tightening": SKIN_TIGHTENING_SERVICES,
   "Wood Therapy": WOOD_THERAPY_SERVICES,
-  Massages: MASSAGE_SERVICES,
   "Add-ons": ADDON_SERVICES,
+  "Vitamin Injectables": Vitamin_Injectables_Services,
 };
 
 const CATEGORY_ORDER: CategoryKey[] = [
   "Featured",
   "Consultation",
-  "Headspa",
+  "Japanese inspired Luxury HeadSpa",
   "ASMR Head massage",
   "Facials",
   "Facial Sculpt",
+  "Massages",
   "Body Sculpt",
   "Skin Tightening",
   "Wood Therapy",
-  "Massages",
   "Add-ons",
+  "Vitamin Injectables",
 ];
 
 // ---------- Page ----------

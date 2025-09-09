@@ -1,17 +1,8 @@
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  Rating,
-} from "@mui/material";
 import { Star } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Box, Container, Typography, Button, Card, CardContent, Rating } from "@mui/material";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   // const [categories, setCategories] = useState([]);
@@ -47,12 +38,6 @@ export default function HomePage() {
         "Personalized skin and wellness consultations to tailor the perfect treatment plan for your needs.",
     },
     {
-      id: "headspa",
-      name: "Headspa",
-      description:
-      "Full Body Lymphatic Drainage Massage A gentle, rhythmic treatment designed to stimulate the lymphatic system, reduce fluid retention, boost circulation, and support the body’s natural detox process. Ideal for bloating, getting rid of toxins or general wellness",
-    },
-    {
       id: "asmr-head-massage",
       name: "ASMR Head massage",
       description:
@@ -68,7 +53,7 @@ export default function HomePage() {
       id: "facial-sculpt",
       name: "Facial sculpt",
       description:
-      "Rejuvenate your facial contours and enhance natural symmetry with our expert facial sculpting treatments.",
+        "Rejuvenate your facial contours and enhance natural symmetry with our expert facial sculpting treatments.",
     },
     {
       id: "massages",
@@ -106,6 +91,12 @@ export default function HomePage() {
       description:
         "Enhance your treatments with our range of add-ons including targeted therapies, extra pampering, and luxurious enhancements.",
     },
+    {
+      id: "vitamin-injectables",
+      name: "Vitamin Injectables",
+      description:
+        "Boost your energy, enhance your immune system, and improve your skin health with our vitamin injectables. These non-invasive treatments deliver essential vitamins directly into your bloodstream for maximum absorption, providing immediate results and long-lasting benefits.",
+    }
   ]);
 
   const features = ["Natural Products", "Expert Staff", "Relaxing Environment"];
@@ -257,88 +248,37 @@ export default function HomePage() {
       {/* Services */}
       <Box sx={{ backgroundColor: "#f8f9fa", py: 8 }}>
         <Container maxWidth="lg">
-          <Typography
-            variant="h4"
-            component="h2"
-            textAlign="center"
-            gutterBottom
-            sx={{ color: "#2c3e50", mb: 6 }}
-          >
+          <Typography variant="h4" component="h2" textAlign="center" gutterBottom sx={{ color: "#2c3e50", mb: 6 }}>
             Our Services
           </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 3,
-              justifyContent: "center",
-            }}
-          >
-            {categories.map((category: any, index: number) => {
-              const isExpanded = expandedService === index;
-              const shortText = category.description?.slice(0, 100); // first 100 chars
-              const needsTruncate = category.description?.length > 100;
+          {/* Flex Layout for Services */}
+          <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 3 }}>
+            {categories.map((category) => (
+              <Box
+                key={category.id}
+                sx={{
+                  flex: "1 1 300px", // Flexbox layout, responsive
+                  maxWidth: "350px", // Prevent too wide
+                  display: "flex",
+                  flexDirection: "column",
+                  textAlign: "center",
+                  boxShadow: 3,
+                  p: 3,
+                  backgroundColor: "white",
+                }}
+              >
+                <Card sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography variant="h5" component="h3" sx={{ color: "#2c3e50" }}>
+                      {category.name}
+                    </Typography>
+                    <Typography variant="body1" sx={{ color: "#7f8c8d", mb: 2 }}>
+                      {category.description}
+                    </Typography>
+                  </CardContent>
 
-              return (
-                <motion.div
-                  key={category._id || index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  style={{
-                    flex: "1 1 calc(25% - 24px)", // 4 per row
-                    maxWidth: 280,
-                  }}
-                >
-                  <Card
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      textAlign: "center",
-                      p: 3,
-                      boxShadow: 3,
-                    }}
-                  >
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography
-                        variant="h5"
-                        component="h3"
-                        gutterBottom
-                        sx={{ color: "#2c3e50" }}
-                      >
-                        {category.name}
-                      </Typography>
-
-                      {/* Truncated Description */}
-                      <Typography
-                        variant="body1"
-                        sx={{ color: "#7f8c8d", mb: 2 }}
-                      >
-                        {isExpanded ? category.description : shortText}
-                        {needsTruncate && !isExpanded && "..."}
-                      </Typography>
-
-                      {needsTruncate && (
-                        <Button
-                          size="small"
-                          onClick={() =>
-                            setExpandedService(isExpanded ? null : index)
-                          }
-                          sx={{
-                            color: "#a67c5b",
-                            textTransform: "none",
-                            "&:hover": { backgroundColor: "transparent" },
-                          }}
-                        >
-                          {isExpanded ? "Read Less" : "Read More"}
-                        </Button>
-                      )}
-                    </CardContent>
-
+                  <Box sx={{ display: "flex", justifyContent: "center", pb: 2 }}>
                     <Button
                       component={Link}
                       to={`/services#${category.id}`}
@@ -346,19 +286,15 @@ export default function HomePage() {
                       sx={{
                         borderColor: "#a67c5b",
                         color: "#a67c5b",
-                        "&:hover": {
-                          borderColor: "#8b6f4e",
-                          backgroundColor: "#a67c5b",
-                          color: "white",
-                        },
+                        "&:hover": { borderColor: "#8b6f4e", backgroundColor: "#a67c5b", color: "white" },
                       }}
                     >
                       Learn More
                     </Button>
-                  </Card>
-                </motion.div>
-              );
-            })}
+                  </Box>
+                </Card>
+              </Box>
+            ))}
           </Box>
         </Container>
       </Box>
