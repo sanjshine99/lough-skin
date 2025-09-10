@@ -16,6 +16,8 @@ import { CartProvider } from "./context/CartContext";
 import OurTeamPage from "./pages/OurTeam";
 import BookingSuccessPage from "./pages/BookingSucess";
 import BookingFailPage from "./pages/BookingFail";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsPage from "./pages/TermsPage";
 
 const theme = createTheme({
   palette: {
@@ -65,6 +67,8 @@ function App() {
               <Route path="/ourteam" element={<OurTeamPage />} />
               <Route path="/booking-success" element={<BookingSuccessPage />} />
               <Route path="/booking-fail" element={<BookingFailPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
             </Routes>
           </main>
           <Banner />
