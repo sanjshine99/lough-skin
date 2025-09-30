@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import {
   Box,
   Container,
@@ -9,8 +7,10 @@ import {
   CardContent,
   Chip,
   IconButton,
+  Stack,
+  Divider,
 } from "@mui/material";
-import { AccessTime, AttachMoney, ShoppingCart } from "@mui/icons-material";
+import { AccessTime, ShoppingCart } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 import { easeOut, motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
@@ -154,6 +154,9 @@ export default function ServicesPage() {
   const [loadingServices, setLoadingServices] = React.useState(true);
   const [error, setError] = React.useState("");
   const [services, setServices] = React.useState<any[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const catBarRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -198,6 +201,8 @@ export default function ServicesPage() {
     }, {});
   }, [services]);
 
+  const categories = Object.keys(groupedServices);
+
   return (
     <Box sx={{ py: 8, background: "#fff8f3" }}>
       <Container maxWidth="lg">
@@ -216,11 +221,67 @@ export default function ServicesPage() {
           </Typography>
         </motion.div>
 
+        {/* Sticky Category Bar */}
+        {categories.length > 0 && (
+          <Box
+            ref={catBarRef}
+            sx={{
+              position: "sticky",
+              top: 0,
+              zIndex: 5,
+              py: 2,
+              mb: 4,
+              background: "rgba(255,248,243,0.9)",
+              backdropFilter: "saturate(120%) blur(6px)",
+            }}
+          >
+            <Stack
+              direction="row"
+              spacing={1}
+              useFlexGap
+              flexWrap="wrap"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ mb: 1 }}
+            >
+              {categories.map((cat) => (
+                <Chip
+                  key={cat}
+                  label={cat}
+                  clickable
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    const el = document.getElementById(
+                      cat.toLowerCase().replace(/\s+/g, "-")
+                    );
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  color={activeCategory === cat ? "primary" : undefined}
+                  variant={activeCategory === cat ? "filled" : "outlined"}
+                  sx={{
+                    borderColor: "#a67c5b",
+                    color: activeCategory === cat ? "white" : "#a67c5b",
+                    backgroundColor:
+                      activeCategory === cat ? "#a67c5b" : "transparent",
+                    "&:hover": {
+                      backgroundColor:
+                        activeCategory === cat ? "#916748" : "#f5eee7",
+                    },
+                  }}
+                />
+              ))}
+            </Stack>
+            <Divider sx={{ opacity: 0.5 }} />
+          </Box>
+        )}
+
         {loadingServices && <Typography>Loading...</Typography>}
         {error && <Typography color="error">{error}</Typography>}
 
         {!loadingServices &&
-          Object.keys(groupedServices).map((category, idx) => (
+          categories.map((category, idx) => (
             <ServiceSection
               key={category}
               id={category.toLowerCase().replace(/\s+/g, "-")}
