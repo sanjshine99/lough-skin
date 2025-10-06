@@ -17,12 +17,11 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
   CircularProgress,
   Snackbar,
   Alert,
   MenuItem,
-  InputAdornment,
+  Checkbox,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart } from "../context/CartContext";
@@ -31,6 +30,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh"; // mandatory icon
+import ConsentForm from "./ConsentForm";
 
 export default function CartAndCheckout() {
   // const { cartItems } = useCart();
@@ -45,6 +45,7 @@ export default function CartAndCheckout() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
+  const [consentChecked, setConsentChecked] = useState(false);
 
   const { cartItems, removeItemFromCart, clearCart } = useCart();
 
@@ -326,6 +327,16 @@ export default function CartAndCheckout() {
                         )}
                       </TextField>
                     )}
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={consentChecked}
+                          onChange={(e) => setConsentChecked(e.target.checked)}
+                        />
+                      }
+                      label="I have already filled out the Consultation & Consent Form"
+                    />
+                    {!consentChecked && <ConsentForm />}
 
                     <Button
                       variant="contained"
@@ -384,7 +395,7 @@ export default function CartAndCheckout() {
                       </Card>
 
                       {/* Cash on Delivery */}
-                      <Card
+                      {/* <Card
                         sx={{
                           border:
                             paymentMethod === "cod"
@@ -408,8 +419,9 @@ export default function CartAndCheckout() {
                             </Typography>
                           }
                         />
-                      </Card>
+                      </Card> */}
                     </RadioGroup>
+                    {/* Consultation Checkbox */}{" "}
                   </FormControl>
                   <Button
                     variant="contained"
