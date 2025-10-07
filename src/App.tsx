@@ -19,6 +19,7 @@ import BookingFailPage from "./pages/BookingFail";
 import ScrollToTop from "./components/ScrollToTop";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsPage from "./pages/TermsPage";
+import ConsentForm from "./pages/ConsentForm";
 
 const theme = createTheme({
   palette: {
@@ -71,6 +72,7 @@ function App() {
               <Route path="/booking-fail" element={<BookingFailPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
               <Route path="/terms" element={<TermsPage />} />
+              <Route path="/consent-form" element={<ConsentForm />} />
             </Routes>
           </main>
           <Banner />
