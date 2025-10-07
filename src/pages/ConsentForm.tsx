@@ -284,21 +284,17 @@ export default function ConsentForm() {
         autoHideDuration={4000}
         onClose={() => setSnackOpen(false)}
       >
-        <Snackbar
-          open={!!submitStatus}
-          autoHideDuration={3000}
-          onClose={() => setSubmitStatus(null)}
-        >
-          {submitStatus ? (
-            <Alert severity={submitStatus === "success" ? "success" : "error"}>
-              {submitStatus === "success"
-                ? "Consent form sent successfully!"
-                : "Failed to send consent form."}
-            </Alert>
-          ) : (
-            <div />
-          )}
-        </Snackbar>
+        {submitStatus ? (
+          <Alert
+            severity={submitStatus === "success" ? "success" : "error"}
+            onClose={() => setSnackOpen(false)}
+            sx={{ width: "100%" }}
+          >
+            {submitStatus === "success"
+              ? "Consent form sent successfully!"
+              : "Failed to send consent form."}
+          </Alert>
+        ) : undefined}
       </Snackbar>
     </div>
   );
