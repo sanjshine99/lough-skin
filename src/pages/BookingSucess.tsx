@@ -133,7 +133,7 @@ const BookingSuccessPage = () => {
               }}
             >
               <Typography variant="h5" fontWeight="bold">
-                ${bookingDetails?.depositPaid || "0.00"}
+                £{bookingDetails?.depositPaid || "0.00"}
               </Typography>
               <Typography variant="body2" color="success.main">
                 ✅ Payment success!
@@ -162,7 +162,7 @@ const BookingSuccessPage = () => {
               </Box>
               <Box display="flex" justifyContent="space-between" mb={1}>
                 <Typography>Reference number</Typography>
-                <Typography>{bookingDetails?.paymentIntent}</Typography>
+                <Typography>{bookingDetails?.bookingId}</Typography>
               </Box>
               <Box display="flex" justifyContent="space-between" mb={1}>
                 <Typography>Total Amount</Typography>
