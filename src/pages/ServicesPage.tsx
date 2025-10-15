@@ -154,6 +154,7 @@ export default function ServicesPage() {
   const [loadingServices, setLoadingServices] = React.useState(true);
   const [error, setError] = React.useState("");
   const [services, setServices] = React.useState<any[]>([]);
+
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const catBarRef = useRef<HTMLDivElement | null>(null);
@@ -201,7 +202,30 @@ export default function ServicesPage() {
     }, {});
   }, [services]);
 
-  const categories = Object.keys(groupedServices);
+  // Desired category order
+  const categoryOrder = [
+    "Consultation",
+    "Japanese inspired Luxury HeadSpa",
+    "ASMR Head massage",
+    "Facials",
+    "Facial sculpt",
+    "Massages",
+    "Body Sculpt",
+    "Skin tightening",
+    "Wood therapy",
+    "Add ons",
+  ];
+
+  // Sort categories: first by predefined order, then any extras alphabetically
+  const categories = Object.keys(groupedServices).sort((a, b) => {
+    const indexA = categoryOrder.indexOf(a);
+    const indexB = categoryOrder.indexOf(b);
+
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b); // both not in list
+    if (indexA === -1) return 1; // a after ordered ones
+    if (indexB === -1) return -1; // b after ordered ones
+    return indexA - indexB; // keep defined order
+  });
 
   return (
     <Box sx={{ py: 8, background: "#fff8f3" }}>
