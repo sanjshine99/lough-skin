@@ -251,6 +251,7 @@ export default function HomePage() {
             {categories.map((category: any) => (
               <Box
                 key={category._id}
+                // id={category.toLowerCase().replace(/\s+/g, "-")}
                 sx={{
                   flex: "1 1 300px", // Flexbox layout, responsive
                   maxWidth: "350px", // Prevent too wide
@@ -291,7 +292,9 @@ export default function HomePage() {
                   >
                     <Button
                       component={Link}
-                      to={`/services#${category.id}`}
+                      to={`/services#${category.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
                       variant="outlined"
                       sx={{
                         borderColor: "#a67c5b",

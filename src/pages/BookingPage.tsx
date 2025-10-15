@@ -96,11 +96,7 @@ export default function CartAndCheckout() {
         const dateStr = selectedDate.toLocaleDateString("en-CA");
 
         const url = `${process.env.REACT_APP_API_BASE_URL}/api/availability?date=${dateStr}`;
-        console.log(
-          "Fetching slots from:",
-          url,
-          process.env.REACT_APP_API_BASE_URL
-        );
+
         const res = await axios.get(
           `${process.env.REACT_APP_API_BASE_URL}/api/availability?date=${dateStr}`
         );

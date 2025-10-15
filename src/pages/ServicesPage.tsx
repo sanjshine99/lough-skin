@@ -160,6 +160,23 @@ export default function ServicesPage() {
   const catBarRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (!loadingServices) {
+      if (location.hash) {
+        const id = location.hash.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          // Small delay ensures rendering is done
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth" });
+          }, 200);
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  }, [loadingServices, location]);
+
+  useEffect(() => {
     const fetchServices = async () => {
       setLoadingServices(true);
       setError("");
@@ -178,19 +195,20 @@ export default function ServicesPage() {
     fetchServices();
   }, []);
 
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (location.hash) {
+  //     const id = location.hash.replace("#", "");
+  //     const el = document.getElementById(id);
+  //     if (el) {
+  //       el.scrollIntoView({ behavior: "smooth" });
+  //     }
+  //   } else {
+  //     window.scrollTo({ top: 0, behavior: "smooth" });
+  //   }
+  // }, [location]);
 
   // Group services by category
+
   const groupedServices = useMemo(() => {
     return services.reduce((acc: Record<string, any[]>, service) => {
       const category = service.category || "Other";
