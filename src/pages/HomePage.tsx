@@ -39,10 +39,39 @@ export default function HomePage() {
   ];
 
   useEffect(() => {
+    const categoryOrder = [
+      "Consultation",
+      "Japanese inspired Luxury HeadSpa",
+      "ASMR Head massage",
+      "Facials",
+      "Facial sculpt",
+      "Massages",
+      "Body Sculpt",
+      "Skin tightening",
+      "Wood therapy",
+      "Add ons",
+    ];
+
     axios
       .get(`${process.env.REACT_APP_API_BASE_URL}/api/categories`)
       .then((res) => {
-        setCategories(res.data); // assuming res.data is an array of categories
+        const fetchedCategories = res.data || [];
+
+        // Sort categories by predefined order, others go below alphabetically
+        const sortedCategories = fetchedCategories.sort((a: any, b: any) => {
+          const nameA = typeof a === "string" ? a : a.name;
+          const nameB = typeof b === "string" ? b : b.name;
+
+          const indexA = categoryOrder.indexOf(nameA);
+          const indexB = categoryOrder.indexOf(nameB);
+
+          if (indexA === -1 && indexB === -1) return nameA.localeCompare(nameB);
+          if (indexA === -1) return 1;
+          if (indexB === -1) return -1;
+          return indexA - indexB;
+        });
+
+        setCategories(sortedCategories);
         setLoading(false);
       })
       .catch((err) => {
@@ -50,6 +79,7 @@ export default function HomePage() {
         setLoading(false);
       });
   }, []);
+
   const features = ["Natural Products", "Expert Staff", "Relaxing Environment"];
 
   return (
