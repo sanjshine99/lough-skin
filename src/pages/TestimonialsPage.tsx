@@ -181,7 +181,7 @@ export default function TestimonialsPage() {
   };
 
   return (
-    <Box sx={{ py: 8, position: "relative" }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, position: "relative" }}>
       <Container maxWidth="lg">
         {/* Heading */}
         <motion.div
@@ -190,18 +190,28 @@ export default function TestimonialsPage() {
           transition={{ duration: 0.6 }}
         >
           <Typography
-            variant="h2"
+            variant="h4"
             component="h1"
             textAlign="center"
             gutterBottom
-            sx={{ color: "#2c3e50", mb: 2 }}
+            sx={{
+              color: "#2c3e50",
+              mb: { xs: 1, md: 2 },
+              fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.8rem" },
+            }}
           >
             Client Testimonials
           </Typography>
+
           <Typography
-            variant="h6"
+            variant="body1"
             textAlign="center"
-            sx={{ color: "#7f8c8d", mb: 6 }}
+            sx={{
+              color: "#7f8c8d",
+              mb: { xs: 4, md: 6 },
+              px: { xs: 2, sm: 0 },
+              fontSize: { xs: "1rem", sm: "1.1rem" },
+            }}
           >
             Hear what our valued clients have to say about their experience at
             Lough Skin
@@ -214,7 +224,7 @@ export default function TestimonialsPage() {
             display: "flex",
             overflow: "hidden",
             position: "relative",
-            p: 10,
+            p: { xs: 2, sm: 4, md: 6, lg: 10 },
           }}
         >
           <motion.div
@@ -224,15 +234,15 @@ export default function TestimonialsPage() {
               width: "100%",
             }}
             animate={{ x: `-${currentIndex * (100 / visibleCards)}%` }}
-            transition={{ duration: 0.6, ease: easeOut }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             {testimonials.map((testimonial, index) => (
               <Card
                 key={index}
                 sx={{
                   flex: `0 0 ${100 / visibleCards}%`,
-                  maxWidth: 400,
-                  p: 3,
+                  maxWidth: { xs: "100%", sm: "80%", md: 400 },
+                  p: { xs: 2, sm: 3 },
                   boxShadow: 3,
                   borderRadius: 3,
                   backgroundColor: "white",
@@ -242,11 +252,11 @@ export default function TestimonialsPage() {
                   <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
                     <Avatar
                       sx={{
-                        width: 60,
-                        height: 60,
+                        width: { xs: 50, sm: 60 },
+                        height: { xs: 50, sm: 60 },
                         backgroundColor: "#a67c5b",
                         mr: 2,
-                        fontSize: "1.5rem",
+                        fontSize: "1.2rem",
                       }}
                     >
                       {testimonial.author
@@ -257,11 +267,18 @@ export default function TestimonialsPage() {
                     <Box>
                       <Typography
                         variant="h6"
-                        sx={{ color: "#2c3e50", fontWeight: "bold" }}
+                        sx={{
+                          color: "#2c3e50",
+                          fontWeight: "bold",
+                          fontSize: { xs: "1rem", sm: "1.1rem" },
+                        }}
                       >
                         {testimonial.author}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: "#7f8c8d" }}>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "#7f8c8d", fontSize: { xs: "0.85rem" } }}
+                      >
                         {testimonial.location}
                       </Typography>
                     </Box>
@@ -276,6 +293,7 @@ export default function TestimonialsPage() {
                       mb: 3,
                       color: "#2c3e50",
                       lineHeight: 1.6,
+                      fontSize: { xs: "0.95rem", sm: "1rem" },
                     }}
                   >
                     "{testimonial.text}"
@@ -291,7 +309,11 @@ export default function TestimonialsPage() {
                   >
                     <Typography
                       variant="body2"
-                      sx={{ color: "#a67c5b", fontWeight: "bold" }}
+                      sx={{
+                        color: "#a67c5b",
+                        fontWeight: "bold",
+                        fontSize: { xs: "0.85rem", sm: "0.9rem" },
+                      }}
                     >
                       Service: {testimonial.service}
                     </Typography>
@@ -308,28 +330,31 @@ export default function TestimonialsPage() {
           sx={{
             position: "absolute",
             top: "50%",
-            left: { xs: 10, md: 30 },
+            left: { xs: 5, sm: 10, md: 30 },
             transform: "translateY(-50%)",
             backgroundColor: "white",
             boxShadow: 2,
             "&:hover": { backgroundColor: "#f1f1f1" },
+            zIndex: 2,
           }}
         >
-          <ArrowBackIos />
+          <ArrowBackIos fontSize="small" />
         </IconButton>
+
         <IconButton
           onClick={handleNext}
           sx={{
             position: "absolute",
             top: "50%",
-            right: { xs: 10, md: 30 },
+            right: { xs: 5, sm: 10, md: 30 },
             transform: "translateY(-50%)",
             backgroundColor: "white",
             boxShadow: 2,
             "&:hover": { backgroundColor: "#f1f1f1" },
+            zIndex: 2,
           }}
         >
-          <ArrowForwardIos />
+          <ArrowForwardIos fontSize="small" />
         </IconButton>
       </Container>
     </Box>

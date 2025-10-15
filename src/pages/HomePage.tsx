@@ -1,3 +1,4 @@
+import { Star } from "@mui/icons-material";
 import {
   Box,
   Container,
@@ -7,11 +8,10 @@ import {
   CardContent,
   Rating,
 } from "@mui/material";
-import { Star } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
@@ -83,7 +83,7 @@ export default function HomePage() {
             zIndex: -1,
           }}
         >
-          <source src="/video.mp4" type="video/mp4" />
+          <source src="/gallery/video.mp4" type="video/mp4" />
         </video>
 
         {/* Overlay */}
@@ -144,34 +144,54 @@ export default function HomePage() {
         viewport={{ once: true }}
       >
         <Container maxWidth="lg" sx={{ py: 8 }}>
-          <Box textAlign="center" mb={6}>
-            <Typography
-              variant="h4"
-              component="h2"
-              gutterBottom
-              sx={{ color: "#2c3e50", mb: 3 }}
-            >
-              Welcome to Lough Skin
-            </Typography>
-            <Typography
-              variant="h6"
+          <Box
+            display="flex"
+            flexDirection={{ xs: "column", md: "row" }}
+            alignItems="center"
+            gap={4}
+          >
+            {/* Left: Image */}
+            <Box
+              component="img"
+              src="/gallery/13.jpeg" // change this path
+              alt="Welcome to Lough Skin"
               sx={{
-                color: "#7f8c8d",
-                maxWidth: "800px",
-                mx: "auto",
-                lineHeight: 1.8,
+                width: { xs: "100%", md: "50%" },
+                borderRadius: 3,
+                boxShadow: 3,
               }}
-            >
-              Welcome to LoughSkin, a space created for calm, care, and
-              confidence.
-              <br />
-              Here, we blend traditional and modern techniques to deliver
-              treatments that not only enhance your skin but also restore
-              balance to your busy lifestyle.
-              <br />
-              Every visit is designed to be more than a treatment—it’s your
-              moment to pause, relax, and feel truly renewed.
-            </Typography>
+            />
+
+            {/* Right: Text */}
+            <Box textAlign={{ xs: "center", md: "left" }}>
+              <Typography
+                variant="h4"
+                component="h2"
+                gutterBottom
+                sx={{ color: "#2c3e50", mb: 3 }}
+              >
+                Welcome to Lough Skin
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#7f8c8d",
+                  maxWidth: "600px",
+                  lineHeight: 1.8,
+                  mx: { xs: "auto", md: "0" },
+                }}
+              >
+                Welcome to LoughSkin, a space created for calm, care, and
+                confidence.
+                <br />
+                Here, we blend traditional and modern techniques to deliver
+                treatments that not only enhance your skin but also restore
+                balance to your busy lifestyle.
+                <br />
+                Every visit is designed to be more than a treatment—it’s your
+                moment to pause, relax, and feel truly renewed.
+              </Typography>
+            </Box>
           </Box>
         </Container>
       </motion.div>
@@ -189,56 +209,56 @@ export default function HomePage() {
             Our Services
           </Typography>
 
-          {loading ? (
-            <Typography textAlign="center">Loading services...</Typography>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 3,
-                justifyContent: "center",
-              }}
-            >
-              {categories.map((category: any, index: any) => (
-                <motion.div
-                  key={category._id || index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  style={{
-                    flex: "1 1 calc(25% - 24px)", // 4 per row, minus gap
-                    maxWidth: 280, // optional, to limit card width
+          {/* Flex Layout for Services */}
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 3,
+            }}
+          >
+            {categories.map((category: any) => (
+              <Box
+                key={category._id}
+                sx={{
+                  flex: "1 1 300px", // Flexbox layout, responsive
+                  maxWidth: "350px", // Prevent too wide
+                  display: "flex",
+                  flexDirection: "column",
+                  textAlign: "center",
+                  boxShadow: 3,
+                  p: 3,
+                  backgroundColor: "white",
+                }}
+              >
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "100%",
                   }}
                 >
-                  <Card
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      textAlign: "center",
-                      p: 3,
-                      boxShadow: 3,
-                    }}
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography
+                      variant="h5"
+                      component="h3"
+                      sx={{ color: "#2c3e50" }}
+                    >
+                      {category.name}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{ color: "#7f8c8d", mb: 2 }}
+                    >
+                      {category.description}
+                    </Typography>
+                  </CardContent>
+
+                  <Box
+                    sx={{ display: "flex", justifyContent: "center", pb: 2 }}
                   >
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography
-                        variant="h5"
-                        component="h3"
-                        gutterBottom
-                        sx={{ color: "#2c3e50" }}
-                      >
-                        {category.name}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{ color: "#7f8c8d", mb: 3 }}
-                      >
-                        {category.description}
-                      </Typography>
-                    </CardContent>
                     <Button
                       component={Link}
                       to={`/services#${category.id}`}
@@ -255,11 +275,11 @@ export default function HomePage() {
                     >
                       Learn More
                     </Button>
-                  </Card>
-                </motion.div>
-              ))}
-            </Box>
-          )}
+                  </Box>
+                </Card>
+              </Box>
+            ))}
+          </Box>
         </Container>
       </Box>
 
