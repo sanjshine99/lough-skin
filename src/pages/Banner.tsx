@@ -82,7 +82,7 @@ const Banner = () => {
                 },
               }}
             >
-              Book Your Consultation
+              Book Your Free Consultation
             </Button>
           </Box>
         </motion.div>
