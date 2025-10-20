@@ -593,14 +593,14 @@ export default function HomePage() {
       </motion.div>
 
       {/* Services */}
-      <Box sx={{ py: 8, backgroundColor: "#fafafa" }}>
+      <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
           <Typography
             variant="h4"
             component="h2"
             textAlign="center"
             gutterBottom
-            sx={{ color: "#2c3e50", mb: 6 }}
+            sx={{ color: "#2c3e50", mb: 6, fontWeight: 700 }}
           >
             Our Services
           </Typography>
@@ -913,7 +913,7 @@ export default function HomePage() {
             component="h2"
             textAlign="center"
             gutterBottom
-            sx={{ color: "#2c3e50", mb: 6 }}
+            sx={{ color: "#2c3e50", mb: 6, fontWeight: 700 }}
           >
             What Our Clients Say
           </Typography>
