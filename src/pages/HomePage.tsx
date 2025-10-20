@@ -295,7 +295,7 @@ export default function HomePage() {
                     px: 4,
                     py: 1.5,
                     "&:hover": {
-                      backgroundColor: "#8b6f4e",
+                      backgroundColor: "#1f7fa3",
                     },
                   }}
                 >
@@ -307,7 +307,7 @@ export default function HomePage() {
                   variant="outlined"
                   size="large"
                   sx={{
-                    borderColor: "#62c5d2",
+                    borderColor: "#1f7fa3",
                     color: "#62c5d2",
                     px: 4,
                     py: 1.5,
@@ -563,7 +563,7 @@ export default function HomePage() {
                       borderRadius: 3,
                       textAlign: "center",
                       backgroundColor: "#fff",
-                      border: "1px solid #eee",
+                      border: "#1f7fa3",
                       "&:hover": {
                         boxShadow: 3,
                         transition: "0.3s",
@@ -700,15 +700,15 @@ export default function HomePage() {
                         .replace(/\s+/g, "-")}`}
                       variant="outlined"
                       sx={{
-                        borderColor: "#62c5d2",
+                        borderColor: "#1f7fa3",
                         color: "#62c5d2",
                         fontWeight: 500,
                         borderRadius: "12px",
                         px: 3,
                         py: 1,
                         "&:hover": {
-                          borderColor: "#8b6f4e",
-                          backgroundColor: "#a67c5b",
+                          borderColor: "#1f7fa3",
+                          backgroundColor: "#1f7fa3",
                           color: "white",
                         },
                       }}
@@ -884,13 +884,13 @@ export default function HomePage() {
               variant="outlined"
               sx={{
                 color: "#62c5d2",
-                borderColor: "#62c5d2",
+                borderColor: "#1f7fa3",
                 fontWeight: 500,
                 px: 4,
                 py: 1.2,
                 borderRadius: 3,
                 "&:hover": {
-                  backgroundColor: "#a67c5b",
+                  backgroundColor: "#1f7fa3",
                   color: "#fff",
                   transition: "0.3s ease",
                 },
@@ -1162,7 +1162,7 @@ export default function HomePage() {
                       borderRadius: 2,
                       fontWeight: 600,
                       alignSelf: "flex-start",
-                      "&:hover": { backgroundColor: "#8b6f4e" },
+                      "&:hover": { backgroundColor: "#1f7fa3" },
                     }}
                   >
                     Submit
