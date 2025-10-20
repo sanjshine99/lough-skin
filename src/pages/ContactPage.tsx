@@ -242,8 +242,8 @@ export default function ContactPage() {
                     target="_blank"
                     variant="contained"
                     sx={{
-                      backgroundColor: "#a67c5b",
-                      "&:hover": { backgroundColor: "#8b6f4e" },
+                      backgroundColor: "#2596be",
+                      "&:hover": { backgroundColor: "#1f7fa3" },
                     }}
                   >
                     View on Google Maps

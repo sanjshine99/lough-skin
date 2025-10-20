@@ -1,6 +1,7 @@
 import { Box, Container, Typography, Chip } from "@mui/material";
 import { School, Star, Spa } from "@mui/icons-material";
 import { motion, easeOut } from "framer-motion";
+import React from "react";
 
 export default function AboutPage() {
   const values = [
@@ -138,7 +139,7 @@ export default function AboutPage() {
                     width: 120,
                     height: 120,
                     borderRadius: "50%",
-                    background: "#f5b041",
+                    background: "#62c5d2",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -233,7 +234,12 @@ export default function AboutPage() {
                     },
                   }}
                 >
-                  <Box mb={3}>{value.icon}</Box>
+                  <Box mb={3}>
+                    {React.cloneElement(value.icon, {
+                      style: { color: "#62c5d2", fontSize: 40 },
+                    })}
+                  </Box>
+
                   <Typography
                     variant="h5"
                     sx={{ color: "#2c3e50", mb: 1, fontWeight: 600 }}

@@ -9,10 +9,12 @@ import {
   Rating,
   Avatar,
   IconButton,
+  Button,
 } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import { easeOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 export default function TestimonialsPage() {
   const testimonials = [
@@ -165,8 +167,14 @@ export default function TestimonialsPage() {
     },
   ];
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // show 1 on mobile, 2 on larger
+  const visibleCards = isMobile ? 1 : 2;
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCards = 2; // show 2 reviews at a time
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handlePrev = () => {
     setCurrentIndex((prev) =>
@@ -178,6 +186,15 @@ export default function TestimonialsPage() {
     setCurrentIndex((prev) =>
       prev >= testimonials.length - visibleCards ? 0 : prev + 1
     );
+  };
+
+  const toggleReadMore = (index: any) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
+  const truncateText = (text: any, index: any) => {
+    if (expandedIndex === index) return text;
+    return text.length > 160 ? text.slice(0, 160) + "..." : text;
   };
 
   return (
@@ -290,14 +307,33 @@ export default function TestimonialsPage() {
                     variant="body1"
                     sx={{
                       fontStyle: "italic",
-                      mb: 3,
+                      mb: 1,
                       color: "#2c3e50",
                       lineHeight: 1.6,
                       fontSize: { xs: "0.95rem", sm: "1rem" },
                     }}
                   >
-                    "{testimonial.text}"
+                    "{truncateText(testimonial.text, index)}"
                   </Typography>
+
+                  {testimonial.text.length > 160 && (
+                    <Button
+                      size="small"
+                      onClick={() => toggleReadMore(index)}
+                      sx={{
+                        textTransform: "none",
+                        color: "#a67c5b",
+                        fontWeight: "bold",
+                        fontSize: "0.9rem",
+                        "&:hover": {
+                          background: "transparent",
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      {expandedIndex === index ? "Read less" : "Read more"}
+                    </Button>
+                  )}
 
                   <Box
                     sx={{
@@ -305,6 +341,7 @@ export default function TestimonialsPage() {
                       p: 2,
                       borderRadius: 2,
                       borderLeft: "4px solid #a67c5b",
+                      mt: 2,
                     }}
                   >
                     <Typography
@@ -324,7 +361,7 @@ export default function TestimonialsPage() {
           </motion.div>
         </Box>
 
-        {/* Custom Arrows */}
+        {/* Navigation Arrows */}
         <IconButton
           onClick={handlePrev}
           sx={{

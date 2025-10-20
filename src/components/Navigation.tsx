@@ -87,14 +87,14 @@ export default function Navigation() {
             variant="contained"
             fullWidth
             sx={{
-              backgroundColor: "#a67c5b",
+              backgroundColor: "#62c5d2",
               textDecoration: "none",
               // "&:hover": { backgroundColor: "#b8941f" },
               mt: 2,
             }}
             onClick={handleDrawerToggle}
           >
-            Book Now
+            Check out
           </Button>
         </ListItem>
       </List>
@@ -165,13 +165,13 @@ export default function Navigation() {
                 to="/booking"
                 variant="contained"
                 sx={{
-                  backgroundColor: "#a67c5b",
+                  backgroundColor: "#62c5d2",
                   ml: 2,
                   textDecoration: "none",
-                  // "&:hover": { backgroundColor: "#b8941f" },
+                  "&:hover": { backgroundColor: "#1f7fa3" },
                 }}
               >
-                Book Now
+                Check out
               </Button>
             </Box>
           )}

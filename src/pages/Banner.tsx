@@ -1,15 +1,6 @@
-import {
-  Box,
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  Chip,
-  Button,
-} from "@mui/material";
-import { AccessTime, AttachMoney } from "@mui/icons-material";
+import { Box, Container, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { easeOut, motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
 
 const Banner = () => {
   const fadeIn = {
@@ -26,7 +17,7 @@ const Banner = () => {
   };
 
   return (
-    <Box sx={{ py: 8, background: "#fff8f3" }}>
+    <Box sx={{ py: 8 }}>
       <Container maxWidth="lg">
         <motion.div
           initial="hidden"
@@ -36,32 +27,62 @@ const Banner = () => {
         >
           <Box
             sx={{
-              mt: 8,
-              p: 4,
+              p: { xs: 4, md: 6 },
               textAlign: "center",
               background: "#e1c9b3",
-              color: "black",
-              borderRadius: 3,
-              boxShadow: 3,
+              borderRadius: "24px",
+              // boxShadow: "0px 8px 30px rgba(0,0,0,0.06)",
             }}
           >
-            <Typography variant="h4" gutterBottom>
-              Book your FREE consultation today
+            <Typography
+              variant="h4"
+              sx={{
+                mb: 2,
+                fontWeight: 500,
+                // color: "#1a3c4e",
+                letterSpacing: 0.3,
+              }}
+            >
+              Book Your FREE Consultation Today
             </Typography>
-            {/* <Typography variant="h6" sx={{ mb: 3 }}>
-              Book your consultation just for £10
-            </Typography> */}
+
+            <Typography
+              variant="body1"
+              sx={{
+                mb: 4,
+                color: "#5a6b73",
+                fontSize: "1.1rem",
+                lineHeight: 1.7,
+                maxWidth: 500,
+                mx: "auto",
+              }}
+            >
+              Begin your tailored skincare journey with our specialists —
+              discover your unique path to radiant, confident skin.
+            </Typography>
+
             <Button
               component={Link}
               to="/services"
               variant="contained"
               size="large"
               sx={{
-                backgroundColor: "#a67c5b",
-                "&:hover": { backgroundColor: "#8b6f4e" },
+                backgroundColor: "#62c5d2",
+                color: "white",
+                px: 5,
+                py: 1.5,
+                borderRadius: "40px",
+                fontSize: "1.05rem",
+                textTransform: "none",
+                boxShadow: "0px 6px 20px rgba(37,150,190,0.3)",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  backgroundColor: "#1f7fa3",
+                  boxShadow: "0px 8px 25px rgba(37,150,190,0.4)",
+                },
               }}
             >
-              Book your consultation
+              Book Your Consultation
             </Button>
           </Box>
         </motion.div>
