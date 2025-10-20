@@ -30,6 +30,7 @@ import {
 import SpaIcon from "@mui/icons-material/Spa";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
+import emailjs from "@emailjs/browser";
 
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
@@ -135,6 +136,51 @@ export default function HomePage() {
         setLoading(false);
       });
   }, []);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    // Sending email using EmailJS
+    emailjs
+      .send(
+        "service_404lxe7", // <-- replace with your EmailJS service ID
+        "template_783v91h",
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        },
+        "tmUgtXKf_TwGrV1iE" // <-- your EmailJS Public Key
+      )
+      .then(() => {
+        alert("Message sent successfully!");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      })
+      .catch((error: any) => {
+        console.error("Email send failed:", error);
+        alert("Failed to send message. Please try again.");
+      });
+  };
 
   // const features = ["Natural Products", "Expert Staff", "Relaxing Environment"];
 
@@ -952,44 +998,6 @@ export default function HomePage() {
             consultation.
           </Typography>
 
-          {/* FEATURE CARDS */}
-          {/* <Stack
-            direction="row"
-            flexWrap="wrap"
-            justifyContent="center"
-            spacing={2}
-            useFlexGap
-            sx={{ mb: 8 }}
-          >
-            {features.map((item, index) => (
-              <Paper
-                key={index}
-                elevation={0}
-                sx={{
-                  flexBasis: { xs: "100%", sm: "45%", md: "22%" },
-                  textAlign: "center",
-                  p: 3,
-                  borderRadius: 3,
-                  border: "1px solid #eee",
-                  transition: "0.3s ease",
-                  "&:hover": { boxShadow: 3 },
-                }}
-              >
-                {item.icon}
-                <Typography
-                  variant="subtitle1"
-                  fontWeight={600}
-                  sx={{ mt: 1, color: "#2c3e50" }}
-                >
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "#7f8c8d" }}>
-                  {item.desc}
-                </Typography>
-              </Paper>
-            ))}
-          </Stack> */}
-
           {/* CONTACT + FORM SECTIONS */}
           <Stack
             direction={{ xs: "column", md: "row" }}
@@ -997,7 +1005,7 @@ export default function HomePage() {
             alignItems="stretch"
             sx={{ width: "100%" }}
           >
-            {/* LEFT: CONTACT INFORMATION */}
+            {/* LEFT: CONTACT INFO */}
             <Paper
               elevation={0}
               sx={{
@@ -1007,7 +1015,6 @@ export default function HomePage() {
                 p: 3,
                 borderRadius: 3,
                 border: "1px solid #eee",
-                height: "100%",
               }}
             >
               <Typography
@@ -1018,7 +1025,7 @@ export default function HomePage() {
                 Contact Information
               </Typography>
 
-              <Stack spacing={2} flex={1}>
+              <Stack spacing={2}>
                 <Stack direction="row" spacing={2} alignItems="center">
                   <Phone sx={{ color: "#a67c5b" }} />
                   <Box>
@@ -1077,7 +1084,7 @@ export default function HomePage() {
               </Stack>
             </Paper>
 
-            {/* RIGHT: CONSULTATION FORM */}
+            {/* RIGHT: FORM */}
             <Paper
               elevation={0}
               sx={{
@@ -1087,80 +1094,81 @@ export default function HomePage() {
                 p: 4,
                 borderRadius: 3,
                 border: "1px solid #eee",
-                height: "100%",
               }}
             >
-              {/* <Typography
-                variant="h6"
-                fontWeight={600}
-                sx={{ color: "#2c3e50", mb: 3 }}
-              >
-                Book Your Consultation
-              </Typography> */}
+              <form onSubmit={handleSubmit}>
+                <Stack spacing={2}>
+                  <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+                    <TextField
+                      fullWidth
+                      label="First Name"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      variant="outlined"
+                      size="small"
+                    />
+                    <TextField
+                      fullWidth
+                      label="Last Name"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </Stack>
 
-              <Stack spacing={2} flex={1}>
-                <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={2}
-                  sx={{ width: "100%" }}
-                >
                   <TextField
                     fullWidth
-                    label="First Name"
+                    label="Email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     variant="outlined"
                     size="small"
                   />
+
                   <TextField
                     fullWidth
-                    label="Last Name"
+                    label="Phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     variant="outlined"
                     size="small"
                   />
+
+                  <TextField
+                    fullWidth
+                    label="Message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    variant="outlined"
+                    size="small"
+                    multiline
+                    minRows={3}
+                    placeholder="Tell us about your aesthetic goals..."
+                  />
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "#62c5d2",
+                      color: "#fff",
+                      py: 1.2,
+                      borderRadius: 2,
+                      fontWeight: 600,
+                      alignSelf: "flex-start",
+                      "&:hover": { backgroundColor: "#8b6f4e" },
+                    }}
+                  >
+                    Submit
+                  </Button>
                 </Stack>
-                <TextField
-                  fullWidth
-                  label="Email"
-                  variant="outlined"
-                  size="small"
-                />
-                <TextField
-                  fullWidth
-                  label="Phone"
-                  variant="outlined"
-                  size="small"
-                />
-                {/* <TextField
-                  fullWidth
-                  label="Treatment Interest"
-                  variant="outlined"
-                  size="small"
-                  placeholder="e.g., Anti-wrinkle, Dermal fillers"
-                /> */}
-                <TextField
-                  fullWidth
-                  label="Message"
-                  variant="outlined"
-                  size="small"
-                  multiline
-                  minRows={3}
-                  placeholder="Tell us about your aesthetic goals and any questions you have..."
-                />
-                <Box flexGrow={1} /> {/* pushes button to bottom */}
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#62c5d2",
-                    color: "#fff",
-                    py: 1.2,
-                    "&:hover": { backgroundColor: "#8b6f4e" },
-                    borderRadius: 2,
-                    fontWeight: 600,
-                    alignSelf: "flex-start",
-                  }}
-                >
-                  Submit
-                </Button>
-              </Stack>
+              </form>
             </Paper>
           </Stack>
         </Container>
