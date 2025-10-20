@@ -316,7 +316,7 @@ export default function HomePage() {
                     },
                   }}
                 >
-                  View Our Gallery
+                  View Full Gallery
                 </Button>
               </Box>
 
@@ -488,16 +488,19 @@ export default function HomePage() {
                   overflow: "hidden",
                   mb: 3,
                   boxShadow: 3,
+                  width: "50%", // reduce width by 50%
+                  mx: "auto", // center horizontally
                 }}
               >
                 <Box
                   component="img"
-                  src="/gallery/13.jpeg" // change this path
+                  src="/gallery/13.jpeg"
                   alt="Lough Skin Salon Interior"
                   sx={{
                     width: "100%",
-                    height: "auto",
+                    height: "40%", // reduce height by 50%
                     display: "block",
+                    objectFit: "cover",
                   }}
                 />
                 <Box
