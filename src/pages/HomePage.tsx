@@ -190,12 +190,14 @@ export default function HomePage() {
       <Box
         sx={{
           position: "relative",
-          height: "100vh",
+          height: { xs: "auto", md: "100vh" }, // allow natural height on mobile
+          minHeight: "100vh",
           overflow: "hidden",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
+          py: { xs: 6, sm: 8, md: 0 }, // add vertical padding on mobile
         }}
       >
         {/* Background Video */}
@@ -235,7 +237,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          style={{ zIndex: 2 }}
+          style={{ zIndex: 2, width: "100%" }}
         >
           <Container maxWidth="md">
             <Paper
@@ -243,42 +245,53 @@ export default function HomePage() {
               sx={{
                 backgroundColor: "rgba(255, 255, 255, 0.9)",
                 borderRadius: 4,
-                p: 5,
+                p: { xs: 3, sm: 4, md: 5 }, // smaller padding on mobile
                 backdropFilter: "blur(10px)",
               }}
             >
               <Typography
-                variant="h3"
-                sx={{ fontWeight: "bold", color: "#1a1a1a" }}
+                variant="h4"
+                sx={{
+                  fontWeight: "bold",
+                  color: "#1a1a1a",
+                  fontSize: { xs: "1.75rem", sm: "2rem", md: "2.5rem" },
+                }}
               >
                 Welcome to LoughSkin
               </Typography>
+
               <Typography
-                variant="h4"
+                variant="h5"
                 sx={{
                   fontWeight: 600,
                   mb: 2,
                   color: "#a67c5b",
+                  fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.75rem" },
                 }}
               >
                 Calm. Care. Confidence.
               </Typography>
+
               <Typography
                 variant="body1"
                 sx={{
                   color: "#555",
                   mb: 4,
-                  maxWidth: "600px",
+                  maxWidth: { xs: "100%", sm: "600px" },
                   mx: "auto",
                   whiteSpace: "pre-line",
+                  fontSize: { xs: "0.95rem", sm: "1rem" },
+                  lineHeight: 1.7,
                 }}
               >
                 {`A space created for calm, care, and confidence.\n\nAt LoughSkin, we combine expert skincare and beauty techniques to help you look and feel your best, while providing a moment of calm in your busy day.\n\nEvery visit is designed to be more than a beauty session—it’s your moment to pause, unwind, and leave feeling refreshed and renewed.`}
               </Typography>
 
+              {/* Buttons */}
               <Box
                 sx={{
                   display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
                   justifyContent: "center",
                   gap: 2,
                   mb: 4,
@@ -290,10 +303,12 @@ export default function HomePage() {
                   variant="contained"
                   size="large"
                   sx={{
+                    width: { xs: "100%", sm: "auto" }, // same fix here
                     backgroundColor: "#62c5d2",
                     color: "white",
-                    px: 4,
+                    px: { xs: 3, sm: 4 },
                     py: 1.5,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
                     "&:hover": {
                       backgroundColor: "#1f7fa3",
                     },
@@ -308,9 +323,11 @@ export default function HomePage() {
                   size="large"
                   sx={{
                     borderColor: "#1f7fa3",
+                    width: { xs: "100%", sm: "auto" }, // instead of fullWidth responsive object
                     color: "#62c5d2",
-                    px: 4,
+                    px: { xs: 3, sm: 4 },
                     py: 1.5,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
                     "&:hover": {
                       backgroundColor: "#f7f3ef",
                     },
@@ -327,13 +344,14 @@ export default function HomePage() {
                   spacing={3}
                   justifyContent="center"
                   alignItems="center"
+                  sx={{ width: "100%" }}
                 >
                   {stats.map((item, index) => (
                     <Paper
                       key={index}
                       elevation={0}
                       sx={{
-                        p: 2,
+                        p: { xs: 2, sm: 3 },
                         textAlign: "center",
                         backgroundColor: "rgba(255,255,255,0.7)",
                         width: { xs: "100%", sm: 150, md: 180 },
@@ -341,11 +359,21 @@ export default function HomePage() {
                     >
                       <Typography
                         variant="h5"
-                        sx={{ fontWeight: "bold", color: "#a67c5b" }}
+                        sx={{
+                          fontWeight: "bold",
+                          color: "#a67c5b",
+                          fontSize: { xs: "1.25rem", sm: "1.5rem" },
+                        }}
                       >
                         {item.value}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{
+                          fontSize: { xs: "0.85rem", sm: "0.9rem" },
+                        }}
+                      >
                         {item.label}
                       </Typography>
                     </Paper>
@@ -447,7 +475,16 @@ export default function HomePage() {
               </Stack>
 
               {/* TAGS */}
-              <Stack direction="row" spacing={1.5} flexWrap="wrap">
+              <Stack
+                direction={{ xs: "column", sm: "row" }} // column on mobile, row on larger screens
+                spacing={1.5}
+                flexWrap="wrap"
+                justifyContent={{ xs: "center", sm: "flex-start" }}
+                alignItems="center"
+                sx={{
+                  mt: 2,
+                }}
+              >
                 <Chip
                   icon={<Verified sx={{ color: "#a67c5b !important" }} />}
                   label="CQC Registered"
@@ -455,6 +492,8 @@ export default function HomePage() {
                     backgroundColor: "#f5f1ee",
                     color: "#5a4a3b",
                     fontWeight: 500,
+                    width: { xs: "100%", sm: "auto" }, // full width on mobile
+                    justifyContent: "flex-start",
                   }}
                 />
                 <Chip
@@ -464,6 +503,8 @@ export default function HomePage() {
                     backgroundColor: "#f5f1ee",
                     color: "#5a4a3b",
                     fontWeight: 500,
+                    width: { xs: "100%", sm: "auto" },
+                    justifyContent: "flex-start",
                   }}
                 />
                 <Chip
@@ -473,6 +514,8 @@ export default function HomePage() {
                     backgroundColor: "#f5f1ee",
                     color: "#5a4a3b",
                     fontWeight: 500,
+                    width: { xs: "100%", sm: "auto" },
+                    justifyContent: "flex-start",
                   }}
                 />
               </Stack>

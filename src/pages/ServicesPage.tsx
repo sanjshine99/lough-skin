@@ -72,32 +72,49 @@ const ServiceSection = React.memo(
           >
             <Card
               sx={{
-                p: 3,
+                p: { xs: 2, sm: 3 }, // smaller padding on mobile
                 boxShadow: 4,
                 borderRadius: 3,
                 background: "linear-gradient(to right, #fff, #fdf7f1)",
                 transition: "transform 0.3s ease",
                 "&:hover": {
-                  transform: "translateY(-4px)",
+                  transform: { sm: "translateY(-4px)" }, // only lift on non-mobile
                 },
               }}
             >
               <CardContent sx={{ p: 0 }}>
+                {/* Header Section */}
                 <Box
                   sx={{
                     display: "flex",
+                    flexDirection: { xs: "column", sm: "row" }, // stack on mobile
                     justifyContent: "space-between",
-                    alignItems: "flex-start",
+                    alignItems: { xs: "flex-start", sm: "center" },
                     mb: 2,
+                    gap: { xs: 1.5, sm: 0 },
                   }}
                 >
                   <Typography
-                    variant="h5"
-                    sx={{ color: "#2c3e50", fontWeight: "bold" }}
+                    variant="h6"
+                    sx={{
+                      color: "#2c3e50",
+                      fontWeight: "bold",
+                      fontSize: { xs: "1rem", sm: "1.25rem" },
+                    }}
                   >
                     {service.name}
                   </Typography>
-                  <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+
+                  {/* Right-side controls */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: 1,
+                      alignItems: "center",
+                      justifyContent: { xs: "flex-start", sm: "flex-end" },
+                    }}
+                  >
                     <Chip
                       icon={<AccessTime sx={{ fontSize: 18 }} />}
                       label={`${service.duration} min`}
@@ -106,7 +123,7 @@ const ServiceSection = React.memo(
                         height: 32,
                         borderColor: "#a67c5b",
                         color: "#a67c5b",
-                        fontSize: 14,
+                        fontSize: { xs: 13, sm: 14 },
                       }}
                     />
                     <Chip
@@ -116,7 +133,7 @@ const ServiceSection = React.memo(
                         backgroundColor: "#a67c5b",
                         color: "white",
                         fontWeight: "bold",
-                        fontSize: 14,
+                        fontSize: { xs: 13, sm: 14 },
                       }}
                     />
                     <IconButton
@@ -136,7 +153,17 @@ const ServiceSection = React.memo(
                     </IconButton>
                   </Box>
                 </Box>
-                <Typography variant="body1" sx={{ color: "#7f8c8d", mb: 3 }}>
+
+                {/* Description */}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#7f8c8d",
+                    mb: 2,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    lineHeight: 1.6,
+                  }}
+                >
                   {service.description}
                 </Typography>
               </CardContent>
