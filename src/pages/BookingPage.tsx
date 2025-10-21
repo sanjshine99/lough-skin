@@ -46,6 +46,7 @@ export default function CartAndCheckout() {
   const [selectedSlot, setSelectedSlot] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [consentChecked, setConsentChecked] = useState(false);
+  const [completeLaterChecked, setCompleteLaterChecked] = useState(false);
 
   const { cartItems, removeItemFromCart, clearCart } = useCart();
 
@@ -327,12 +328,34 @@ export default function CartAndCheckout() {
                       control={
                         <Checkbox
                           checked={consentChecked}
-                          onChange={(e) => setConsentChecked(e.target.checked)}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            setConsentChecked(checked);
+                            if (checked) setCompleteLaterChecked(false); // uncheck the other
+                          }}
                         />
                       }
                       label="I have already filled out the Consultation & Consent Form"
                     />
-                    {!consentChecked && <ConsentForm />}
+
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={completeLaterChecked}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            setCompleteLaterChecked(checked);
+                            if (checked) setConsentChecked(false); // uncheck the other
+                          }}
+                        />
+                      }
+                      label="I’ll complete the Consent Form later"
+                    />
+
+                    {/* Show consent form only if neither checkbox is selected */}
+                    {!consentChecked && !completeLaterChecked && (
+                      <ConsentForm />
+                    )}
 
                     <Button
                       variant="contained"
