@@ -19,6 +19,7 @@ import {
   Instagram,
 } from "@mui/icons-material";
 import { easeOut, motion } from "framer-motion";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
 export default function ContactPage() {
   const faqs = [
@@ -156,7 +157,7 @@ export default function ContactPage() {
                   <Typography variant="h6" sx={{ color: "#2c3e50", mb: 2 }}>
                     Follow Us
                   </Typography>
-                  <Box sx={{ display: "flex", gap: 2 }}>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
                     <Button
                       href="https://instagram.com/loughskin"
                       target="_blank"
@@ -173,6 +174,7 @@ export default function ContactPage() {
                     >
                       Instagram
                     </Button>
+
                     <Button
                       href="https://facebook.com/loughskin"
                       target="_blank"
@@ -188,6 +190,22 @@ export default function ContactPage() {
                       variant="outlined"
                     >
                       Facebook
+                    </Button>
+                    <Button
+                      href="https://www.tiktok.com/@loughskin"
+                      target="_blank"
+                      startIcon={<MusicNoteIcon />} // TikTok-like
+                      sx={{
+                        color: "#a67c5b",
+                        borderColor: "#a67c5b",
+                        "&:hover": {
+                          backgroundColor: "#a67c5b",
+                          color: "white",
+                        },
+                      }}
+                      variant="outlined"
+                    >
+                      TikTok
                     </Button>
                   </Box>
                 </Box>

@@ -5,6 +5,7 @@ import {
   Email,
   Phone as PhoneIcon,
   LocationOn,
+  MusicNote, // TikTok-like icon
 } from "@mui/icons-material";
 
 const Footer = () => {
@@ -106,6 +107,13 @@ const Footer = () => {
                 sx={{ color: "black" }}
               >
                 <Facebook />
+              </IconButton>
+              <IconButton
+                href="https://www.tiktok.com/@loughskin"
+                target="_blank"
+                sx={{ color: "black" }}
+              >
+                <MusicNote />
               </IconButton>
             </Box>
           </Box>

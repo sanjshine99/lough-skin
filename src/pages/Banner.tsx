@@ -57,8 +57,8 @@ const Banner = () => {
                 mx: "auto",
               }}
             >
-              Begin your tailored skincare journey with our specialists —
-              discover your unique path to radiant, confident skin.
+              Begin your free skincare journey with our specialists — discover
+              your unique path to radiant, confident skin.
             </Typography>
 
             <Button

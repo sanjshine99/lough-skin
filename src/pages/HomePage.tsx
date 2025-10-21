@@ -31,6 +31,7 @@ import SpaIcon from "@mui/icons-material/Spa";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import emailjs from "@emailjs/browser";
+import Banner from "./Banner";
 
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
@@ -260,7 +261,7 @@ export default function HomePage() {
                 Welcome to LoughSkin
               </Typography>
 
-              <Typography
+              {/* <Typography
                 variant="h5"
                 sx={{
                   fontWeight: 600,
@@ -270,7 +271,7 @@ export default function HomePage() {
                 }}
               >
                 Calm. Care. Confidence.
-              </Typography>
+              </Typography> */}
 
               <Typography
                 variant="body1"
@@ -284,7 +285,20 @@ export default function HomePage() {
                   lineHeight: 1.7,
                 }}
               >
-                {`A space created for calm, care, and confidence.\n\nAt LoughSkin, we combine expert skincare and beauty techniques to help you look and feel your best, while providing a moment of calm in your busy day.\n\nEvery visit is designed to be more than a beauty session—it’s your moment to pause, unwind, and leave feeling refreshed and renewed.`}
+                <Box
+                  component="span"
+                  sx={{ fontWeight: "bold", color: "#a67c5b" }}
+                >
+                  A space created for calm, care, and confidence.
+                </Box>
+                {"\n\n"}
+                At LoughSkin, we combine expert skincare and beauty techniques
+                to help you look and feel your best, while providing a moment of
+                calm in your busy day.
+                {"\n\n"}
+                Every visit is designed to be more than a beauty session—it’s
+                your moment to pause, unwind, and leave feeling refreshed and
+                renewed.
               </Typography>
 
               {/* Buttons */}
@@ -318,7 +332,7 @@ export default function HomePage() {
                 </Button>
                 <Button
                   component={Link}
-                  to="/gallery"
+                  to="/services"
                   variant="outlined"
                   size="large"
                   sx={{
@@ -333,7 +347,7 @@ export default function HomePage() {
                     },
                   }}
                 >
-                  View Full Gallery
+                  book your free consultation
                 </Button>
               </Box>
 
@@ -768,6 +782,8 @@ export default function HomePage() {
           </Box>
         </Container>
       </Box>
+
+      <Banner />
 
       {/* Why Choose Us */}
       <Box sx={{ py: 10 }}>

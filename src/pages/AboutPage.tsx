@@ -46,12 +46,13 @@ export default function AboutPage() {
   ];
 
   const certifications = [
-    "CIBTAC Certified",
-    "BABTAC Member",
-    "Japanese HeadSpa Training",
+    "Natural Body Contouring",
+    "Sculpting",
+    "Lymphatic Specialist",
+    "Japanese Head Spa Training",
     "Advanced Skincare Specialist",
-    "VTCT",
-    "CPD Credited",
+    "VTCT Certified",
+    "CPD Accredited",
   ];
 
   const fadeInUp = {
