@@ -582,7 +582,7 @@ export default function HomePage() {
                   {
                     icon: <People sx={{ fontSize: 30, color: "#a67c5b" }} />,
                     title: "Trusted by Clients",
-                    desc: "Hundreds of satisfied clients across Sheffield",
+                    desc: "Hundreds of satisfied clients",
                   },
                   {
                     icon: (
