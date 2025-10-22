@@ -39,7 +39,7 @@ export default function HomePage() {
 
   const stats = [
     { label: "Happy Clients", value: "500+" },
-    { label: "Years Experience", value: "5+" },
+    { label: "Years Experience", value: "10+" },
     { label: "Natural Results", value: "100%" },
   ];
 
@@ -79,7 +79,7 @@ export default function HomePage() {
     {
       icon: <SpaIcon sx={{ fontSize: 60, color: "#a67c5b" }} />,
       title: "Natural & Science Driven",
-      desc: "We use only the finest natural and organic skincare products, ensuring your skin receives gentle yet effective care.",
+      desc: "Harnessing nature and science to bring you the best of both worlds.",
       img: "/gallery/natural.jpg",
     },
     {
@@ -468,7 +468,8 @@ export default function HomePage() {
               <Stack spacing={1.2} sx={{ mb: 3 }}>
                 {[
                   "Professional Skin Specialists",
-                  "Advanced Aesthetic Treatments",
+                  "Headspa Specialist",
+                  "Natural Body Contour Specialist",
                   "Personalised Consultations",
                   "Results-Driven Approach",
                 ].map((item, index) => (
@@ -1012,7 +1013,7 @@ export default function HomePage() {
             align="center"
             sx={{ color: "#7f8c8d", mb: 6 }}
           >
-            Ready to start your aesthetic journey? Contact us today to book your
+            Ready to start your self care journey? Contact us today to book your
             consultation.
           </Typography>
 

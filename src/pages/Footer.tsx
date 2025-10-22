@@ -15,45 +15,36 @@ const Footer = () => {
         {/* Top Section */}
         <Box
           sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr",
+              md: "1.2fr 1fr 1fr 1fr",
+            },
             gap: 4,
-            pb: 4,
+            pb: 6,
           }}
         >
           {/* Contact Info */}
           <Box>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
+            <Typography variant="h6" fontWeight="bold" mb={2}>
               Contact Info
             </Typography>
-            <Typography
-              variant="body2"
-              sx={{ mb: 1, display: "flex", alignItems: "center" }}
-            >
-              <LocationOn fontSize="small" sx={{ mr: 1 }} />
-              11 Great Central Road, Loughborough, England
+            <Typography variant="body2" sx={{ display: "flex", mb: 1 }}>
+              <LocationOn sx={{ fontSize: 18, mr: 1 }} /> 11 Great Central Road,
+              Loughborough, England
             </Typography>
-            <Typography
-              variant="body2"
-              sx={{ mb: 1, display: "flex", alignItems: "center" }}
-            >
-              <PhoneIcon fontSize="small" sx={{ mr: 1 }} />
-              <a
-                href="tel:+447788988337"
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
+            <Typography variant="body2" sx={{ display: "flex", mb: 1 }}>
+              <PhoneIcon sx={{ fontSize: 18, mr: 1 }} />
+              <a href="tel:+447788988337" style={{ color: "inherit" }}>
                 +44 7788 988337
               </a>
             </Typography>
-            <Typography
-              variant="body2"
-              sx={{ display: "flex", alignItems: "center" }}
-            >
-              <Email fontSize="small" sx={{ mr: 1 }} />
+            <Typography variant="body2" sx={{ display: "flex" }}>
+              <Email sx={{ fontSize: 18, mr: 1 }} />
               <a
                 href="mailto:loughskin@outlook.com"
-                style={{ color: "inherit", textDecoration: "none" }}
+                style={{ color: "inherit" }}
               >
                 loughskin@outlook.com
               </a>
@@ -62,35 +53,45 @@ const Footer = () => {
 
           {/* Business Hours */}
           <Box>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
+            <Typography variant="h6" fontWeight="bold" mb={2}>
               Business Hours
             </Typography>
-            <Typography variant="body2">Monday: Closed</Typography>
-            <Typography variant="body2">Tuesday: 10:30 - 18:30</Typography>
-            <Typography variant="body2">Wednesday: 10:30 - 18:30</Typography>
-            <Typography variant="body2">Thursday: 10:30 - 18:30</Typography>
-            <Typography variant="body2">Friday: 10:30 - 18:30</Typography>
-            <Typography variant="body2">Saturday: 11:00 - 18:00</Typography>
-            <Typography variant="body2">Sunday: 11:00 - 18:00</Typography>
+            {[
+              "Mon: Closed",
+              "Tue: 10:30 - 18:30",
+              "Wed: 10:30 - 18:30",
+              "Thu: 10:30 - 18:30",
+              "Fri: 10:30 - 18:30",
+              "Sat: 11:00 - 18:00",
+              "Sun: 11:00 - 18:00",
+            ].map((item, i) => (
+              <Typography key={i} variant="body2">
+                {item}
+              </Typography>
+            ))}
           </Box>
 
-          {/* Extra Info */}
+          {/* Amenities */}
           <Box>
             <Typography variant="h6" fontWeight="bold" gutterBottom>
               Additional Information
             </Typography>
-            <Typography variant="body2">
-              • Verified business by Fresha
-            </Typography>
-            <Typography variant="body2">• Instant Confirmation</Typography>
-            <Typography variant="body2">• Pay by app</Typography>
-            <Typography variant="body2">• Wheelchair accessible</Typography>
-            <Typography variant="body2">• Parking available</Typography>
+            {[
+              "Verified on Fresha",
+              "Instant Confirmation",
+              "Pay by App",
+              "Wheelchair Accessible",
+              "Parking Available",
+            ].map((item, i) => (
+              <Typography key={i} variant="body2" sx={{ mb: 0.3 }}>
+                • {item}
+              </Typography>
+            ))}
           </Box>
 
           {/* Socials */}
           <Box>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
+            <Typography variant="h6" fontWeight="bold" mb={2}>
               Follow Us
             </Typography>
             <Box sx={{ display: "flex", gap: 2 }}>
@@ -101,6 +102,7 @@ const Footer = () => {
               >
                 <Instagram />
               </IconButton>
+
               <IconButton
                 href="https://facebook.com/loughskin"
                 target="_blank"
@@ -108,12 +110,20 @@ const Footer = () => {
               >
                 <Facebook />
               </IconButton>
+
               <IconButton
                 href="https://www.tiktok.com/@loughskin"
                 target="_blank"
                 sx={{ color: "black" }}
               >
-                <MusicNote />
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M12.42 2h3.08a6.4 6.4 0 0 0 6.37 6.37v3.08a9.48 9.48 0 0 1-6.8-2.81v8.2a6.58 6.58 0 1 1-6.58-6.58h1.93v3.09H11.5a3.49 3.49 0 1 0 3.49 3.49V2z" />
+                </svg>
               </IconButton>
             </Box>
           </Box>
@@ -125,7 +135,7 @@ const Footer = () => {
         sx={{
           borderTop: "1px solid rgba(0,0,0,0.2)",
           backgroundColor: "#d8bfa8",
-          py: 2,
+          py: 2.5,
         }}
       >
         <Container
@@ -142,7 +152,7 @@ const Footer = () => {
             © {new Date().getFullYear()} Lough Skin. All rights reserved.
           </Typography>
 
-          <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+          <Box sx={{ display: "flex", gap: 3 }}>
             <Link
               href="/privacy-policy"
               underline="hover"
@@ -153,13 +163,13 @@ const Footer = () => {
             <Link href="/terms" underline="hover" sx={{ color: "black" }}>
               Terms & Conditions
             </Link>
-            <Typography variant="body2" sx={{ color: "black" }}>
+            <Typography variant="body2">
               Powered by{" "}
               <Link
                 href="https://www.ansely.co.uk/"
                 target="_blank"
                 underline="hover"
-                sx={{ color: "#62c5d2", fontWeight: "bold" }}
+                sx={{ color: "#62c5d2", fontWeight: 600 }}
               >
                 Ansely
               </Link>
