@@ -159,7 +159,7 @@ const Footer = () => {
                 href="https://www.ansely.co.uk/"
                 target="_blank"
                 underline="hover"
-                sx={{ color: "black", fontWeight: "bold" }}
+                sx={{ color: "#62c5d2", fontWeight: "bold" }}
               >
                 Ansely
               </Link>

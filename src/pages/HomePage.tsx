@@ -78,7 +78,7 @@ export default function HomePage() {
   const features = [
     {
       icon: <SpaIcon sx={{ fontSize: 60, color: "#a67c5b" }} />,
-      title: "Natural Products",
+      title: "Natural & Science Driven",
       desc: "We use only the finest natural and organic skincare products, ensuring your skin receives gentle yet effective care.",
       img: "/gallery/natural.jpg",
     },
@@ -221,7 +221,7 @@ export default function HomePage() {
         </video>
 
         {/* Overlay */}
-        <Box
+        {/* <Box
           sx={{
             position: "absolute",
             top: 0,
@@ -231,7 +231,7 @@ export default function HomePage() {
             background: "rgba(0, 0, 0, 0.4)",
             zIndex: 0,
           }}
-        />
+        /> */}
 
         {/* Centered Hero Content */}
         <motion.div
@@ -244,7 +244,7 @@ export default function HomePage() {
             <Paper
               elevation={3}
               sx={{
-                backgroundColor: "rgba(255, 255, 255, 0.9)",
+                backgroundColor: "rgba(255, 255, 255, 0.5)",
                 borderRadius: 4,
                 p: { xs: 3, sm: 4, md: 5 }, // smaller padding on mobile
                 backdropFilter: "blur(10px)",
@@ -451,9 +451,9 @@ export default function HomePage() {
                 sx={{ color: "#7f8c8d", mb: 2, lineHeight: 1.8 }}
               >
                 We also offer a curated selection of body contouring and
-                sculpting treatments, lymphatic drainage, and variety of massage
-                options to suit your needs — whether you’re looking to relax,
-                release tension, or support detoxification.
+                sculpting treatments, lymphatic drainage, and a variety of
+                massage options to suit your needs — whether you’re looking to
+                relax, release tension, or support detoxification.
               </Typography>
 
               <Typography
@@ -469,7 +469,7 @@ export default function HomePage() {
                 {[
                   "Professional Skin Specialists",
                   "Advanced Aesthetic Treatments",
-                  "Personalized Consultations",
+                  "Personalised Consultations",
                   "Results-Driven Approach",
                 ].map((item, index) => (
                   <Stack
@@ -497,28 +497,6 @@ export default function HomePage() {
                   mt: 2,
                 }}
               >
-                <Chip
-                  icon={<Verified sx={{ color: "#a67c5b !important" }} />}
-                  label="CQC Registered"
-                  sx={{
-                    backgroundColor: "#f5f1ee",
-                    color: "#5a4a3b",
-                    fontWeight: 500,
-                    width: { xs: "100%", sm: "auto" }, // full width on mobile
-                    justifyContent: "flex-start",
-                  }}
-                />
-                <Chip
-                  icon={<Star sx={{ color: "#a67c5b !important" }} />}
-                  label="Award-Winning Clinic"
-                  sx={{
-                    backgroundColor: "#f5f1ee",
-                    color: "#5a4a3b",
-                    fontWeight: 500,
-                    width: { xs: "100%", sm: "auto" },
-                    justifyContent: "flex-start",
-                  }}
-                />
                 <Chip
                   icon={<People sx={{ color: "#a67c5b !important" }} />}
                   label="Established 2019"
@@ -577,7 +555,7 @@ export default function HomePage() {
                   {
                     icon: <Favorite sx={{ fontSize: 30, color: "#a67c5b" }} />,
                     title: "Client-Focused Care",
-                    desc: "Every treatment is personalized and results-oriented",
+                    desc: "Every treatment is personalised and results-oriented",
                   },
                   {
                     icon: <People sx={{ fontSize: 30, color: "#a67c5b" }} />,

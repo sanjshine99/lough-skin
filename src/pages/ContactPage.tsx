@@ -26,7 +26,7 @@ export default function ContactPage() {
     {
       question: "What should I expect during my first visit?",
       answer:
-        "Your first visit begins with a complimentary 15-minute skin consultation where we assess your skin type and discuss your goals. We'll then recommend the best treatments for your needs and create a personalized skincare plan.",
+        "Your first visit begins with a complimentary 15-minute skin consultation where we assess your skin type and discuss your goals. We'll then recommend the best treatments for your needs and create a personalised skincare plan.",
     },
     {
       question: "What is your cancellation policy?",
