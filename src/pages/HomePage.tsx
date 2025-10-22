@@ -415,55 +415,53 @@ export default function HomePage() {
           >
             {/* LEFT: TEXT CONTENT */}
             <Box flex={1}>
+              {/* REPLACED CONTENT: MAIN SERVICE COPY */}
               <Typography
-                variant="h4"
-                component="h2"
-                gutterBottom
-                sx={{ fontWeight: 700, color: "#2c3e50" }}
+                variant="body1"
+                sx={{ color: "#7f8c8d", mb: 2, lineHeight: 1.8 }}
               >
-                About Lough Skin Salon
-              </Typography>
-
-              <Typography
-                variant="h5"
-                gutterBottom
-                sx={{
-                  fontWeight: 600,
-                  color: "#a67c5b",
-                  mb: 2,
-                }}
-              >
-                Where Skin Health Meets Confidence
+                Welcome to Loughskin — your sanctuary for professional,
+                results-driven treatments designed to restore balance, beauty,
+                and inner calm.
               </Typography>
 
               <Typography
                 variant="body1"
-                sx={{
-                  color: "#7f8c8d",
-                  mb: 3,
-                  lineHeight: 1.8,
-                }}
+                sx={{ color: "#7f8c8d", mb: 2, lineHeight: 1.8 }}
               >
-                Welcome to Lough Skin Salon, your destination for professional,
-                results-driven skincare. Our mission is to help every client
-                feel confident and radiant in their own skin through tailored
-                treatments, medical-grade products, and a commitment to
-                excellence in every service we offer.
+                Experience the transformative power of our Japanese-inspired
+                Headspa, the first of its kind in the East Midlands. This deeply
+                relaxing ritual focuses on scalp health and glymphatic drainage,
+                leaving you refreshed from head to soul.
               </Typography>
 
               <Typography
                 variant="body1"
-                sx={{
-                  color: "#7f8c8d",
-                  mb: 3,
-                  lineHeight: 1.8,
-                }}
+                sx={{ color: "#7f8c8d", mb: 2, lineHeight: 1.8 }}
               >
-                Located in the heart of Sheffield, we specialize in advanced
-                non-surgical aesthetic treatments that enhance natural beauty
-                while prioritizing skin health. Every consultation is personal,
-                ensuring you receive a customized plan designed around your
-                unique goals and skin type.
+                At Loughskin, we believe true beauty begins with healthy skin.
+                Our facials combine medical-grade technology with holistic
+                techniques, ensuring radiant results while offering a serene
+                escape from the everyday. It’s more than a facial — it’s a
+                moment of peace and renewal.
+              </Typography>
+
+              <Typography
+                variant="body1"
+                sx={{ color: "#7f8c8d", mb: 2, lineHeight: 1.8 }}
+              >
+                We also offer a curated selection of body contouring and
+                sculpting treatments, lymphatic drainage, and variety of massage
+                options to suit your needs — whether you’re looking to relax,
+                release tension, or support detoxification.
+              </Typography>
+
+              <Typography
+                variant="body1"
+                sx={{ color: "#7f8c8d", mb: 3, lineHeight: 1.8 }}
+              >
+                Step into Loughskin and discover the art of self-care — where
+                science meets serenity.
               </Typography>
 
               {/* BULLET POINTS */}
@@ -552,7 +550,7 @@ export default function HomePage() {
                 <Box
                   component="img"
                   src="/gallery/13.jpeg"
-                  alt="Lough Skin Salon Interior"
+                  alt="Lough Skin Love Spa Interior"
                   sx={{
                     width: "100%",
                     height: "40%", // reduce height by 50%
@@ -560,26 +558,6 @@ export default function HomePage() {
                     objectFit: "cover",
                   }}
                 />
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 16,
-                    left: 16,
-                    background: "rgba(255, 255, 255, 0.9)",
-                    borderRadius: 2,
-                    px: 2,
-                    py: 1,
-                    boxShadow: 1,
-                    width: "fit-content",
-                  }}
-                >
-                  <Typography variant="subtitle1" fontWeight={600}>
-                    Lough Skin Salon
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    Advanced Aesthetic & Skincare Experts
-                  </Typography>
-                </Box>
               </Box>
 
               {/* INFO CARDS */}
