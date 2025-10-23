@@ -31,7 +31,7 @@ export default function ContactPage() {
     {
       question: "What is your cancellation policy?",
       answer:
-        "We require 24 hours notice for cancellations or rescheduling. Cancellations made less than 24 hours in advance may be subject to a 50% charge. No-shows will be charged the full treatment price.",
+        "Deposits are non-refundable. If you are unable to attend your appointment and need to reschedule, you must notify us at least 72 hours in advance. Failure to attend your appointment will result in the loss of your deposit, and the full cost of treatment will be charged.",
     },
     {
       question: "Do you offer package deals or memberships?",
@@ -46,7 +46,7 @@ export default function ContactPage() {
     {
       question: "Is parking available?",
       answer:
-        "Yes, we have dedicated parking spaces available for our clients directly outside our location on High Street. Street parking is also available nearby.",
+        "Off-street parking is available on Albert Promenade, providing convenient access for our clients.",
     },
   ];
 
