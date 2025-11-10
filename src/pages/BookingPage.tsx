@@ -460,7 +460,7 @@ export default function CartAndCheckout() {
               </Card>
             )}
 
-            {step === 4 && bookingStatus === "success" && (
+            {/* {step === 4 && bookingStatus === "success" && (
               <Card sx={{ mb: 3 }}>
                 <CardContent>
                   <Typography variant="h5" color="success.main" gutterBottom>
@@ -472,7 +472,7 @@ export default function CartAndCheckout() {
                   </Typography>
                 </CardContent>
               </Card>
-            )}
+            )} */}
           </Box>
 
           {/* Summary Panel */}
