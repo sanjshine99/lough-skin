@@ -181,7 +181,7 @@ export default function CartAndCheckout() {
         clearCart();
         setBookingStatus("success");
         setSnackOpen(true);
-        setStep(4);
+        // setStep(4);
       } else {
         throw new Error("Booking failed");
       }
