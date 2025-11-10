@@ -177,8 +177,8 @@ export default function CartAndCheckout() {
       );
 
       if (res.status === 200 || res.status === 201) {
-        window.open(res.data.session_url, "_blank");
-        clearCart(); // 👈 this line is new
+        window.location.href = res.data.session_url; // ✅ opens in same page
+        clearCart();
         setBookingStatus("success");
         setSnackOpen(true);
         setStep(4);
