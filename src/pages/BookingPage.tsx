@@ -83,6 +83,19 @@ export default function CartAndCheckout() {
   };
 
   useEffect(() => {
+    const handlePopState = () => {
+      // Whenever user clicks the browser back button
+      setStep(1); // 👈 Reset to Step 1 (Selected Services)
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
+  useEffect(() => {
     setServices(groupServices(cartItems));
   }, [cartItems]);
 
