@@ -40,20 +40,6 @@ export default function TestimonialsPage() {
       text: "Kindly moved my appointment to squeeze me in before officially opening, such a lovely experience and will definitely be back! Full body massage & head massage were great and very relaxing & needed!",
     },
     {
-      author: "Safiyha Davies",
-      location: "Loughborough",
-      rating: 5,
-      service: "Skin Treatment",
-      text: "I had my treatment done with Shriya today, she was so lovely & very professional. I really enjoyed my treatment and the results also after just one session! Highly recommend & I will definitely be back again 😍 also the salon is so nice inside I love it!",
-    },
-    {
-      author: "Zoe Watret",
-      location: "Loughborough",
-      rating: 5,
-      service: "Body Contour Bundle",
-      text: "I booked in for the body contour bundle on my torso and it was brilliant! Shriya was so knowledgeable and professional. She made me feel super comfortable getting this treatment done on something I’m so insecure about.",
-    },
-    {
       author: "Lauren Bolus-Jones",
       location: "Local Guide",
       rating: 5,
@@ -61,32 +47,11 @@ export default function TestimonialsPage() {
       text: "What a blissful few hours! I went for the luxury Japanese head spa, facial & dermaplaning. It was fantastic, first time coming after finding on Instagram and I will be back. One of the best facials ever!",
     },
     {
-      author: "Sameena Amin",
-      location: "Manchester",
-      rating: 5,
-      service: "Microneedling + Head Spa + Full Body Massage",
-      text: "Truly one of the most amazing experiences! Coming from Manchester me and my sister booked Shreya and Bee for micro needling, Japanese head spa and a full body massage - both ladies were so attentive to our needs and made sure we felt relaxed the whole time!",
-    },
-    {
-      author: "Matylda Drost",
-      location: "Loughborough",
-      rating: 5,
-      service: "Skin Treatment",
-      text: "Had the best experience with Shriya, so friendly and welcoming. She made me feel comfortable and walked me through the whole process. Definitely knows what she’s doing and to top it off the results are amazing 😝",
-    },
-    {
       author: "B K",
       location: "Loughborough",
       rating: 5,
       service: "Couples Head Spa + Luxury Facial",
       text: "My husband and I booked a couples Japanese head spa with the luxury facial and we were not disappointed, 2 hours of pure bliss! It was the perfect little treat for us before we welcome our baby soon and they made sure I was comfortable.",
-    },
-    {
-      author: "Vicki Arnett",
-      location: "Loughborough",
-      rating: 5,
-      service: "Facials",
-      text: "I’ve been for many facials in my life and hands down Lough Skin do the best facials. From start to finish it was amazing. Thank you so much to Shriya my skin feels great.",
     },
     {
       author: "Rashpal Bassi",

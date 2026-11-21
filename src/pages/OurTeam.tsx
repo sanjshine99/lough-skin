@@ -24,20 +24,6 @@ const team = [
     ],
     image: "image2.jpeg",
   },
-  {
-    name: "Shriya",
-    role: "Body & Wellbeing Therapist",
-    desc: `Hi, I’m Shriya! With a bubbly personality and a love for good conversation, I’m passionate about body contouring, wood therapy, lymphatic drainage, and overall wellbeing. I create calm, relaxing experiences tailored to each client.\n\nWith careful attention to skin concerns and soothing HeadSpa treatments, my goal is to provide a peaceful space where self-care thrives and every visit becomes a journey of beauty and renewal.`,
-    tags: [
-      "Facialist",
-      "Natural Body Contour Expert",
-      "Lymphatic Expert",
-      "HeadSpa Therapy",
-      "VTCT Qualified",
-      "CPD Credited",
-    ],
-    image: "image1.jpeg",
-  },
 ];
 
 const fadeInUp = {
