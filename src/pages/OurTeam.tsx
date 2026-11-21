@@ -24,6 +24,18 @@ const team = [
     ],
     image: "image2.jpeg",
   },
+  {
+    name: "Kyra",
+    role: "Japanese-Inspired HeadSpa Therapist & Wellness Specialist",
+    desc: `Hi, I’m Kyra! I’ve always loved all things self-care, and I truly believe that taking time for yourself is so important. For me, beauty isn’t just about how you look, it’s about how you feel.\n\nMy passion is creating a calm, relaxing and welcoming experience for every client who walks through the doors of LoughSkin. I love helping people switch off from the outside world, slow down and enjoy some well-deserved time for themselves.\n\nI specialise in our Japanese-Inspired HeadSpa, alongside relaxing massages and luxurious facials. I especially love treatments that combine relaxation with effective skincare and wellness, leaving you feeling refreshed, restored and glowing.\n\nMy aim is to make every LoughSkin experience feel like time truly dedicated to you. Whether you’re here to unwind with a HeadSpa, release tension with a massage or give your skin some extra love, I want you to feel comfortable, cared for and completely at ease.\n\nI can’t wait to welcome you to LoughSkin and help you relax, reset and leave feeling your very best.`,
+    tags: [
+      "HeadSpa Specialist",
+      "Facialist",
+      "Massage & Wellness",
+      "Passionate About Self-Care",
+    ],
+    image: "kyra.jpg",
+  },
 ];
 
 const fadeInUp = {
